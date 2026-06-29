@@ -41,6 +41,25 @@ type AnalysisResult = {
   final_assessment?: string;
 };
 
+export type ComplianceAnalysisResult = {
+  attestation?: string;
+  overall_assessment?: {
+    compliance?: string;
+    summary?: string;
+  };
+  principle_assessments?: Array<{
+    principle?: string;
+    principle_name?: string;
+    compliance?: string;
+    relevant_text_fragment?: string;
+    issue_identified?: string;
+    explanation?: string;
+  }>;
+  identified_elements?: Record<string, string[]>;
+  missing_information?: string[];
+  final_assessment?: string;
+};
+
 type RewriteBackendResult = {
   decision?: string;
   rewritten?: string;
@@ -96,6 +115,12 @@ export class Crd13ApiService {
   unitize(text: string): Observable<string[]> {
     return this.postTool<string[]>('/unitize', { text }).pipe(
       map(result => this.asStringArray(this.unwrapResults(result)))
+    );
+  }
+
+  analyzeCompliance(attestation: string): Observable<ComplianceAnalysisResult> {
+    return this.postTool<ComplianceAnalysisResult>('/analyze_compliance', { attestation }).pipe(
+      map(result => (this.unwrapResults(result) || result || {}) as ComplianceAnalysisResult)
     );
   }
 

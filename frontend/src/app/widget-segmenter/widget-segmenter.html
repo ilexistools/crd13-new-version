@@ -56,7 +56,7 @@
             type="button"
             class="link"
             (click)="reidentifyCommodity()"
-            [disabled]="loading || commodityLoading || !rawText.trim()">
+            [disabled]="loading || commodityLoading || complianceLoading || !rawText.trim()">
             Re-identify
           </button>
         </div>
@@ -71,7 +71,7 @@
               (keydown)="onCommodityInputKeydown($event)"
               placeholder="Search commodity"
               autocomplete="off"
-              [disabled]="commodityLoading || loading || commodityOptions.length === 0"
+              [disabled]="commodityLoading || complianceLoading || loading || commodityOptions.length === 0"
             />
             <div class="ws-commodity-options" *ngIf="commodityInput.trim() && filteredCommodityOptions.length > 0 && !commodityLoading && !loading">
               <button
@@ -87,7 +87,7 @@
             type="button"
             class="btn btn-outline ws-commodity-add"
             (click)="addCommodityFromInput()"
-            [disabled]="commodityLoading || loading || !canAddSelectedCommodity()">
+            [disabled]="commodityLoading || complianceLoading || loading || !canAddSelectedCommodity()">
             Add
           </button>
         </div>
@@ -100,7 +100,7 @@
               class="ws-chip-remove"
               title="Remove commodity"
               (click)="removeCommodity(i)"
-              [disabled]="commodityLoading || loading">
+              [disabled]="commodityLoading || complianceLoading || loading">
               ×
             </button>
           </span>
@@ -114,7 +114,7 @@
       </div>
 
       <div class="ws-footer ws-footer-end">
-        <button type="button" class="btn btn-primary" (click)="goToCommodities()" [disabled]="loading || commodityLoading">
+        <button type="button" class="btn btn-primary" (click)="goToCommodities()" [disabled]="loading || commodityLoading || complianceLoading">
           <span class="spinner spinner-button" *ngIf="commodityLoading"></span>
           {{ commodityLoading ? 'Identifying commodities...' : 'Continue' }}
         </button>
@@ -125,7 +125,7 @@
     <div *ngIf="step === 'commodities'" class="ws-step">
       <div class="ws-header">
         <div class="ws-title">Commodities</div>
-        <button type="button" class="link" (click)="goToText()" [disabled]="loading || commodityLoading">Back</button>
+        <button type="button" class="link" (click)="goToText()" [disabled]="loading || commodityLoading || complianceLoading">Back</button>
       </div>
 
       <div class="ws-text-preview">{{ rawText }}</div>
@@ -137,7 +137,7 @@
             type="button"
             class="btn btn-outline ws-commodity-refresh"
             (click)="reidentifyCommodity()"
-            [disabled]="commodityLoading || loading">
+            [disabled]="commodityLoading || complianceLoading || loading">
             {{ commodityLoading ? 'Identifying...' : 'Re-identify' }}
           </button>
         </div>
@@ -152,7 +152,7 @@
               (keydown)="onCommodityInputKeydown($event)"
               placeholder="Search commodity"
               autocomplete="off"
-              [disabled]="commodityLoading || loading || commodityOptions.length === 0"
+              [disabled]="commodityLoading || complianceLoading || loading || commodityOptions.length === 0"
             />
             <div class="ws-commodity-options" *ngIf="commodityInput.trim() && filteredCommodityOptions.length > 0 && !commodityLoading && !loading">
               <button
@@ -168,7 +168,7 @@
             type="button"
             class="btn btn-outline ws-commodity-add"
             (click)="addCommodityFromInput()"
-            [disabled]="commodityLoading || loading || !canAddSelectedCommodity()">
+            [disabled]="commodityLoading || complianceLoading || loading || !canAddSelectedCommodity()">
             Add
           </button>
         </div>
@@ -181,7 +181,7 @@
               class="ws-chip-remove"
               title="Remove commodity"
               (click)="removeCommodity(i)"
-              [disabled]="commodityLoading || loading">
+              [disabled]="commodityLoading || complianceLoading || loading">
               ×
             </button>
           </span>
@@ -192,6 +192,7 @@
         </div>
         <div class="ws-error ws-commodity-error" *ngIf="commodityError">{{ commodityError }}</div>
         <div class="ws-error ws-commodity-error" *ngIf="commodityListError">{{ commodityListError }}</div>
+        <div class="ws-error ws-commodity-error" *ngIf="complianceError">{{ complianceError }}</div>
       </div>
 
       <div class="ws-seg-row">
@@ -217,17 +218,96 @@
           <span>Split (.)</span>
         </label>
   
-        <button type="button" class="btn btn-primary" (click)="segment()" [disabled]="loading || commodityLoading">
-          Segment
+        <button type="button" class="btn btn-primary" (click)="analyzeComplianceAndContinue()" [disabled]="loading || commodityLoading || complianceLoading">
+          <span class="spinner spinner-button" *ngIf="complianceLoading"></span>
+          {{ complianceLoading ? 'Analyzing...' : 'Continue' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div *ngIf="step === 'compliance'" class="ws-step">
+      <div class="ws-header">
+        <div class="ws-title">Compliance analysis</div>
+        <button type="button" class="link" (click)="backToCommodities()" [disabled]="loading">Back</button>
+      </div>
+
+      <div class="ws-compliance-summary" *ngIf="complianceResult">
+        <div class="ws-compliance-overall">
+          <span class="ws-compliance-label">Overall assessment</span>
+          <span class="ws-compliance-badge" [ngClass]="complianceClass(complianceResult.overall_assessment?.compliance)">
+            {{ complianceResult.overall_assessment?.compliance || 'Not classified' }}
+          </span>
+        </div>
+        <div class="ws-compliance-text" *ngIf="complianceResult.overall_assessment?.summary">
+          {{ complianceResult.overall_assessment?.summary }}
+        </div>
+      </div>
+
+      <div class="ws-compliance-grid" *ngIf="complianceResult">
+        <div class="ws-compliance-panel" *ngIf="compliancePrinciples().length > 0">
+          <div class="ws-compliance-panel-title">Principles</div>
+          <div class="ws-principle-list">
+            <div class="ws-principle-item" *ngFor="let item of compliancePrinciples()">
+              <div class="ws-principle-head">
+                <span class="ws-principle-code">{{ item.principle }}</span>
+                <span class="ws-principle-name">{{ item.principle_name }}</span>
+                <span class="ws-compliance-badge" [ngClass]="complianceClass(item.compliance)">
+                  {{ item.compliance }}
+                </span>
+              </div>
+              <div class="ws-compliance-fragment" *ngIf="item.relevant_text_fragment">
+                {{ item.relevant_text_fragment }}
+              </div>
+              <div class="ws-compliance-text" *ngIf="item.issue_identified">
+                <strong>Issue:</strong> {{ item.issue_identified }}
+              </div>
+              <div class="ws-compliance-text" *ngIf="item.explanation">
+                {{ item.explanation }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-compliance-panel" *ngIf="complianceElementGroups().length > 0">
+          <div class="ws-compliance-panel-title">Identified elements</div>
+          <div class="ws-element-group" *ngFor="let group of complianceElementGroups()">
+            <div class="ws-element-label">{{ group.label }}</div>
+            <div class="ws-commodity-chips">
+              <span class="ws-chip" *ngFor="let value of group.values">
+                <span class="ws-chip-text">{{ value }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-compliance-panel" *ngIf="(complianceResult.missing_information || []).length > 0">
+          <div class="ws-compliance-panel-title">Missing information</div>
+          <ul class="ws-missing-list">
+            <li *ngFor="let item of complianceResult.missing_information">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div class="ws-compliance-panel" *ngIf="complianceResult.final_assessment">
+          <div class="ws-compliance-panel-title">Final assessment</div>
+          <div class="ws-compliance-text">{{ complianceResult.final_assessment }}</div>
+        </div>
+      </div>
+
+      <div class="ws-error" *ngIf="complianceError">{{ complianceError }}</div>
+
+      <div class="ws-footer ws-footer-end">
+        <button type="button" class="btn btn-primary" (click)="continueAfterCompliance()" [disabled]="loading">
+          Continue
         </button>
       </div>
     </div>
   
-    <!-- STEP 4 -->
+    <!-- STEP 5 -->
     <div *ngIf="step === 'segments'" class="ws-step">
       <div class="ws-header">
         <div class="ws-title">Edit segmentation</div>
-        <button type="button" class="link" (click)="step = 'commodities'" [disabled]="loading">Back</button>
+        <button type="button" class="link" (click)="step = 'compliance'" [disabled]="loading">Back</button>
       </div>
   
       <div class="ws-seg-list">

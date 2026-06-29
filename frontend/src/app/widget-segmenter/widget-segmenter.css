@@ -262,6 +262,144 @@
   margin-bottom: 0;
 }
 
+.ws-compliance-summary,
+.ws-compliance-panel{
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  padding: 10px;
+}
+
+.ws-compliance-summary{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-compliance-overall{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ws-compliance-label,
+.ws-compliance-panel-title{
+  color: #111827;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ws-compliance-badge{
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #fff;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.ws-compliance-badge.is-compliant{
+  border-color: #bbf7d0;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.ws-compliance-badge.is-partial{
+  border-color: #fde68a;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.ws-compliance-badge.is-non-compliant{
+  border-color: #fecaca;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.ws-compliance-grid,
+.ws-principle-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.ws-compliance-grid{
+  padding-right: 4px;
+}
+
+.ws-compliance-panel{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-principle-item{
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-principle-head{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ws-principle-code{
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ws-principle-name{
+  color: #111827;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.ws-compliance-text,
+.ws-compliance-fragment,
+.ws-missing-list{
+  color: #374151;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.ws-compliance-fragment{
+  border-left: 3px solid #c7d2fe;
+  color: #4b5563;
+  padding-left: 8px;
+}
+
+.ws-element-group{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ws-element-label{
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.ws-missing-list{
+  margin: 0;
+  padding-left: 18px;
+}
+
 .ws-seg-item{
   border: 1px solid #e5e7eb;
   border-radius: 12px;
