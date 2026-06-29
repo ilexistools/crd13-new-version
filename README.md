@@ -25,6 +25,8 @@ uv sync
 uv run uvicorn app.main:app --reload
 ```
 
+O `uv sync` instala tambem o modelo spaCy `en_core_web_sm`, usado pela ferramenta de unitizacao.
+
 Crie um arquivo `.env` local quando precisar de chaves ou configuracoes privadas. Arquivos `.env` sao ignorados pelo Git.
 
 ## Frontend

@@ -4,6 +4,16 @@ from app.orchestration.util import instruction_loader
 import spacy
 from pydantic import BaseModel
 
+_NLP = None
+
+
+def _get_nlp():
+    global _NLP
+    if _NLP is None:
+        _NLP = spacy.load("en_core_web_sm")
+    return _NLP
+
+
 class UnitizationResponse(BaseModel):
     units: list[str]
 
@@ -18,7 +28,7 @@ class UnitizationTool:
         
     
     def run(self, text: str) -> UnitizationResponse:
-        nlp = spacy.load("en_core_web_sm")
+        nlp = _get_nlp()
         doc = nlp(text)
         sentences = [sent.text for sent in doc.sents]
         prompt = f"Break down the following text into smaller, manageable units: {'\n'.join(sentences)}"
@@ -26,7 +36,7 @@ class UnitizationTool:
         return {'input':{"text": text},'results': result.units}
 
     async def run_async(self, text: str) -> dict:
-        nlp = spacy.load("en_core_web_sm")
+        nlp = _get_nlp()
         doc = nlp(text)
         sentences = [sent.text for sent in doc.sents]
         prompt = f"Break down the following text into smaller, manageable units: {'\n'.join(sentences)}"
