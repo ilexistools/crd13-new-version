@@ -1,0 +1,210 @@
+A lot should be considered as meeting the requirement of Section 7.1.1 when the number of “defectives”, as defined in Section 7.1.2, does not exceed the acceptance number c) of an appropriate sampling plan with an AQL of 6.5.
+The following Codex Alimentarius documentsi are relevant for these guidelines:
+(Note that for some foodborne illnesses such as listeriosis, this information may not apply, since food causing the illness may not have been consumed recently); and • with regards to the affected person: personal details (to be treated with confidentiality), disease onset, symptoms, duration, hospitalization, underlying health conditions, person-to-person contact, information on travel, animal, and environmental exposures, etc.
+Parts of the information from the outbreak analysis may be needed for risk assessors to reply to the specific question in the rapid risk assessment.
+(In other words, are the production and storage requirements of this food item described sufficiently to eliminate the specific risk?)
+Is this process adequate to prevent illness from Listeria monocytogenes?
+Human cases Agent involved – characteristics of the agent Overview of human cases reported including severity of illness (e.g. hospitalizations, disability, foetal loss and deaths).
+Investigations in food • information on samples taken – items, places of sampling , open or closed sample, lot code, any storage or cooking instructions provided on package, etc.; • analytical methods used; • outcome of the laboratory analyses; • information on tracing of the affected food/food ingredients, for example, starting from the food/establishment initially linked to the human cases: o tracing back the food/ingredients to the source; o tracing forward the distribution; o to be repeated for each affected establishment along the food chain;
+Has outbreak information been reported to the public and how?
+Other descriptive information available of the outbreak size and distribution area.
+Possible significant family or community event that may have been an opportunity for outbreaks to occur (e.g. family events, birthday parties, fiestas, festivals, holiday celebrations, etc.).
+If any data is not available, this should be clearly stated when asking for the outbreak analysis, as the missing data may be vital for the outcome of the analysis.
+When available, results from whole genome sequencing can be added, and a single - linkage tree including all human and non-human isolates should be made, illustrating the core gene allelic differences.
+Could more cases be expected in near future, or can it be assumed/stated that the outbreak is over?
+Any sample unit that falls outside the limits for the soluble solids range specified in Section 3.2.1 and Section 3.2.2 shall be regarded as a "defective" provided it does not exceed the limits of the range by more than five percent m/m soluble solids.
+A lot is considered acceptable when the number of "defectives" as defined in paragraph 3.3.5 does not exceed the acceptance number (c) of an appropriate sampling plan with an AQL of 6.5, provided that, with respect to all styles except "whole", the number of whole pits (stones) does not exceed the tolerance on a sample average basis.
+Limited by good manufacturing practices (GMP)
+Samples of meat and poultry should be frozen prior to despatch, unless transported to the laboratory before spoilage can occur.
+(b) Where separate laboratory samples are prepared during collection of the primary sample(s), the bulk sample is the conceptual sum of the laboratory samples, at the time of taking the samples from the lot.
+(ii) Decisions as to whether or not an MRL is exceeded should be based on the analytical data available but decisions on the consequent action are a matter for the authorities involved.
+8. Taking into account the analytical uncertainty at both laboratories, if the results from the reference laboratory indicate residues of iprodione ≥10 mg/kg, the MRL is considered to be exceeded.
+If clinicians do not know the characteristic symptoms, they may misdiagnose CP, leading to underreporting of the disease.
+Because of differences in CTXs, analytical methods and standards, and regional prevalence levels of CP, not all recommended practices will be applicable in all situations or to all stakeholders.
+When referring to CTX, analogues have similar backbone structures but different functional groups in specific locations.
+In this case, testing of sentinel fish or water may be preferable to testing fish for consumption when determining if an area should be restricted to fishing.
+Because of current limitations in analytical methods and toxic equivalency factors of different CTXs, MLs may not be appropriate for all toxins or regions.
+If traded as classified, the provision in Annexes I and II applies as minimum requirements.
+The safety assessment carried out in this way does not impl y absolute safety of the new product; rather, it focuses on assessing the safety of any identified differences so that the safety of the new product can be considered relative to its conventional counterpart.
+In certain cases, the characteristics of the food may necessitate additional data and information to address issues that are unique to the product under review.
+The extent to which the food products provide important nutritional components to particular subgroups of the population, and what important macro- or micronutrients it contributes to the diet should also be considered.
+Appropriate oral toxicity studies may need to be carried out in cases where the protein present in the food is not similar to proteins that have previously been consumed safely in food, taking into account its biological function in the animal where known.
+Nevertheless, the possibility of such events cannot be completely discounted12.
+If the product is to be considered further, it should be assessed using serum from individuals sensitised to the identified allergenic source.
+When dried or dehydrated turmeric is traded as classified, the chemical and physical characteristics in Annex I apply as the minimum requirements.
+This standardi applies to milk powders and cream powder intended for direct consumption or further processing, in conformity with the description in Section 2 of this standard.
+Minimum milk protein in milk solids-not-fat(a) 34% m/m (a) The water content does not include water of crystallization of the lactose; the milk solids-not-fat content includes water of crystallization of the lactose.
+In addition to the provisions of the General Standard for the Labelling of Pre -packaged Foods (CXS 1-1985)6 and the General Standard for the Use of Dairy Terms (CXS 206-1999),7 the following specific provisions apply:
+If the consumer would be misled by the omission, the milk protein content shall be declared in a manner acceptable in the country of sale to the final consumer, either as (i) a percentage by mass, or (ii) grams per serving as quantified in the label provided the number of servings is stated.
+The exact species bought/sold may be defined by contractual specifications.
+When dried or dehydrated fruits and berries as described in Table 1 are traded as classified/graded, the provisions in Annex I shall apply as the minimum requirements for the lowest class/grade.
+These characteristics include the product transport systems and the irradiation source, as they affect the dose distribution within the container.
+g) Capital and operational costs: The basic economic considerations necessary for sustainable operation.
+For certain public health or quarantine applications, there may be specific requirements to regulate the minimum absorbed dose in order to ensure that the desired technological effect is achieved.
+If the required minimum is not applied, the intended technical effect may not
+If the spices, herbs or mixtures thereof have been exposed to one of the above treatments, labelling of the non-retail containers shall either be given on the container or in accompanying documents.
+Where the treatment involves an extraction process, the extractant should be approved for use in food and used according to good manufacturing practice.
+Where irradiation is used for the control of microbial contamination or insect infestation, this should be done in accordance with good irradiation practice and in conformity with the "Codex General Standard for Irradiated Foods" (CODEX STAN 106 -1983) and the "Recommended International Code of Practice for the Operation of Irradiation Facilities Used for the Treatment of Foods" (CAC/RCP 19 -1979-Rev.1).
+Where the treatment involves exposure to chemicals to control microorganisms (e.g. fumigants) whether in solid, fluid or gaseous form, the chemicals used should be those approved for the purpose.
+Some of the hurdles in addition to refrigeration include: decreased pH and aw, and addition of preservatives.
+If reusable trays are used, once they are cleaned and sanitized they should not pass through an area where they may be contaminated unless they are appropriately protected.
+Product shelf life depends on a number of factors, such as: product formulation (might include decreased pH, decreased a w, other hurdles - see Appendix ); scheduled heat or other preservation treatments; cooling methods applied to product; type of packaging (e.g., hermetically sealed or not, MAP); storage temperature;
+In HR areas: If the air temperature has been determined to be critical and is exceeded, the manufacturer should evaluate the product's safety and take appropriate action.
+If acceptable, the products should be moved to a suitable area; if not, they should be removed from the case, not offered for sale, and destroyed if necessary.
+These GMPs and GHPs, if adhered to, should also be effective in preventing the risk from other pathogens that may be of concern.
+When monitoring of control measures or verification results demonstrate deviations, appropriate corrective actions should be taken.
+However, researc h has shown that hot oil may not be completely effective in removing Salmonella from contaminated processing equipment.
+ If necessary, production should be stopped while controlled wet cleaning is taking place and only restarted once the area is dry.
+Finally, the need for testing can be minimized when product safety is addressed by raw material controls and by the design and implementation of process controls, with ongoing documentation demonstrating that the appropriate procedures have been followed.
+1.3 This standard does not apply to maize (corn) meals for use as a brewing adjunct, to maize (corn) meals used for manufacturing of starch and any industrial use, nor to maize (corn) meal for use as an animal feed.
+These products are intended for use in foods requiring further preparation and by the food processing industry.
+The protein content is calculated on a dry weight basis excluding added vitamins, minerals, amino acids and food additives.
+Clean, sound, mature, dry seeds essentially free from other seeds and foreign matter in accordance with Good Manufacturing Practice, or SPP of lower protein content meeting the specifications contained in this Standard.
+The following requirements apply to the final product when prepared ready for consumption in accordance with the instructions for use:
+It should be underlined that any guidance given to reduce PAH levels in a final product should not lead to an increased risk to human health due to increases in other contaminants or to reduced microbiological safety.
+The formation of PAH during smoking and direct drying is dependent on a number of variables, including:
+PAH contamination of oil seed is higher when using coconut husk compared to coconut shell as fuel due to the higher lignin content of the husk.
+Because smoke condensates are produced from smoke that is subjected to fractionation and purification, products made with condensed smoke generally have lower PAH levels than products made with freshly generated smoke.
+Also, washing might lower organoleptic quality and increase microbiological risk.
+Water is usually removed by evaporation and creating a hard outer-layer, helping to stop micro-organisms from entering the food.
+This section is divided in direct drying using a) sun or wind, b) other fuels.
+Drying is also the normal means of preservation for cereal grains.
+Lower water content of wood may lead to rapid burning of the wood and higher PAH levels; d) Avoid the use of fuels such as diesel fuel, waste products, especially rubber tyres, olive residues and waste oil which may already contain significant levels of PAH; e) The fuel influences the taste of the final food.
+Soy sauces, and related products, that are subject to acid treatment during manufacture may also contain chloropropanols.
+These foods include processed fruits and vegetables, cereals and bakery products, processed meats, smoked fish and beer.
+A number of different manufacturing processes are employed in the production of soy sauces and the method used will impact on whether the product contains 3-MCPD.
+This Standard applies to Tehena as defined in Section 2 below and offered for direct consumption.
+The following requirements apply to the final product when prepared ready for consumption in accordance with the instructions for use.
+For products not covered by the annexes, any presentation of the product is permitted provided that the product: (1) is sufficiently distinctive from other forms of presentation laid down in the standard; (2) is adequately described on the label to avoid confusing or misleading the consumer. canned fruit cocktail shall have normal colour except that a slight leaching of colour from the coloured cherries is acceptable and not considered a defect.
+A container that fails to meet one or more of the applicable quality requirements, as set out in Section 3 . 2 (except those based on sample averages), should be considered as a “defective”.
+A lot should be considered as meeting the applicable quality requirements referred to in Section 3.1.3 and 3.2 when: (1) for those requirements which are not based on averages, the number of “defectives”, as defined in Section 3.3, does not exceed the acceptance number (c) of the appropriate sampling plan with an acceptance quality limit (AQL) of 6.5; and (2) the requirements of Sections 3.1.3 and 3.2, which are based on sample averages, are complied with.
+A lot should be considered as meeting the requirement of Section 7 .1.1 when the number of “defectives”, as defined in Section 7.1.2, does not exceed the acceptance number (c) of the appropriate sampling plan with an AQL of 6.5.
+In addition to the general provisions applicable to canned mixed fruits, the following specific provisions apply:
+(6) Cherries: any variety of the species Prunus cerasus L., and which may be: (i) any light, sweet variety; (ii) artificially coloured red; or (iii) artificially coloured red with added flavourings, whether natural or synthetic.
+Tropical fruits as defined in Sections 1.3.1 and 1.3.2
+For all classes and forms of presentation, ten percent by number or weight of bundles corresponding to the size immediately above and/or below that indicated on the package.
+If the produce is not visible from the outside, each package shall be labelled as to the name of the produce “culantro coyote”, or its name in the country of marketing, and may be labelled as to the name of the variety and/or commercial type, specifying the form of presentation (individual or in bunches).
+This standard applies to the product known as kimchi, as defined in Section 2 below, which is prepared with Chinese cabbage as a predominant ingredient and other vegetables which have been trimmed, cut, salted and seasoned before fermentation.
+While remote audit and inspection activities will generally follow steps that are similar to physical audit or inspection activities, there are important considerations that will contribute to their successful implementation.
+In addition to the provisions of the General Standard for the Labelling of Prepackaged Foods (CXS 1 -1985) the following specific provisions apply:
+If living nematodes are confirmed, products must not be placed on the market for human consumption before they are treated in conformity with the methods laid down in Annex II.
+The presence in the sample unit of any matter which has not been derived from fish, does not pose a threat to human health, and is readily recognized without magnification or is present at a level determined by any method including magnification that indicates non-compliance with good manufacturing and sanitation practices.
+The presence of readily visible parasites in a sample of the edible portion of the sample unit detected by normal visual inspection of the fish flesh (see Annex III).
+Fish affected by persistent and distinct objectionable odours or flavours indicative of decomposition (such as sour, putrid, fishy, rancid, burning sensation, etc.) or contamination by foreign substances (such as fuel oil, cleaning compounds, etc.).
+A lot shall be considered as meeting the requirements of this standard when: (i) the total number of defectives as classified according to Section 8 does not exceed the acceptance number (c) of the appropriate sampling plan in Section 7; (ii) the average net weight of all sample units is not less than the declared weight, provided no individual container is less than 95% of the declared weight; and (iii) the Food Additives, Hygiene and Labelling requirements of Sections 4, 5 and 6 are met.
+Where allowed in accordance with the General Principles for the Addition of Essential Nutrients for Food (CXG 9-1987), maximum and minimum levels for Vitamins A, D and other nutrients, where appropriate, should be laid down by national legislation in accordance with the needs of individual country including, where appropriate, the prohibition of the use of particular nutrients.
+ The extent of international trade of the food commodity;  Existence of regional/international trade agreements and how they may affect the public health impact with respect to the specific hazard/commodity combination(s);  Public perceptions of the problem and the risk;  Potential public health and economic consequences of establishing Codex MRM guidance document.
+ Initial assessments of the need and benefits to be gained from requesting an MRA, and the feasibility that such an assessment could be accomplished within the required time frame;  If a risk assessment is identified as being needed, recommended questions that should be posed to the risk assessor;
+If the maximum level of Salmonella
+This standard applies to dairy fat spreads intended for use as spreads for direct consumption, or for further processing, in conformity with Section 2 of this standard.
+These substances can be used in the same function as thickeners, provided they are added only in amounts functionally necessary as governed by GMP taking into account any use of the thickeners listed in Section 4.
+If the lipid content exceeds 0.8 g/100 kJ (3.3 g/100 kcal): - the amount of linoleic acid (in the form of triglycerides = linoleates) shall not be less than 70 mg/100 kJ (300 mg/100 kcal) and shall not exceed 285 mg/100 kJ (1200 mg/100 kcal); - the amount of lauric acid shall not exceed 15 percent of the total lipid content; and - the amount of myristic acid shall not exceed 15 percent of the total lipid content.
+When prepared according to the label directions for use, processed cereal-based foods should have a texture appropriate for the spoon-feeding of infants or young children of the age for which the product is intended.
+In addition to the requirements of the General Standard for the Labelling of Pre-packaged Foods (CXS 1-1985, Rev 1-1991) the following specific provisions apply :
+A lot will be considered as meeting the applicable quality requirements referred to in subsection 2.2.5 when: a) for those requirements which are not based on averages, the number of "defectives", as defined in subsection 2.2.5, does not exceed the acceptance number (c) of an appropriate sampling plan with an AQL of 6.5 (see relevant Codex texts on methods of analysis and sampling); and b) the requirements which are based on sample averages are complied with.
+A container that fails to meet the requirement for minimum fill (90 percent container capacity) of subsection 5.1.1 shall be considered a "defective".
+A lot will be considered as meeting the requirement of sub section 5.1.1 when the number of "defectives", as defined in subsection 5.1.2, does not exceed the acceptance number c) of an appropriate sampling plan with an AQL of 6.5 (see relevant Codex texts on methods of analysis and sampling).
+Tomatoes are classified in three classes defined below:
+The tomatoes may be presented as follows: (i) as individual tomatoes, with or without calyx and short stalk; (ii) as trusses of tomatoes, in other words, in entire inflorescence or part of inflorescence, where each inflorescence or part of each inflorescence should comprise at least the following number of tomatoes: 3 (2 if prepackaged), or in the case of trusses of “cherry” tomatoes, 6 (4 if prepackaged).
+It does not apply to fragmented pulses when sold as such, or to other legumes for which separate standards may be elaborated.
+In the case of berry fruits, dragon fruit and passion fruit, seeds shall be considered a natural fruit component and not a defect unless the product is presented as “seedless”.
+A lot should be considered as meeting the applicable quality requirements referred to in Section 3.3.1 when the number of “defectives” as defined in Section 3.4 does not exceed the acceptance number (c) of the appropriate sampling plan with an accepted quality level (AQL) of 6.5.
+A lot should be considered as meeting the requirement of Section 7.1.1 when the number of “defectives”, as defined in Section 7.1.2, does not exceed the acceptance number (c) of the appropriate sampling plan with an acceptable quality level (AQL) of 6.5.
+It excludes cumin intended for industrial processing.
+When ungraded, the provisions for class/grade III requirements apply as the minimum requirements.
+A lot will be considered as meeting the requirements for proportions of fruits when: (a) the average of the individual fruit proportions (except those in 2.1.2 above) from all containers in the sample is within the range required for the individual fruits; and (b) the number of individual containers, which are not within the range for any or one or more fruits, does not exceed the acceptance number (c) of an appropriate sampling plan with an acceptable quantity level (AQL) of 6.5 (see relevant Codex texts on methods of analysis and sampling).
+A container shall be considered a “defective” that fails to meet one or more of the applicable quality requirements in 2.3.1 through 2.3.4.
+A lot will be considered as meeting the applicable quality and other requirements referred to in 2.3.5 when: (a) for those requirements which are not based on average – the number of “defectives”, as defined in subsection 2.3.5, does not exceed the acceptance number (c) of an appropriate sampling plan with an AQL of 6.5 (see relevant Codex texts on methods of analysis and sampling); and (b) the requirements which are based on sample averages are complied with.
+The requirements for minimum drained weight shall be deemed to have been complied with when the average drained weight of all containers examined is not less than the minimum required, provided that there is no unreasonable shortage in individual containers.
+When sugars are added to one or more fruit juices, the packing medium shall be declared as may be appropriate: “Lightly sweetened (name of fruit) juice”
+A lot will be considered as meeting the requirement of 6.1.1 when the number of “defectives” as defined in subsection 6.1.2 does not exceed the acceptance number (c) of an appropriate sampling plan with an AQL of 6.5 (see relevant Codex texts on methods of analysis and sampling).
+This has led to the use of surrogate viruses, e.g., the use of feline calicivirus and murine norovirus in place of NoV. When evaluating risk management options, the use of a surrogate will not always mimic the resistance of the intended foodborne viruses.
+RATIONALE: Food may become contaminated at the primary production area by water, soil, harvesting containers or utensils contaminated by faeces or vomit or by food handlers.
+Water contaminated with untreated or partially treated sewage discharges, by overflow from sewage and septic tank systems or from run -off associated with a heavy rainfall that is use d for irrigation, washing of produce, or application of fertilizers and agrichemicals.
+RATIONALE: Inability to properly clean and disinfect may result in persistence of the virus leading to potential contamination of food.
+Chemical treatment: Antimicrobial agents, effective for bacteria, may not be effective for the reduction of NoV and HAV in fresh produce.
+The need for public information and communicated warnings should be considered.
+The effects of HHP on virus infectivity in foods are highly dependent on virus (sub)type and food matrix, but may be considered a measure to reduce viral loads for some virus(types) present in specified matrices.
+More than 3 log 10 inactivation of HAV may occur only at pH < 3, a pH that is not always acceptable for the sensorial quality of foods.
+The drying/desiccation of human enteric viruses on processing equipment surfaces may reduce virus titers.
+The washing of food ingredients or products in water, either treated (UV, ozone, chlorine, etc.) or untreated, may not be effective if the food surface is rough, broken or pitted or when viruses are internalized.
+Vomiting/diarrhoea events and persons shedding viruses are likely to cause widespread contamination of food production premises, and measures to eliminate this contamination should be taken.
+When cleaning and disinfection is needed for potential virus contamination, accurate documentation and monitoring of the cleaning and disinfection are recommended.
+Interpretation of results from the use of human NoV surrogates, specifically feline calicivirus and murine NoV, in the evaluation of disinfectants should be made with caution as these surrogates exhibit different physiochemical properties as compared to NoV.
+If gloves are used in the handling of food, new gloves should put on before handling or preparing food.
+In particular, bivalves that are at a high risk of being contaminated with NoV or HAV, should be labelled to alert at-risk consumers to avoid or cook these products, in line with the legislation in the countries where these products are retailed or sold.
+The following requirements apply to the product when prepared ready -for-consumption in accordance with the directions for use.
+The variation of the creatinine content in beef meat changes the amount of raw beef meat to be used in correlation.
+The variation of the dry matter content changes the creatinine content in correlation and the amount of beef extract to be used.
+Human health surveillance and treatment data, where available, are useful in assessing any residual risks that may exist in different regions or countries.
+Picked cucumbers is the product: (a) prepared from clean, sound cucumbers of cultivars conforming to the characteristics of Cucumis sativus L.; (b) that may or may not be peeled and may or may not have seeds removed; (c) packed with or without a suitable liquid packing medium and seasoning ingredients appropriate to the product; and (d) is preserved in an appropriate manner before or after the container is closed – such preservation to include acidulation to a pH of 4.6 or less either by natural or controlled fermentation or addition of a vinegar or an edible acid, and may also include heat pasteurization, refrigeration or a chemical preservative.
+Prepared from fresh, uncured and unfermented cucumbers.
+Such salt stock may be sufficiently desalted, if necessary, during preparation for processing.
+A lot will be considered as meeting requirements for quality criteria when the number of “defectives” as defined in Section 3.3 does not exceed the acceptance number (c) of an appropriate sampling plan with an acceptable quality limit (AQL) of 6.5, (see relevant Codex texts on methods of analysis and sampling).
+All styles and types, except for cucumbers that are peeled not more than 0.08 percent m/m.
+The requirements for fill of container (as specified in Section 7.1) shall be deemed to be complied with when the average from all containers is not less than the minimum required, provided that there is no unreasonable shortage in individual containers.
+Cocoa seeds and seed associated material, such as dust, earth, and other seed may promote proliferation of OTA producing fungi.
+The unripe cocoa fruits have a solid pulp, without mucilage, hence the cocoa beans are difficult to separate from the pod, do not ferment properly and can contribute to slaty beans.
+Research has shown that fermentation carried out during drying on a drying mat; and partially depulped cocoa also being fermented directly on the drying mat can increase OTA production in cocoa beans.
+The microbiological pathogens associated with fresh fruits and vegetables include Salmonella spp., Shigella spp., Campylobacter, pathogenic strains of Escherichia coli, Listeria monocytogenes, Yersinia pseudotuberculosis, norovirus, hepatitis A virus and parasites such as Cyclospora cayetanensis, Giardia lamblia and Cryptosporidium parvum.
+Human pathogens can survive and grow in many agrichemicals, including pesticides.
+Minimizing the time such products are exposed to higher temperatures may be preferable to maintaining the temperature below 5°C.
+The use of water or having a wet environment enhances the growth and spread of food-borne pathogens.
+If not labelled “washed and ready to eat” or similar wording, then it should be understood that a product needs to be washed.
+If additional cooling time is necessary, steps should be taken to facilitate rapid cooling (e.g. product placed in smaller containers with adequate air flow between containers).
+If seed lots are analysed for the presence of microbial pathogens of concern, the seeds should not be used until the results are available.
+Most berries intended for direct consumption are generally not washed after harvest.
+Fresh melons are consumed without further processing treatment that would eliminate or inactivate pathogens if present.
+The handling of berries during production and harvesting and the broad range of etiological agents that have been associated with berry consumption suggest that the safety of berries for raw consumption depends significantly on the maintenance of good hygienic practices (GHPs)throughout the food chain, up to the point of consumption.
+This standard only applies to fish oils used in food and in food supplements where those are regulated as foods.
+Note: this section does not apply to flavoured fish oils where the added flavourings may interfere with the analytical determination of oxidation parameters.
+If the consumer would be misled by the omission, the milk protein content shall be declared in a manner acceptable in the country of sale to the final consumer, either as (i) a percentage by mass or volume, or (ii) grams per serving as quantified in the label provided the number of servings is stated.
+(b) Style presentations could include for example, whole, pieces, halves, quarters, cubes, shredded or chopped.
+Fruits and vegetables and liquid packing medium when appropriate, as defined in Sections 2.1(a), 2.1(d) and 3.1.2, in combination with one or more of the other permitted ingredients listed in Section 3.1.3.
+For pickled vegetables, in accordance with the following provisions: (a) Basic ingredients Water, and if necessary, salt or oil or acidic media such as vinegar. (b) Optional ingredients Packing media for pickled vegetables may contain ingredients subject to labelling requirements of Section 8 and may include, but is not limited to: (1) foodstuff with sweetening properties such as sugars (including syrups) as defined in the Standard for Sugars (CXS 212-1999), honey as defined in the Standard for Honey (CXS 12-1981) or juices and/or nectars as defined in the General Standard for Fruit Juices and Nectars (CXS 247-2005) and;
+(a) cereal grains; (b) dried fruits; (c) malt extract; (d) nuts; (e) pulses; (f) sauce (e.g. fish sauce); (g) soy sauce; (h) foodstuff with sweetening properties such as sugars (including syrups) and honey as defined in the Standards for Sugars (CXS 212-1999)2 and Honey (CXS 12-1981)3 respectively; and (i) other ingredients as appropriate.
+(b) Harmless extraneous material – means any vegetable part (such as, but not limited to, a leaf or portion thereof, or a stem) that does not pose any hazard to human health but affects the overall appearance of the final product.
+A lot should be considered as meeting the applicable quality requirements referred to in Section 3.2 when: (a) for those requirements which are not based on averages, the number of “defectives”, as defined in Section 3.3, does not exceed the acceptance number (c) of the appropriate sampling plan with an acceptable quality limit (AQL) of 6.5; and (b) the requirements, which are based on sample averages, are complied with.
+This standard applies exclusively to cocoa butter used as ingredient in the manufacture of chocolate and chocolate products.
+However, transport is identified as a stage where growth of STEC may occur if the temperatu re of the milk is not properly maintained.
+Additionally, some of the proposed methods are focused on specific subpopulations of STEC (e.g. vaccines).
+Consequently, the microbiological quality of raw milk used in cheese making is crucial for reduction of the risk associated with the end products.
+If product is removed from the original package for further processing or re-portioning, appropriate good hygienic practices should be observed to avoid recontamination with STEC.
+Milk that has been subject to processing techniques such as microfiltration and/or bactofugation is no longer considered raw milk because these processes require milk to be heated above 40 °C.
+Nevertheless, procedures that reduce faecal contamination are most likely to have an impact on STEC contamination.
+If the gastrointestinal tract has been punctured causing a major contamination, the carcass should be identified and additional procedures to avoid cross-contamination of other carcasses should be performed, such as separating the carcass immediately from the others.
+The effectiveness of validated biocidal carcass washing depends on factors such as concentration, temperature, method of application, operator competency and the initial load of STEC on the carcass.
+Treatment is most effective when applied to clean, dry carcass sides as large drops or sheets of water; when applied under such conditions the treatment can achieve reductions in total E. coli in commercial slaughter operations.
+Some raw beef will need more control measures and monitoring than others (e.g. non-intact raw beef).
+However, the overall occurrence of STEC in these products can vary considerably due to differences in primary processing and post-processing conditions and interventions.
+Steps may not occur in all operations and may not occur in the order presented in the flow diagram.
+If recycled water is used, it should be treated and maintained under conditions ensuring that its use does not impact the safety of the milk (see the Code of Hygienic Practice for Milk and Milk Products [CXC 57- 2004]).
+Application of prerequisite programmes, including GHPs, and HACCP principles : Given the low frequency and low level of contamination by STEC strains and the limits of the sampling plans, it is the combination of control measures (including GHPs and HACCP, when applicable) throughout the dairy chain that will reduce the risk of STEC contamination of the products put on the market.
+Any sample unit taken in accordance with an appropriate sampling plan with an AQL 6.5 (see relevant Codex texts on methods of analysis and sampling) shall be regarded as a "defective" for the respective characteristics as follows: (a) that exceeds the tolerance for mineral impurities (3.3.2); (b) that exceeds the tolerance for "free-flowing" (3.3.3); (c) that exceeds the "Total Allowable Points" for "Visual Defects" in any one or more of the categories in Table 1 (3.3.6); (d) that exceeds the tolerance for "Disintegrated" in Table 1 (3.3.6).
+Speciality or minced products as such are not included (e.g. fish-salads).
+Product and process definitions for smoked fish, smoke-flavoured fish and smoke-dried fish are considered separately under this section.
+“Storage” is a process in which smoked fish is kept refrigerated or frozen to assure product quality and safety in conformity with Sections 3 and 6.
+“Salting” is a process of treating fish with salt of food grade quality to lower water activity in fish flesh and to enhance flavour by any appropriate salting technology (e.g. dry salting, brining, injection salting).
+This applies only to susceptible species (e.g. Scombridae, Clupeidae, Engraulidae, Coryphaenidae, Pomatomidae, Scomberesocidae).
+if treated by the processes described in paragraph 2.1, “smoke flavoured X” if treated by the processes described in paragraph 2.2,”smoke -dried X” if treated by the processes described in paragraph 2.3, X being the common or usual name of the species of fish used in accordance with the law or customs of the country in which the food is sold, so as not to mislead the consumer.
+A lot will be considered as meeting the requirements of this standard when:
+The presence in the sample unit of any matter, which has not been derived from the fish, does not pose a threat to human health, and is readily recognised without magnification or is present at a level determined by any method including magnification that indicates non-compliance with good manufacturing practice.
+The presence of two or more visible parasites per kg of the sample unit detected by the method described in 8.11 with a capsular diameter greater than 3 mm or a parasite not encapsulated and greater than 10 mm in length.
+A sample unit affected by persistent and distinct objectionable odours, flavours, or textures indicative of decomposition, or rancidity, burning sensation or other sensorial impressions not characteristic of the product.
+Levels of dioxins and PCBs in animal fat may be related to contamination of the local environment and to contamination of feed (e.g. fish-oil and fish-meal) or to certain production processes (e.g. artificial drying).
+JECFA concluded that despite the uncertainties, the intake estimates suggest that a considerable fraction of the population has a long -term mean intake above the PTMI.
+Although the MOEs are lower for breastfed infants, based on current knowledge, the benefits of breastfeeding are considered to outweigh the potential disadvantages that may be associated with the presence of NDL-PCBs in breast milk.
+Since the global limitation and reduction of dioxins and PCBs from non food/feed related industrial and environmental sources may lie outside of the responsibility of CCCF, these measures will not be considered within this Code of Practice.
+If necessary, the outdoor production in these areas should be restricted.
+This information will determine actions, if needed, to minimize dioxin and PCB levels and allow alternative feed and feed ingredients to be located, if necessary.
+If there are nationally established guideline levels or maximum levels for animal feeds, the feed manufacturer should ensure that the products are in compliance with these provisions.
+If potential sources of dioxins and PCBs are anticipated in the vicinity of fields, attention should be paid to monitor these areas, as necessary.
+This will enable national authorities to take appropriate management measures in order to prevent the transfer of dioxins (and PCBs) to the food chain.
+If there is evidence of elevated contamination, such fractions should not be used in food or feed and should be treated as waste.
+If there are indications of elevated levels of dioxins and PCBs, farmers and other primary producers should be informed about the contamination and the source should be identified and the necessary measures taken to remediate the situation and reduce or prevent further contamination.
+This standard does not apply to maize meals for use as a brewing adjunct, to maize meals used for manufacturing of starch and any industrial use, nor to maize meal for use as an animal feed.
+Not limited except as provided for below in respect of pickled fungi and sterilized fungi
+There is a suggestion that ballast discharge may be a major mechanism for global spread of pandemic V. parahaemolyticus, but a possibility of export/import seafood-mediated international spread cannot be ruled out.
+harvest is probably the most critical stage, since it is from this point onwards that individuals can actually implement measures to control V. parahaemolyticus.
+Controls measures presented in Part I apply to live and raw bivalve molluscs (including those that receive post-harvest processing), while those in Part II apply to bivalve molluscs consumed after partial treatment.
+This Annex may require modifications and amendments in use, taking into account such factors as regional differences in the prevalence of pathogenic strains of V. parahaemolyticus and V. vulnificus and the epidemiological data, including the susceptibility of the population.

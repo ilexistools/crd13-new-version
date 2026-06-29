@@ -1,0 +1,201 @@
+<div class="ws-card">
+    <div class="ws-status" *ngIf="loading">
+      <span class="spinner"></span>
+      <span>Working…</span>
+    </div>
+  
+    <div class="ws-error" *ngIf="error">{{ error }}</div>
+    <div class="ws-info" *ngIf="info">{{ info }}</div>
+  
+    <!-- STEP 1 -->
+    <div *ngIf="step === 'upload'" class="ws-step">
+      <div class="ws-title">Paste or Upload requirements.</div>
+  
+      <div class="ws-actions">
+        <button type="button" class="btn" (click)="pasteFromClipboard()" [disabled]="loading">
+          <mat-icon>content_paste</mat-icon>
+          Paste attestations from clipboard
+        </button>
+  
+        <label class="btn btn-outline" [class.disabled]="loading">
+          <mat-icon>upload_file</mat-icon>
+          Upload PDF
+          <input
+            type="file"
+            accept=".pdf,.txt,.md,.csv,text/plain,application/pdf"
+            (change)="onFileSelected($event)"
+            hidden
+          />
+        </label>
+  
+        <button type="button" class="btn btn-outline" (click)="createFromScratch()" [disabled]="loading">
+          <mat-icon>note_add</mat-icon>
+          Create new from scratch
+        </button>
+      </div>
+    </div>
+  
+    <!-- STEP 2 -->
+    <div *ngIf="step === 'text'" class="ws-step">
+      <div class="ws-header">
+        <div class="ws-title">Text</div>
+        <button type="button" class="link" (click)="goToUpload()" [disabled]="loading">Back</button>
+      </div>
+  
+      <textarea
+        class="ws-textarea"
+        [(ngModel)]="rawText"
+        placeholder="Text extracted/pasted will appear here…"
+        (ngModelChange)="error=null; info=null"
+      ></textarea>
+
+      <div class="ws-footer ws-footer-end">
+        <button type="button" class="btn btn-primary" (click)="goToCommodities()" [disabled]="loading || commodityLoading">
+          Continue
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div *ngIf="step === 'commodities'" class="ws-step">
+      <div class="ws-header">
+        <div class="ws-title">Commodities</div>
+        <button type="button" class="link" (click)="goToText()" [disabled]="loading || commodityLoading">Back</button>
+      </div>
+
+      <div class="ws-text-preview">{{ rawText }}</div>
+
+      <div class="ws-commodity-box">
+        <div class="ws-commodity-head">
+          <span class="ws-commodity-title">Commodities applied to all requirements</span>
+          <button
+            type="button"
+            class="btn btn-outline ws-commodity-refresh"
+            (click)="reidentifyCommodity()"
+            [disabled]="commodityLoading || loading">
+            {{ commodityLoading ? 'Identifying...' : 'Re-identify' }}
+          </button>
+        </div>
+
+        <div class="ws-commodity-input-row">
+          <input
+            class="ws-commodity-input"
+            type="text"
+            [ngModel]="commodityInput"
+            (ngModelChange)="onCommodityInput($event)"
+            (keydown)="onCommodityInputKeydown($event)"
+            placeholder="Type a commodity and press Enter"
+            [disabled]="commodityLoading || loading"
+          />
+          <button
+            type="button"
+            class="btn btn-outline ws-commodity-add"
+            (click)="addCommodityFromInput()"
+            [disabled]="commodityLoading || loading || !commodityInput.trim()">
+            Add
+          </button>
+        </div>
+
+        <div class="ws-commodity-chips" *ngIf="commodities.length > 0">
+          <span class="ws-chip" *ngFor="let item of commodities; let i = index">
+            <span class="ws-chip-text">{{ item }}</span>
+            <button
+              type="button"
+              class="ws-chip-remove"
+              title="Remove commodity"
+              (click)="removeCommodity(i)"
+              [disabled]="commodityLoading || loading">
+              ×
+            </button>
+          </span>
+        </div>
+
+        <div class="ws-commodity-status" *ngIf="commodityLoading">
+          Identifying commodities...
+        </div>
+        <div class="ws-error ws-commodity-error" *ngIf="commodityError">{{ commodityError }}</div>
+      </div>
+
+      <div class="ws-seg-row">
+        <div class="seg-label">Segmentation:</div>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='ai'" (change)="setMode('ai')" />
+          <span>Auto (AI)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='semicolon'" (change)="setMode('semicolon')" />
+          <span>Split (;)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='newline'" (change)="setMode('newline')" />
+          <span>Split (\n)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='dot'" (change)="setMode('dot')" />
+          <span>Split (.)</span>
+        </label>
+  
+        <button type="button" class="btn btn-primary" (click)="segment()" [disabled]="loading || commodityLoading">
+          Segment
+        </button>
+      </div>
+    </div>
+  
+    <!-- STEP 4 -->
+    <div *ngIf="step === 'segments'" class="ws-step">
+      <div class="ws-header">
+        <div class="ws-title">Edit segmentation</div>
+        <button type="button" class="link" (click)="step = 'commodities'" [disabled]="loading">Back</button>
+      </div>
+  
+      <div class="ws-seg-list">
+        <div class="ws-seg-item" *ngFor="let s of segments; let i = index">
+          <textarea
+            class="ws-seg-text"
+            [value]="s"
+            (input)="updateSegment(i, $any($event.target).value)"
+          ></textarea>
+  
+          <div class="ws-mini-actions">
+            <button
+              type="button"
+              class="icon-btn"
+              title="Segment this item (AI)"
+              (click)="refineSegment(i)"
+              [disabled]="loading || refiningIdx.has(i)"
+            >✂️</button>
+  
+            <button
+              type="button"
+              class="icon-btn"
+              title="Remove"
+              (click)="removeSegment(i)"
+              [disabled]="loading || refiningIdx.has(i)"
+            >🗑️</button>
+  
+            <button
+              type="button"
+              class="icon-btn"
+              title="Add below"
+              (click)="addSegment(i)"
+              [disabled]="loading || refiningIdx.has(i)"
+            >＋</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="ws-footer">
+        <button type="button" class="btn btn-outline" (click)="addSegment()" [disabled]="loading">
+          Add new…
+        </button>
+        <button type="button" class="btn btn-primary" (click)="next()" [disabled]="loading">
+          NEXT
+        </button>
+      </div>
+    </div>
+  </div>
+  

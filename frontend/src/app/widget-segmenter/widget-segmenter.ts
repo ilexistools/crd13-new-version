@@ -1,0 +1,432 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { firstValueFrom } from 'rxjs';
+import { Crd13ApiService } from '../crd13-api.service';
+
+type SegMode = 'ai' | 'semicolon' | 'newline' | 'dot';
+type Step = 'upload' | 'text' | 'commodities' | 'segments';
+
+export interface SegmenterOutput {
+  segments: string[];
+  commodities: string[];
+  source: 'scratch' | 'input';
+}
+
+@Component({
+  selector: 'widget-segmenter',
+  standalone: true,
+  templateUrl: './widget-segmenter.html',
+  styleUrls: ['./widget-segmenter.css'],
+  imports: [CommonModule, FormsModule, MatIconModule],
+})
+export class WidgetSegmenterComponent {
+  @Input() initialText: string = '';
+  @Output() segmentsReady = new EventEmitter<SegmenterOutput>();
+
+  step: Step = 'upload';
+  mode: SegMode = 'ai';
+
+  rawText = '';
+  segments: string[] = [];
+  commodities: string[] = [];
+  commodityInput = '';
+
+  loading = false;
+  commodityLoading = false;
+  error: string | null = null;
+  info: string | null = null;
+  commodityError: string | null = null;
+
+  refiningIdx = new Set<number>();
+
+  constructor(private crd13Api: Crd13ApiService) {}
+
+  ngOnInit() {
+    const init = (this.initialText || '').trim();
+    if (init) {
+      this.rawText = init;
+      this.step = 'text';
+    }
+  }
+
+  setMode(mode: SegMode) {
+    this.mode = mode;
+    this.error = null;
+    this.commodityError = null;
+    this.segments = [];
+    this.commodities = [];
+    this.commodityInput = '';
+  }
+
+  goToUpload() {
+    this.error = null;
+    this.commodityError = null;
+    this.loading = false;
+    this.commodityLoading = false;
+    this.commodityInput = '';
+    this.step = 'upload';
+  }
+
+  goToText() {
+    this.error = null;
+    this.commodityError = null;
+    this.loading = false;
+    this.commodityLoading = false;
+    this.commodityInput = '';
+    this.step = 'text';
+  }
+
+  async goToCommodities(): Promise<void> {
+    const text = (this.rawText || '').trim();
+    if (!text) {
+      this.error = 'Paste or upload some text first.';
+      return;
+    }
+
+    this.error = null;
+    this.info = null;
+    this.step = 'commodities';
+
+    if (!this.commodities.length && !this.commodityLoading) {
+      await this.detectCommodityForCurrentContext();
+    }
+  }
+
+  clearAll() {
+    this.rawText = '';
+    this.segments = [];
+    this.error = null;
+    this.info = null;
+    this.loading = false;
+    this.commodityLoading = false;
+    this.commodityError = null;
+    this.commodities = [];
+    this.commodityInput = '';
+    this.refiningIdx.clear();
+    this.step = 'upload';
+  }
+
+  async pasteFromClipboard() {
+    try {
+      const t = await navigator.clipboard.readText();
+      const text = (t || '').trim();
+      if (!text) return;
+
+      this.rawText = text;
+      this.segments = [];
+      this.error = null;
+      this.info = null;
+      this.commodityError = null;
+      this.commodities = [];
+      this.commodityInput = '';
+      this.step = 'text';
+    } catch {
+      // Clipboard API blocked by browser — navigate to text step so the user
+      // can paste manually with Ctrl+V directly into the textarea.
+      this.rawText = '';
+      this.segments = [];
+      this.error = null;
+      this.info = 'Clipboard access was blocked by the browser. Please paste your text below (Ctrl+V).';
+      this.commodityError = null;
+      this.commodities = [];
+      this.commodityInput = '';
+      this.step = 'text';
+    }
+  }
+
+  async onFileSelected(ev: Event) {
+    const input = ev.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    this.loading = true;
+    this.error = null;
+
+    try {
+      const name = (file.name || '').toLowerCase();
+      const isPdf =
+        name.endsWith('.pdf') ||
+        file.type === 'application/pdf' ||
+        file.type === 'application/x-pdf';
+
+      if (isPdf) {
+        const extracted = await this.extractTextFromPdfBackend(file);
+        this.rawText = (extracted || '').trim();
+      } else {
+        const text = await file.text();
+        this.rawText = (text || '').trim();
+      }
+
+      this.segments = [];
+      this.commodities = [];
+      this.commodityInput = '';
+      this.commodityError = null;
+      this.step = 'text';
+    } catch (e: any) {
+      this.error = e?.message || 'Failed to read file.';
+    } finally {
+      this.loading = false;
+      input.value = '';
+    }
+  }
+
+  private extractTextFromPdfBackend(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.crd13Api.extractPdfText(file).subscribe({
+        next: (res) => {
+          const text = String(res || '').trim();
+          if (!text || !text.trim()) {
+            reject(new Error('Backend returned empty PDF text.'));
+            return;
+          }
+
+          resolve(text);
+        },
+        error: (err) => {
+          reject(
+            new Error(
+              err?.error?.detail ||
+              err?.error?.message ||
+              'PDF extraction failed.'
+            )
+          );
+        },
+      });
+    });
+  }
+
+  segment() {
+    const text = (this.rawText || '').trim();
+    if (!text) {
+      this.error = 'Paste or upload some text first.';
+      return;
+    }
+
+    this.error = null;
+    this.addCommodityFromInput();
+
+    if (!this.getNormalizedCommodityList(this.commodities).length) {
+      this.commodityError = 'Identify or add at least one commodity before segmentation.';
+      this.step = 'commodities';
+      return;
+    }
+
+    // 2) Split (;)
+    if (this.mode === 'semicolon') {
+      this.segments = text.split(';').map(s => s.trim()).filter(Boolean);
+      this.step = 'segments';
+      return;
+    }
+
+    // 3) Split (\n)
+    if (this.mode === 'newline') {
+      this.segments = text.split(/\r?\n+/).map(s => s.trim()).filter(Boolean);
+      this.step = 'segments';
+      return;
+    }
+
+    // 4) Split (.)
+    if (this.mode === 'dot') {
+      this.segments = text
+        .split('.')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(s => (s.endsWith('.') ? s : s + '.'));
+      this.step = 'segments';
+      return;
+    }
+
+    // 1) Auto (AI) -> API
+    this.loading = true;
+    this.crd13Api.unitize(text).subscribe({
+      next: (res) => {
+        const segs = Array.isArray(res) ? res : [];
+        this.segments = segs.map((s: string) => (s || '').trim()).filter(Boolean);
+
+        if (!this.segments.length) {
+          this.error = 'No segments returned by the API.';
+          this.loading = false;
+          return;
+        }
+
+        this.loading = false;
+        this.step = 'segments';
+      },
+      error: (err) => {
+        this.error = err?.error?.message || 'Segmentation failed.';
+        this.loading = false;
+      },
+    });
+  }
+
+  updateSegment(i: number, value: string) {
+    this.segments[i] = value;
+  }
+
+  addSegment(afterIndex?: number) {
+    const idx = typeof afterIndex === 'number' ? afterIndex + 1 : this.segments.length;
+    this.segments.splice(idx, 0, '');
+  }
+
+  removeSegment(i: number) {
+    this.segments.splice(i, 1);
+  }
+
+  refineSegment(i: number) {
+    const current = (this.segments[i] || '').trim();
+    if (!current || this.refiningIdx.has(i)) return;
+
+    this.refiningIdx.add(i);
+    this.error = null;
+
+    this.crd13Api.unitize(current).subscribe({
+      next: (res) => {
+        const segs = Array.isArray(res) ? res : [];
+        const cleaned = segs.map((s: string) => (s || '').trim()).filter(Boolean);
+        if (!cleaned.length) return;
+
+        this.segments.splice(i, 1, ...cleaned);
+      },
+      error: (err) => {
+        this.error = err?.error?.message || 'Item segmentation failed.';
+      },
+      complete: () => {
+        this.refiningIdx.clear();
+      },
+    });
+  }
+
+  async next() {
+    const cleaned = this.segments.map(s => (s || '').trim()).filter(Boolean);
+    if (!cleaned.length) {
+      this.error = 'No valid segments to send.';
+      return;
+    }
+
+    this.addCommodityFromInput();
+    let commodities = this.getNormalizedCommodityList(this.commodities);
+    if (!commodities.length) {
+      commodities = await this.detectCommodityForCurrentContext();
+    }
+
+    if (!commodities.length) {
+      this.error = 'Commodity identification failed. Please identify at least one commodity before continuing.';
+      return;
+    }
+
+    this.segmentsReady.emit({ segments: cleaned, commodities, source: 'input' });
+  }
+
+  onCommodityInput(value: string): void {
+    this.commodityInput = String(value || '');
+    this.commodityError = null;
+  }
+
+  onCommodityInputKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' && event.key !== ',') return;
+    event.preventDefault();
+    this.addCommodityFromInput();
+  }
+
+  addCommodityFromInput(): void {
+    const next = this.normalizeCommodity(this.commodityInput);
+    if (!next) return;
+
+    const exists = this.commodities.some(item => item.toLowerCase() === next.toLowerCase());
+    if (!exists) {
+      this.commodities = [...this.commodities, next];
+    }
+
+    this.commodityInput = '';
+    this.commodityError = null;
+  }
+
+  removeCommodity(index: number): void {
+    if (index < 0 || index >= this.commodities.length) return;
+    this.commodities = this.commodities.filter((_, i) => i !== index);
+  }
+
+  async reidentifyCommodity(): Promise<void> {
+    await this.detectCommodityForCurrentContext();
+  }
+
+  private async detectCommodityForCurrentContext(): Promise<string[]> {
+    const sourceText = String(this.rawText || this.segments.join('\n') || '').trim();
+    if (!sourceText) {
+      this.commodities = [];
+      this.commodityError = 'No text available to identify commodity.';
+      return [];
+    }
+
+    this.commodityLoading = true;
+    this.commodityError = null;
+
+    try {
+      const commodities = await this.identifyCommodities(sourceText);
+      this.commodities = commodities;
+      return commodities;
+    } catch (e: any) {
+      this.commodities = [];
+      this.commodityError = e?.error?.message || e?.message || 'Failed to identify commodity.';
+      return [];
+    } finally {
+      this.commodityLoading = false;
+    }
+  }
+
+  private async identifyCommodities(text: string): Promise<string[]> {
+    const baseText = String(text || '').trim();
+    if (!baseText) {
+      throw new Error('No text available for commodity identification.');
+    }
+
+    const response = await firstValueFrom(this.crd13Api.identifyCommodities(baseText));
+    const commodities = this.getNormalizedCommodityList(response);
+    if (!commodities.length) {
+      throw new Error('No commodities were identified.');
+    }
+
+    return commodities;
+  }
+
+  createFromScratch() {
+    this.error = null;
+    this.loading = false;
+    this.commodityLoading = false;
+    this.commodityError = null;
+    this.commodities = [];
+    this.commodityInput = '';
+    this.refiningIdx.clear();
+
+    // estado "do zero"
+    this.rawText = '';
+    this.mode = 'ai';
+
+    // manda direto pro Editor (o pai deve abrir o editor ao receber segmentsReady)
+    this.segmentsReady.emit({ segments: [''], commodities: [], source: 'scratch' });
+  }
+
+  private normalizeCommodity(value: string | null | undefined): string {
+    return String(value ?? '').trim();
+  }
+
+  private getNormalizedCommodityList(values: string[] | null | undefined): string[] {
+    const list = Array.isArray(values) ? values : [];
+    const normalized = list
+      .map(value => this.normalizeCommodity(value))
+      .filter(Boolean);
+
+    const seen = new Set<string>();
+    const unique: string[] = [];
+    for (const item of normalized) {
+      const key = item.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      unique.push(item);
+    }
+    return unique;
+  }
+
+}

@@ -1,0 +1,54 @@
+# macOS and editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+wheels/
+*.egg-info/
+
+# Python virtual environments
+venv/
+.venv/
+env/
+.env/
+backend/venv/
+new-backend/.venv/
+
+# Node / Angular
+node_modules/
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local service logs and runtime files
+*.log
+*.pid
+*.sock
+backend/mcp_http.*.log
+
+# Downloadable embedding/model caches
+backend/app/embeddings/models/
+new-backend/app/embeddings/models/
+**/.cache/
+
+# Temporary office lock files
+~$*

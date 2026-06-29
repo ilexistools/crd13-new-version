@@ -1,0 +1,250 @@
+The visible part of the contents of the package, unit package or bundle must be representative of the entire contents.
+“Asparagus” followed by the indication “white”, “violet”, “violet/green” or “green” if the contents of the package are not visible from the outside and, where appropriate, the indication “short” or “tips” or “mixture white and violet”.
+- Number of bundles or number of unit packages, for asparagus packed in bundles or unit packages.
+The produce covered by this Standard shall comply with the maximum levels of the Codex General Standard for Contaminants and Toxins in Food and Feed (CODEX STAN 193-1995).
+It is recommended that the produce covered by the provisions of this Standard be prepared and handled in accordance with the appropriate sections of the Recommended International Code of Practice – General Principles of Food Hygiene (CAC/RCP 1 -1969), Code of Hygienic Practice for Fresh Fruits and Vegetables (CAC/RCP 53 -2003), and other relevant Codex texts such as Codes of Hygienic Practice and Codes of Practice.
+The label of all prepackaged Foods for Special Dietary Uses shall bear the information required by Sections 4.1 to 4.8 of this standard as applicable to the food being labelled, except to the extent otherwise expressly provided in a specific Codex standard.
+The composition of these foodstuffs must differ significantly from the composition of ordinary foods of comparable nature, if such ordinary foods exist.
+In addition to the declaration of the name of the food in accordance with Section 4.1 of the General Standard, the following provisions apply:
+The declaration of the list of ingredients shall be in accordance with Section 4.2 of the General Standard.
+The declaration of net contents and drained weight shall be in accordance with Section 4.3 of the General Standard.
+The name and address shall be declared in accordance with Section 4.4 of the General Standard.
+The country of origin shall be declared in accordance with Section 4.5 of the General Standard.
+The lot identification shall be declared in accordance with Section 4.6 of the General Standard.
+In addition to the declaration of date marking and storage instructions in accordance with Section 4.7 of the General Standard, the following provisions apply:
+Exemptions from mandatory labelling requirements shall be in accordance with Section 6 of the General Standard.
+The quantitative labelling of ingredients shall be in accordance with Section 5.1 of the General Standard.
+Irradiated foods for special dietary uses shall be labelled in accordance with Section 5.2 of the General Standard.
+Optional labelling of foods for special dietary uses shall be in accordance with Section 7 of the General Standard.
+The presentation of the mandatory information shall be in accordance with Section 8 of the General Standard.
+Milk producers and personnel involved in the collection and transport and retail of milk should be trained as necessary and have appropriate skills in the areas listed below: • health of animals and use of veterinary drugs; • manufacturing and use of feeds (more specifically fermented feeds); • herd management; • hygienic milking; • storage, handling, collection and transport of milk (cleaning of storage tanks, temperature requirements, sampling procedures, etc.); • microbiological, chemical and physical hazards and their control measures.
+In-container sterilization may be a batch or continuous process.
+Over-arching principles that are applicable to all phases of production, processing and handling of milk and milk products are given in Section 2.3.
+Definitions relevant to a particular annex (e.g., heat treatment definitions) will be contained in the relevant annex.
+Precautions should be adopted to ensure that milking animals do not consume or have access to contaminated water or other environmental contaminants likely to cause diseases transmissible to humans or contaminate milk.
+Therefore, the needs for time/temperature control at farm level should be clearly communicated by the manufacturer of the milk products.
+With respect to food safety, records should be kept where necessary on: • Prevention and control of animal diseases with an impact on public health; • Identification and movement of animals; • Regular control of udder health; • Use of veterinary drugs and pest control chemicals; • Nature and source of feed; • Milk storage temperatures; • Use of agricultural chemicals; • Equipment cleaning.
+Where dead ends or dead spots occur, special procedures should ensure they are effectively cleaned or otherwise do not permit a safety hazard to occur.
+Preventive measures should include those that will minimize the potential for cross contamination of allergenic components and/or ingredients that may present in other products to a milk product in which these components and/or ingredients are not supposed to be present.
+Any claims that raw materials meet safety and suitability specifications should be verified periodically.
+Critical control point(s) should be identified, as appropriate, and critical limit(s) established and monitored to verify compliance.
+All food product contact surfaces in piping and equipment, including areas that are difficult to clean such as by-pass valves, sampling valves, and overflow siphons in fillers should be adequately cleaned.
+A routine programme to verify the adequacy of cleaning should be in place.
+Products covered under this Code should be transported at time/temperature combinations that will not adversely affect the safety and suitability of the product.
+In the case of refrigerated products, the vehicle product compartment should be cooled prior to loading and the product compartment should be kept at an appropriate temperature at all times, including during unloading.
+Additional provision for raw milk products Raw milk products should be labelled to indicate they are made from raw milk according to national requirements in the country of retail sale.
+Measures should be implemented at the primary production level to reduce the initial load of pathogenic micro-organisms and micro-organisms affecting safety and suitability to the extent possible to provide for a greater margin of safety and/or to prepare the milk in a way that permits the application of microbiological control measures of lesser stringency than might otherwise be needed to assure product safety and suitability.
+Milk produced according to the provisions of this section should be subjected to the application of control measures described in Annex II.
+During that separation period, milk from those animals shall not be used for the production of milk for the manufacture of raw milk products; • the owner shall keep a record of relevant information, e.g., results of tests carried out to establish the status of an animal just being introduced, and the identity for each animal either coming or leaving the herd.
+The owner shall keep a record of relevant information concerning feed.
+The improper use of veterinary drugs has been shown to result in potentially harmful residues in milk and milk products, and may affect the suitability of milk intended for the manufacture of cultured products. – The relevant aspects of the Guidelines for the Design and Implementation of National Regulatory Food Safety Assurance Programmes Associated with the Use of Veterinary Drugs in Food Producing 6 Treatment with veterinary drugs should be consistent with the Code of Practice to Minimize and Contain Antimicrobial Resistance (CXC 61- 2005).
+Foremilk (initially drawn small quantity of milk) from each teat should be discarded or collected separately and not used for human consumption unless it can be shown that it does not affect the safety and suitability of the milk.
+Between inspections, milking equipment should be maintained in proper working condition.
+Conditions should be arranged to allow necessary communication with the staff of the dairy, delivery of milk samples, dressing, rest breaks, etc. without direct contact taking place with the dairy processing areas or with staff members involved with processing milk and milk products.
+– Lorries, trucks or other vehicles which carry the tank or cans should be cleaned whenever necessary.
+For the effective implementation of the provisions in this Section, milk should be produced in accordance with Section 3 and Annex I of this Code.
+Similarly, where certain animal diseases are present in herds producing the milk, particular attention should be drawn to the recommendations in the OIE Terrestrial Animal Health Code, as specific microbiocidal control measures or performances thereof may be necessary to eliminate the animal health risks associated with these diseases.
+There should be adequate stock rotation, based on the principle of “first in, first out”.
+– Particular attention should be paid throughout storage and distribution to: • periods of defrosting of refrigeration units; • temperature abuse; and • overloading the cold storage facility.
+Where they are employed, microbiological criteria, including those used to verify the effective application of control measures within the framework of HACCP principles, should be developed in accordance with the Principles for the Establishment and Application of Microbiological Criteria for Foods (CXG 21-1997), including the use of a risk assessment approach as specified in the Principles and Guidelines for the Conduct of Microbiological Risk Assessment (CXG 30-1999).
+Incoming milk that is out of compliance with established criteria indicates that the control measure system is not working properly and corrective action should be taken to identify and resolve causative problems.
+To reflect the greater emphasis on the compliance needed on certain provisions, the word “should” has been substituted with the word “shall” where applicable.
+Likewise, in certain primary production situations, the occurrence of food safety hazards may be less avoidable, which will mandate the application of more stringent control measures during subsequent processing in order to insure the safety and suitability of the finished product.
+Where a particular principle has been identified in the main body of the Code, guidelines for the application of that principle will be located in the corresponding section of this Annex.
+In particular, the litter and the stabling area should be maintained in a manner that minimizes the risk of teat injuries and udder diseases.
+Additional provisions for the production of milk used for raw milk products Only potable water can be used in milking areas, product storage areas and other critical areas.
+Milking operations should minimize the introduction of food-borne pathogens and foreign matter from the skin and general milking environment as well as chemical residues from cleaning and disinfection routines.
+Milking equipment should be designed such that it does not damage teats and udders during normal operation.
+Rinsing of equipment and storage tanks following cleaning and disinfection should remove all detergents and disinfectants, except in those circumstances where the manufacturer instructions indicate that rinsing is not required.
+– Suitable clothing should be worn during milking and should be clean at the commencement of each milking period.
+Collection and chilling centres, if employed, should be designed and operated in such a manner that minimizes or prevents the contamination of milk.
+– The temperature of the milk to be used for the manufacture of raw-milk products shall not exceed 8°C, unless the milk has been collected within 2 hours after milking.
+For this reason, there should be clear communication between the manufacturer and the farm and, if necessary, technical assistance should be provided to the primary producer by the manufacturer.
+Extrapolation to temperatures outside the range of 63 to 72 °C, in particular, processing at temperatures above 72 °C must be treated with the utmost caution as the ability for them to be scientifically [validated] is beyond current experimental techniques.
+Such manuals should be available and consulted whenever necessary.
+Thermal processes necessary to obtain commercially sterile products are designed to result in the absence of viable micro-organisms and their spores capable of growing in the treated product when kept in a closed container at normal non-refrigerated conditions at which the food is likely to be held during manufacture, distribution and storage.
+These codes of practice indicate the measures that should be implemented by all persons that have the responsibility for assuring that food is safe and suitable for consumption.
+Close checks of moisture content/water activity of lots of farmer’s stock peanuts should be maintained.
+Where possible aerate the peanuts by circulation of air through the storage area to maintain proper and uniform temperature levels throughout the storage area.
+Specifications for the purchase of peanuts intended for further processing should include a maximum level for aflatoxin based in appropriate methods of analysis and a proper sampling plan.
+The implementation of HACCP principles will minimize aflatoxin contamination of peanuts through applications of preventive controls to the extent feasible in the production, handling storage and processing of each peanut crop.
+In all classes, subject to the special provisions for each class and the tolerances allowed, the pitahayas must be: - whole; - sound, produce affected by rotting or deterioration such as to make it unfit for consumption is excluded; - clean and free of any visible foreign matter; - practically free of pests affecting the general appearance of the produce; - practically free of damage caused by pests; - free of abnormal external moisture, excluding condensation following removal from cold storage; - free of any foreign smell and/or taste1; - firm; - fresh in appearance; - free of cracks in the skin; - with a peduncle or stem between 15 and 25 mm in length; - without thorns.
+The development and condition of the pitahayas must be such as to enable them: ­ to withstand transport and handling; and ­ to arrive in satisfactory condition at the place of destination.
+Pitahayas shall be packed in each container in compliance with the Code of Practice for Packaging and Transport of Fresh Fruits and Vegetables (CXC 44-1995).
+If the produce is not visible from the outside, each package shall be labelled as to the name of the produce and may be labelled as to the name of the variety and/or commercial type.
+In all classes, subject to the special provisions for each class and the tolerances allowed, the tree tomatoes must be: whole; sound, produce affected by rotting or deterioration such as to make it unfit for consumption is excluded; clean and practically free of any visible foreign matter; practically free of pests and damage caused by them affecting the general appearance of the produce; free of abnormal external moisture, excluding condensation following removal from cold storage; free of any foreign smell and/or taste; firm; fresh in appearance; with the stalk present to the first knot.
+The development and condition of the tree tomatoes must be such as to enable them: to withstand transport and handling; and to arrive in satisfactory condition at the place of destination.
+Tree tomatoes shall be packed in each container in compliance with the Code of Practice for Packaging and Transport of Fresh Fruits and Vegetables (CXC 44-1995).
+The products covered by this standard shall comply with the maximum levels for contaminants that are specified for the product in the General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995).2 The milk used in the manufacture of the products covered by this standard shall comply with the maximum levels for contaminants and toxins specified for milk by the General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995)2 and with the maximum residue limits for veterinary drug residues and pesticides established for milk by the Codex Alimentarius Commission.
+The products should comply with any microbiological criteria established in accordance with the Principles and Guidelines for the Establishment and Application of Microbiological Criteria Related to Foods (CXG 21-1997).5
+The name of the food shall be: Evaporated milk according to the composition specified in Section 3 Evaporated skimmed milk Evaporated partly skimmed milk Evaporated high-fat milk Evaporated partly skimmed milk may be designated “evaporated semi-skimmed milk” if the milkfat content is 4.0–4.5 percent and the minimum milk solids is 24 percent m/m.
+If the consumer would be misled by the omission, the milkfat content shall be declared in a manner found acceptable in the country of sale to the final consumer, either (i) as a percentage by mass or volume, or (ii) in grams per serving as quantified in the label provided that the number of servings is stated.
+If the consumer would be misled by the omission, the milk protein content shall be declared in a manner acceptable in the country of sale to the final consumer, either as (i) a percentage by mass or volume, or (ii) grams per serving as quantified in the label provided that the number of servings is stated.
+used in products covered by this annex shall comply with the Guidelines for the use of flavourings (CXG 66-2008).13
+The cut-out strength for any syrup packing medium shall be determined on average, but no container may have a soluble solids (oBrix) value beyond the next category of the medium oBrix.
+Canned fruits shall have normal colour, flavour and odour of canned fruits, corresponding to the type of fruits, packing medium, and added optional ingredients used and shall possess texture characteristic of the product.
+Certain common defects should not be present in amounts greater than the limitations fixed in the corresponding annexes.
+6.2 The products should comply with any microbiological criteria established in accordance with the Principles and guidelines for the establishment and application of microbiological criteria related to foods (CXG 21-1997).9
+8.1 The products covered by the provisions of this standard shall be labelled in accordance with the General standard for the labelling of pre-packaged foods (CXS 1-1985).10 In addition, the following specific provisions apply:
+8.2.6 If an added ingredient, as defined in Section 3.1.2, alters the flavour characteristic of the product, the name of the food shall be accompanied by the term “flavoured with X” or “X flavoured” as appropriate. 8.2.7 The name of the product may include the varietal type.
+7.1.4.1 The drained weight of the product should be not less than the percentages indicated in the corresponding Annexes, calculated on the basis of the weight of distilled water at 20 oC which the sealed container will hold when completely filled.ii 7.1.4.2 Lot acceptance The requirements for minimum drained weight should be deemed to be complied with when the average drained weight of all containers examined is not less than the minimum required, provided that there is no unreasonable shortage in individual containers.
+The canned pineapple shall have a reasonably good texture, shall be reasonably compact in structure, and the product shall be fairly free from porosity.
+All portions that collectively equal the size of a full-size unit are considered one unit in applying the allowance herein.
+(f) Cubes or dice (i) not more than 10 percent of the drained weight of pineapple in the container may consist of units of such size that they will pass through a screen that has square openings of 8 mm; (ii) not more than 15 percent of the drained weight of pineapple in the container may consis t of pieces which weight more than 3 g each. (iii) for dice or cubes less than 8 mm or 3 g, no more than 15 percent of the drained weight of pineapple in the container may consist of cubes or dice, each of which shall weigh less than three-fourths of the average weight of cubes or dice.
+10% by count of fruit units (cylinders)iii 3 blemishes per fruit unit (cylinder) Slices or spiral slices or whole slices; Half slices; Quarter slices 1 unit if 10 or less per can; 2 units if over 10 but not over 27 per can; or 7.5% by count if over 27 per can 1 unit if 5 or less per can; 2 units if over 5 but not over 10 per can; 4 units if over 10 but not over 32 per can; or 12.5% by total number of units if over 32 per can Spears 15% by count of all units 1 unit if 5 or less per can; 2 units if over 5 but not over 10 per can; 4 units if over 10 but not over 32 per can; or 12.5% by total number of units if over 32 per can Broken slices; titbits; chunks; cubes; pieces Not applicable 12.5% by total number of units Chips; crushed Not applicable Not more than 1.5% by weight of the drained fruit
+A container that fails to meet the quality requirements as set out in Section 3.2 shall be considered defective.
+The flavourings used in products covered by this standard should comply with the Guidelines for the use of flavourings (CXG 66-2008).5
+Cooked rice wrapped in plant leaves should have the following qualities:  have their appropriate shape;  be uniform in size;  be properly wrapped; and  have the characteristic smell and taste of the basic and/or optional ingredients.
+Cooked rice wrapped in plant leaves should be substantially free from following defects:  broken wrapper and leaking filling;  foreign taste; and  visible foreign mattersi outside and inside the product.
+Refrigerated products should comply with Code of Hygienic Practice for Refrigerated Packaged Foods with Extended Shelf Life (CXC 46-1999).
+The product covered by the provisions of this standard shall be labelled in accordance with the General Standard for the Labelling of Pre-packaged Foods (CXS 1-1985).
+Packaging used for cooked rice wrapped in plant leaves shall be in accordance with the relevant provisions of the Code of Practice for the Processing and Handling of Quick Frozen Foods (CXC 8-1976); the Code of Hygienic Practice for Low-Acid and Acidified Low-Acid Canned Foods (CXC 23-1979), or the Code of Hygienic Practice for Refrigerated Packaged Foods with Extended Shelf Life (CXC 46-1999).
+The weight of the product covered by the provisions of this standard shall be indicated in accordance with the General Standard for the Labelling of Pre-packaged Foods (CXS 1-1985).
+(b) processed by heat, in an appropriate manner, before or after being hermetically sealed in a container, so as to prevent spoilage.
+Light coconut milk shall be the product obtained from either the bottom portion of centrifuged coconut milk or by further dilution of coconut milk and complies with the requirements in Section 3 of this standard.
+Coconut milk is the dilute emulsion of comminuted coconu t endosperm (kernel) in water with the soluble and the suspended solids distributed and complies with the requirements in Section 3 of this standard.
+Coconut cream is the emulsion extracted from matured endosperm (kernel) of the coconut fruit with or without any addition of coconut water/water and complies with the requirements in Section 3 of this standard.
+Coconut cream concentrate is the product obtained after the partial removal of water from coconut cream and complies with the requirements in Section 3 of this standard.
+Coconut milk and coconut cream shall have normal colour, flavour and odour characteristic of the products.
+The products covered by the provisions of this standard shall comply with those maximum levels for heavy metals established by the Codex Alimentarius Commission for these products.
+The products covered by the provisions of this standard shall comply with those maximum pesticide residue limits established by the Codex Alimentarius Commission for these products.
+A container that fails to meet the requirement for minimum fill as described in Section 7.1.1 should be considered as a “defective”.
+shall be labelled to indicate that these are reconstituted products.
+The following information shall appear on the label of non -retail containers of food :
+common usage as an appropriate descriptive term which is not misleading or confusing to the food business or in the country in which the food is intended to be sold shall be used.
+Name and address of the manufacturer, packer, distributor, importer, exporter or vendor of the food shall be declared.
+In the case of a non-retail container used as a food transportation unit that is not amenable to possess a label, all the information required under Section 5 and Subsection 6.1 shall be provided in the accompanying documents or through appropriate other means (e.g. electronically between food businesses) and shall be effectively traceable to the food in such containers.
+Each non-retail container shall be marked in code or in a manner to clearly identify the producing factory and the lot(s) of the food in the non-retail container.
+Date marking and storage instructions shall be provided when required for the safety or integrity of the product.
+iii. Net contents of the non-retail container.
+The information required under Subsection 6.1 shall be traceable to the food in the non-retail container.
+Where the non -retail container contains multiple types of food, the names of all the foods contained therein and/or a commonly understood descriptor that best explains the foods present together in the container shall be provided on the label, as allowed by the competent authority in the country in which the product is sold.
+Where a non -retail container contains multiple types of food, the mandatory information required by Section 5 and Subsection 6.1 shall be provided for all the types of foods contained therein.
+Kiwifruit for industrial processing are excluded.
+In all classes, subject to the special provisions for each class and the tolerances allowed, the kiwifruit must be: • intact (but free of peduncle); • sound; produce affected by rotting or deterioration such as to make it unfit for consumption is excluded; • adequately firm; not soft, shrivelled or water-soaked; • well formed; double/multiple fruit being excluded; • clean, practically free of any visible foreign matter; • practically free of pests1; • practically free of damage caused by pests1; • free of abnormal external moisture, excluding condensation following removal from cold storage; • free of any foreign smell and/or taste; • fresh in appearance; The development and condition of the kiwifruit must be such as to enable them: • to withstand transportation and handling; • to arrive in satisfactory condition at the place of destination.
+The fruit must have attained a degree of maturity of at least 6.2° Brix or an average dry matter content of 15%2.
+They must be free of defects, with the exception of very slight, superficial defects, provided these do not affect the general appearance of the produce, the quality, the keeping quality and presentation in the package.
+When sized in accordance with existing trade practices, the package must be labelled with the size and method used.
+To ensure uniformity in size, the range in size between produce in the same package that is sized by weight shall not exceed: • 10 g for fruit less than or equal to 85 g; • 15 g for fruit weighing greater than 85 g and up to 120 g; • 20 g for fruit weighing greater than 120 g and up to 150 g; • 40 g for fruit weighing greater than 150 g.
+Kiwifruit shall be packed in each container in compliance with the Code of Practice for Packaging and Transport of Fresh Fruits and Vegetables (CXC 44-1995).
+Each package shall be labelled as to the name of the produce and optionally the name of the variety(ies) or cultivar(s) or the predominant flesh colour.
+The full or a commonly used name should be indicated.
+9.1 It is recommended that the produce covered by the provisions of this Standard be prepared and handled in accordance with the appropriate sections of the General Principles of Food Hygiene (CXC 1-1969), Code of Hygienic Practice for Fresh Fruits and Vegetables (CXC 53-2003), and other relevant Codex texts such as codes of hygienic practice and codes of practice. 9.2 The produce should comply with any microbiological criteria established in accordance with the Principles and Guidelines for the Establishment and Application of Microbiological Criteria Related to Foods (CXG 21-1997).
+, the following specific provisions apply:
+The name of the food shall be: Anhydrous milkfat Milkfat Anhydrous butter oil Butter oil Ghee According to description specified in Section 2, composition specified in 3 and the use of antioxidants (see Section 4).
+Products in either chill or frozen storage should be appropriately wrapped to prevent drying out or desiccation.
+The exact times and conditions of cooking for the products should be determined by prior experimentation.
+Assessors must pay particular attention to those features of the product which are referred to in any standards and which determinate conformance to the standard, but in addition they should assess and record other relevant attributes of the samples, as appropriate.
+The rooms should be designed to ensure cooking odours do not interfere with sensory analysis.
+Any specific conditions in standards should be met.
+Reference documents are presented in Appendix II.
+It is essential that samples of excellent quality be provided as a reference point during the preparation of such packs.
+They must be administered under the exact conditions specified in the instructions.
+The samples used in the test described are permanent samples cast from polyvinyl chloride although a series of samples can also be generated from appropriate food samples.
+Immerse the pouch in boiling water and cook.
+Variations in spoilage rates between individual units can be minimized if the starting ma terial is of uniform size and quality and contact between individual units is maintained during spoilage.
+The samples should have both chemical analysis and sensory results to determine the quality of the increment and the homogeneity of the increment.
+In all classes, subject to the special provisions for each class and the tolerances allowed, the yacon must be:  intact;  sound; produce affected by rotting or deterioration such as to make it unfit for consumption is excluded;  clean; practically free of any visible foreign matter;  practically free from pests;  free of damage caused by pests affecting the flesh;  free of abnormal external moisture, excluding condensation following removal from cold storage;  fresh in appearance;  firm;  free of mechanical damage and bruising;  free of damage caused by frost or low temperatures;  free of damage caused by cracking or high temperatures; and  free of any foreign smell and/or taste; The cut at the distal (narrow) of the yacon should not exceed 2 cm in diameter. The stalk end should have a clean cut between 1 cm and 2.5 cm in length in case of varieties and/or commercial types that have distinct stalk. The development and condition of the yacon must be such as to enable it:  to withstand transportation and handling; and  to arrive in satisfactory condition at the place of destination.
+The yacon is classified into three classes defined below:
+The yacon must have reached an appropriate degree of maturity for trade and consumption in conformity with the characteristics of the variety, and/or commercial type and the growing area.
+They must be free from defects, with the exception of very slight superficial defects, provided these do not affect the general appearance of the produce, the quality, the keeping quality and presentation in the package.
+At all marketing stages, tolerances in respect of quality and size shall be allowed in each lot for produce not satisfying the requirements of the class indicated.
+Yacon shall be packed in each container in compliance with the Code of Practice for Packaging and Transport of Fresh Fruit and Vegetables (CXC 44-1995).
+In addition, the following specific requirement shall apply:
+Each package shall be labelled as to the name of the produce and may be labelled as to the name of the variety and/or commercial type.
+In the case of a mixture of distinctly different varieties of yacon of different origins, the indication of each country of origin shall appear next to the name of the variety and/or commercial type concerned.
+In the case of a mixture of distinctly different varieties and/or commercial types and/or colours of yacon, which are not visible from the outside, varieties and/or commercial types and/or colours must be indicated.
+This standard applies to yacon as identified in food category 04.2.1.1 “untreated fresh vegetables (including mushrooms and fungi, roots and tubers, pulses and legumes, and aloe vera), seaweed and nuts and seeds”, and therefore no food additives is allowed in accordance with the provisions of the General Standard for Food Additives (CXS 192-1995).
+Managers should also arrange for adequate and periodic training for relevant employees in the facility so as to ensure they understand the principles involved in HACCP. Section 8.2.1.3 Section 15A.3.2.3
+• In refrigerated water storage areas, the density of the fish should be controlled to prevent damage.
+• Water inlets and outlets to ponds should be screened to prevent the entrance of unwanted species.
+In such systems, the water is constantly refreshed and reused and water quality is controlled within safe measures.
+To minimize deterioration, it is important that: • Chilling should commence as soon as possible. • Fresh fish, shellfish and other aquatic invertebrates should be kept chilled, processed and distributed with care and minimum delay.
+• The time, temperature and homogeneity of chilling should be monitored and controlled regularly.
+- Appropriate design and construction of fish farms should be adopted to ensure control of hazards and prevention of water contamination.
+- The source of post-larvae, fry and fingerlings should be such to avoid the carryover of potential hazards into the growing stocks.
+Care should also be taken to minimize physical damage to fish, which may lead to bruising.
+• Products should be registered with the relevant national authority as appropriate.
+• A post-harvest control should reject all fish that do not comply with the requirements set for veterinary drug residues by the relevant national authority.
+• All equipment and holding facilities should be easy to clean and disinfect and should be cleaned and disinfected regularly and as appropriate.
+• Water should not be contaminated with either human sewage or industrial pollution; holding tanks and transportation systems should be designed and operated in a hygienic way to prevent contamination of water and equipment. • Water in holding and conditioning tanks should be well aerated before fish are transferred into it. Potential hazards: microbiological contamination, biotoxins, chemical contamination (e.g. oil, cleaning and disinfecting agents) Potential defects: dead fish, physical damage, off-flavours, physical/biochemical change owing to stress of live fish Technical guidance:
+Species known to exhibit strong territoriality, cannibalism or hyperactivity when under stress should be separated into individual tanks or appropriately secured/banned to prevent damage (an alternative method is reduction in temperature).
+• Conditioned and packaged fish should be stored or transported under conditions that ensure proper temperature control.
+Where no Codex standard exists, reference should be made to national regulations and/or commercial specifications.
+Classified growing areas should be clearly defined by the official agency having jurisdiction as either: suitable for harvesting for direct human consumption, relaying in acceptable water or depuration in an approved depuration centre or approved processing to reduce or limit target organisms; or unsuitable for growing or harvesting bivalve molluscs.
+Growing areas providing bivalve molluscs for indirect human consumption should be defined in relation to the further procedure of the lot.
+Distribution centres that prepare live bivalve molluscs suitable for direct consumption and establishments that prepare live and raw bivalve molluscs suitable for direct consumption should maintain the same hygiene standards as per Sections 3.2, 3.3, 3.4 and 3.5.
+Distribution centres and other establishments that prepare live bivalve molluscs should only accept bivalve molluscs that meet the end-product specification and that originate directly from approved growing areas or after relaying in an approved relaying area or after depuration in an approved depuration centre or tank.
+Sampling frequency must be sufficient to address spatial–temporal changes in microalgae and toxins in shellfish and to cover the risks of rapid rises in shellfish toxicity.
+• Tanks should be drained, cleaned and disinfected at suitable intervals. • Re-circulating wet storage systems must contain approved water treatment systems.
+The equipment used should be designed and adjusted to minimize the risk of damage to the shells.
+• If labels on post-harvest treated raw bivalve molluscs make safety claims relating to the post-harvest treatment, the claims should be specific to the target hazard that has been eliminated or reduced.
+• Shucked molluscs should be rinsed or washed to eliminate mud, sand and detritus and to reduce the microbiological level of the products.
+Before packaging, the bivalve molluscs should be examined for objectionable matter such as shell pieces.
+Where marketing of roe-on scallop meat is concerned, this product should meet the contaminants and relevant hygiene provisions outlined in the Standard for Live and Raw Bivalve Molluscs (CXS 292-2008) and the Standard for Fresh and Quick Frozen Raw Scallop Products (CXS 315-2014).
+• The shucked scallops should proceed immediately to the washing step to minimize their exposure to ambient temperatures above 4 °C.
+Potential hazards: microbiological contamination, chemical and physical contamination Potential defects: physical damage Technical guidance: • Storage periods should be kept as short as possible. • Damage to packaging of frozen product should be avoided.
+• Each establishment that purifies bivalve molluscs with a heat treatment must develop a heat treatment process schedule, acceptable to the official agency having jurisdiction, that addresses such critical factors as the species and size of bivalve molluscs, time of exposure to heat, internal bivalve molluscs temperature, type of heat process used, water/steam to bivalve molluscs ratios, nature of heat equipment, measurement devices and their calibration, post-heating chilling operations, cleaning and sanitizing of heat process equipment.
+If a hazard analysis based on information from monitoring of the harvesting area or from biotoxin screening indicates that toxins are present in the viscera/whole body analysis, control measures should be in place to confirm that scallop products are safe for human consumption, e.g. further testing of meat or roe-on scallops or controls ensuring complete removal of viscera and/or roe and any other measures that the competent authority may require.
+Proper controls should be put in place by the producer and processor so as to avoid water uptake or limit it to that which is technologically unavoidable.
+• Scallops should be sorted and graded at this point.
+• After washing, the shucked scallops should be immediately pre-chilled, packed and refrigerated or iced and kept at an appropriate temperature (between 0 °C and 4 °C).
+Storage containers/bags should not be too large, should be appropriately filled and not over-stacked in order to facilitate cooling and to prevent scallops from being damaged.
+The duration of shucking on vessel voyages should be limited to the number of days that will assure that at the time of offloading at shore, all harvest scallops will have adequate remaining shelf-life.
+• Appropriate documentation should be completed to comply with any regulatory requirements.
+Any measurable absorbed water from ice should be properly measured and labelled.
+Potential hazards: microbiological and chemical contamination Potential defects: inaccurate measurement and labelling of percentage added water Technical guidance: • The quantity of water added to scallops as an ingredient (for the produc- tion of quick-frozen products only) should be limited to the lowest possi- ble level. • The weight of added water and scallops should be controlled and accurate in order to calculate the percentage added water for labelling purposes.
+• Exposure to ambient temperatures above 4 °C should be minimal and monitored.
+Alternatively, the product should be rejected.
+Potential hazards: metal fragments Potential defects: unlikely Technical guidance: • Metal detection equipment that is capable of sensing product that has become contaminated with metal fragments of the size likely to cause human injury should be installed at the most appropriate place in the process to eliminate the hazard. Section 15A.3.2.11
+• When it is impractical for the initial receiving establishment to conduct all the necessary histamine controls listed in subsection 10.2 (i.e. temperature monitoring, sensory evaluation, vessel records review, and/or histamine testing), then the processing establishment should conduct these activi
+For products whose preparation does not include a heating step or other means to eliminate histamine-producing bacteria and their enzymes, refrigerated storage will continue to be a critical control point to prevent histamine formation throughout the shelf-life of the products.
+The processing facility should use histamine testing to periodically verify that histamine controls are working properly (Refer to Section 10.2.4 Histamine testing).
+Potential hazards: unlikely Potential defects: incorrect label, damage to packaging Technical guidance: • Boxing should be clean, durable and suitable for the intended use. • The boxing operation should be so conducted as to avoid damage to packaging materials. • Product in damaged boxing should be re-boxed so that it is properly protected.
+• Stored frozen product should have adequate air circulation to ensure that it remains properly frozen. This includes preventing product from being stored directly on the floor of the freezer.
+For frozen surimi processing, consideration should be given to the following for each step:
+• Separated minced meat should be immediately spread into water and transferred to the washing and dewatering step to prevent blood from congealing and causing loss of gel strength capability.
+In some cases, dehydration should be performed before refining.
+The use of protein plasma should be appropriately labelled.
+• The packaging operation should have procedures established that make possible cross-contamination unlikely.
+Sawdust should be kept well separated from fish cores used for coated products, should be temperature controlled, not stay too long at ambient temperature and should be stored preferably in frozen state prior to further processing into suitable products.
+In countries that produce frozen surimi by traditional non-mechanized methods from locally available fish species for local consumption, extensive consideration should be given to prerequisite programmes described in Section 3.
+Raw fish should preferably be stored at 4 °C or below, and the dates of harvesting and the time of receipt of the fish should identify the lot of fish used for processing.
+During the preparation of this batter and its use, the potential hazard for the possible growth and toxin production of Staphylococcus aureus and Bacillus cereus must be controlled.
+• Microwave tempering is an alternative method but should also be controlled to prevent softening of outer layers.
+• Protect wrapped, unwrapped and unpacked fish blocks when cleaning and sanitizing processing lines during breaks and between shifts if the production process is interrupted.
+• Representative samples should be taken for further examination for possible hazards and defects.
+• Pre-printed labelling and packaging material should be examined for accuracy.
+• Sawn shims used to form irregularly shaped fish cores by mechanical pressure should be kept in clean, hygienic conditions until further manufacturing.
+Refer also to Section 9.4.3. Potential hazards: foreign material, microbiological contamination, scombrotoxin Potential defects: incorrect addition of additives, decomposition Technical guidance: • The temperature of the product in the mixing process should be adequately controlled to avoid the growth of pathogenic bacteria, and scombrotoxin formation.
+• Formed fish cores should be examined closely for proper shape, weight and texture.
+• An adequate supply of clean seawater or potable water should be available for the washing of whole cephalopods and cephalopod products.
+An adequate supply of clean seawater or potable water should be available for the washing of product during and after skinning.
+Where sulphites have been used in the process, care should be taken to ensure that they are properly labelled.
+It is necessary to wash fresh shrimps after reception in adequate equipment with a series of low-velocity sprays with chilled clean water.
+• Shrimps should be drained and chilled without delay prior to further processing.
+• Adequate separation of cooked shrimps exiting the cooking cycle utilizing separate equipment is essential in order to ensure no cross-contamination.
+Potential hazards: microbiological contamination Potential defects: presence of shell Technical guidance: • Cooked shrimps have to be properly peeled through mechanical or manual peeling in line with cooling and freezing processes. • Cleaning and maintenance schedules should be available and implemented by fully trained staff in order to ensure efficient and safe processing.
+• After cooling and draining, the shrimps should be frozen as soon as possible, avoiding any environmental contamination.
+• Freezers are complex machines requiring cleaning and maintenance schedules operated by fully trained staff.
+• Sulphites should be used in accordance with manufacturer instructions and GMP. • Where sulphites were used in the process, care should be taken that they are properly labelled.
+All end-products should be stored in the freezer to allow proper air circulation.
+• The cold storage facility should have a temperature-monitoring device, preferably a continuous recording unit to monitor and record ambient temperature properly.
+• Immediately after thawing, the shrimps should be re-iced or held in chill to avoid temperature abuse before further processing.
+This should be undertaken with minimum of delay followed by re-icing of the shrimps.
+• The grading process should be carried out promptly to prevent unnecessary microbiological growth and product decomposition.
+Sulphites used to prevent blackspot formation autolysis should be used in accordance with manufacturer instructions and good manufacturing practice (GMP).
+Whatever the process, it is necessary to ensure that the peeling tables are kept clear of contaminated shrimps and shell fragments using water jets and the shrimps are rinsed to ensure no carryover of shell fragments.
+This operation is considered to be a mechanical though labour-intensive process so that: – cleaning and maintenance schedules should be in place and cover the need for cleaning before, after and during processing by trained operatives; and – in addition, it is essential to ensure that damaged and contaminated shrimps are removed from the line and that no debris builds up.
+• Products should be properly protected from dehydration by sufficient packaging or glaze.
+Hand-stripping should be performed gently taking into account the anatomical position and direction of the oviduct in order to release the eggs quickly. CODE OF PRACTICE FOR FISH AND FISHERY PRODUCTS SECTION
+• After unloading, the accumulation of waste should be avoided and any waste should be disposed of in a proper manner.
+• Granule size of salt crystals and permitted additives should be tiny to allow for rapid dissolution and absorption into the eggs and to prevent damage to the eggs.
+• Storage area and packaging materials used for additives and salt should comply with Section 3. • All stored additives and salt should be kept with labels with the name, expiry date and storage requirements.
+• Trained personnel should periodically monitor the storage environment and records should be kept.
+• Packaging materials and labels should be sourced from reliable suppliers and accompanied by appropriate documentation on the specifications and composition.
+• The effectiveness of the cleaning and disinfection of packaging materials should be validated and revalidated after any changes to procedures (e.g. change of disinfectants, cleaners).
+• The ambient temperature and humidity and the duration of exposure to the ambient temperature should be controlled and monitored to ensure they do not affect the homogeneous distribution of ingredients and additives and to prevent microbial growth. • Grading and blending should be done by trained personnel.
+The primary coding should be verified by trained personnel to ensure that it is legible, accurate and permanent.
+• The cooling system should be frequently calibrated to ensure accuracy and efficiency.
+• All thermal equipment and monitoring devices should be regularly checked and calibrated based on a schedule to ensure accuracy.

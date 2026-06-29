@@ -1,0 +1,912 @@
+{
+    "version": "mvp-5.0",
+    "items": [
+      {
+        "id": "UND-8f2c3a1b-5d7e-4d2b-9f6a-0b7f3d2b1a9c",
+        "type": "default",
+        "category": "undefined",
+        "modality": "undefined",
+        "communicative_function": "undefined",
+        "representative_example": "This sentence has not been processed yet.",
+        "structural_template": "*<sentence>",
+        "components": {
+          "1": {
+            "label": "sentence",
+            "text": "This sentence has not been processed yet.",
+            "required": true,
+            "description": "Fallback component for sentences that do not match any defined template.",
+            "examples": ["This sentence has not been processed yet."],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "CND-1a6d8e2c-3f41-4b6b-9c61-2d4f7b0a8c31",
+        "type": "default",
+        "category": "Expressing Condition",
+        "modality": "Condition",
+        "communicative_function": "Qualify a risk",
+        "representative_example": "Micro-organisms that may present a health risk shall be eliminated.",
+        "structural_template": "*<SubjectNounPhrase> *[that/which may] *<RiskVerbPhrase> *[shall/must] *<RequiredAction>.",
+        "components": {
+          "1": {
+            "label": "SubjectNounPhrase",
+            "text": "Micro-organisms",
+            "required": true,
+            "description": "Entity or agents identified as potentially presenting a risk.",
+            "examples": ["Micro-organisms", "Contaminants", "Pathogenic bacteria"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "RiskVerbPhrase",
+            "text": "present a health risk",
+            "required": true,
+            "description": "Verb phrase expressing potential or conditional risk.",
+            "examples": ["present a health risk", "pose a risk to consumers", "cause contamination"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "RequiredAction",
+            "text": "be eliminated",
+            "required": true,
+            "description": "Mandatory action required to mitigate or eliminate the identified risk.",
+            "examples": ["be eliminated", "be controlled", "be removed from the process"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "CND-4c2b9a7e-0d5b-4a0d-a4dd-8c6b9e2a1f70",
+        "type": "default",
+        "category": "Expressing Condition",
+        "modality": "Condition",
+        "communicative_function": "Add a contextual condition",
+        "representative_example": "Where feasible, protective clothing shall be worn.",
+        "structural_template": "*[Where/When/If] *<Condition>, *<MainAttestation>.",
+        "components": {
+          "1": {
+            "label": "Condition",
+            "text": "feasible",
+            "required": true,
+            "description": "Contextual or situational condition that limits or qualifies the obligation.",
+            "examples": ["feasible", "necessary", "applicable"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "MainAttestation",
+            "text": "protective clothing shall be worn",
+            "required": true,
+            "description": "Main regulatory statement expressing an obligation, recommendation, or requirement.",
+            "examples": ["protective clothing shall be worn", "protective equipment must be used", "controls shall be implemented"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "CND-9e1b4d77-0a3f-4c63-b4d2-7c0f2b6a4d11",
+        "type": "default",
+        "category": "Expressing Condition",
+        "modality": "Condition",
+        "communicative_function": "Set an if-then threshold trigger",
+        "representative_example": "If the pH falls below 4.2, the batch must be discarded.",
+        "structural_template": "If <Parameter> *[exceeds/falls below] *<Limit>, *<Action>.",
+        "components": {
+          "1": {
+            "label": "Parameter",
+            "text": "the pH",
+            "required": true,
+            "description": "Measurable parameter being monitored.",
+            "examples": ["the pH", "the temperature", "the histamine level"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Limit",
+            "text": "4.2",
+            "required": true,
+            "description": "Numeric threshold that triggers the action (value + optional unit).",
+            "examples": ["4.2", "5°C", "20 mg/kg"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Action",
+            "text": "the batch must be discarded",
+            "required": true,
+            "description": "Required action once the threshold is crossed.",
+            "examples": ["the batch must be discarded", "the lot shall be rejected", "production shall be stopped"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "CND-2b8a0c14-6c0b-4d7e-9b2c-1f8d3a4c0b72",
+        "type": "default",
+        "category": "Expressing Condition",
+        "modality": "Condition",
+        "communicative_function": "State an exception with “unless”",
+        "representative_example": "Unless refrigerated, cooked meat shall not be stored longer than 2 hours.",
+        "structural_template": "Unless <ExceptionCondition>, *<Attestation>.",
+        "components": {
+          "1": {
+            "label": "ExceptionCondition",
+            "text": "refrigerated",
+            "required": true,
+            "description": "Condition under which the main attestation does NOT apply (exception).",
+            "examples": ["refrigerated", "properly labeled", "stored at or below 5°C"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Attestation",
+            "text": "cooked meat shall not be stored longer than 2 hours",
+            "required": true,
+            "description": "Main regulatory statement that applies when the exception condition is NOT met.",
+            "examples": ["cooked meat shall not be stored longer than 2 hours", "the product shall not be distributed", "the lot must be rejected"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "CND-7f3a9b2c-1d4e-4c1a-8a2f-3b6c9d0e1f22",
+        "type": "default",
+        "category": "Expressing Condition",
+        "modality": "Condition",
+        "communicative_function": "Allow an action “provided that” a safeguard is met",
+        "representative_example": "Packaging may be reused provided that it is thoroughly cleaned and sanitized.",
+        "structural_template": "*<PermittedAction> may *<BaseVerbPhrase> provided that *<SafeguardCondition>.",
+        "components": {
+          "1": {
+            "label": "PermittedAction",
+            "text": "Packaging",
+            "required": true,
+            "description": "Entity or action that is being permitted under a safeguard condition.",
+            "examples": ["Packaging", "Reusable containers", "Processing water"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "BaseVerbPhrase",
+            "text": "be reused",
+            "required": true,
+            "description": "Verb phrase expressing the permitted action or state.",
+            "examples": ["be reused", "be used", "be applied"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "SafeguardCondition",
+            "text": "it is thoroughly cleaned and sanitized",
+            "required": true,
+            "description": "Safeguard requirement that must be met for the permission to apply.",
+            "examples": ["it is thoroughly cleaned and sanitized", "cross-contamination is prevented", "controls are verified and documented"],
+            "allow_custom": true
+          }
+        }
+      },
+  
+      {
+        "id": "OBL-0b7e2c1a-9d3f-4b2a-8f0c-6d1a2b3c4d5e",
+        "type": "default",
+        "category": "Expressing Obligation",
+        "modality": "Obligation",
+        "communicative_function": "Mandate an action or state",
+        "representative_example": "Products shall be packaged promptly.",
+        "structural_template": "*<Subject> *[shall/must/should] be *<PastParticiple> {[with/in/at] <Complement>}.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "Products",
+            "required": true,
+            "description": "Entity or item to which the obligation applies.",
+            "examples": ["Products", "Raw materials", "Food products"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PastParticiple",
+            "text": "packaged",
+            "required": true,
+            "description": "Past participle expressing the mandated action or state (passive voice).",
+            "examples": ["packaged", "stored", "labeled"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Complement",
+            "text": "promptly",
+            "required": false,
+            "description": "Optional complement specifying manner, place, timing, or condition.",
+            "examples": ["promptly", "in clean containers", "at the facility"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "OBL-3a1c9d2e-5f6b-4a0c-9e2b-1d3f4a5b6c7d",
+        "type": "default",
+        "category": "Expressing Obligation",
+        "modality": "Obligation",
+        "communicative_function": "Require compliance with a standard, limit, or criterion",
+        "representative_example": "Products shall comply with the maximum residue limits established by the Codex Alimentarius Commission.",
+        "structural_template": "*<Subject> *[shall/must/should] comply with *<StandardOrCriterion>.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "Products",
+            "required": true,
+            "description": "Entity that must meet the referenced standard, limit, or criterion.",
+            "examples": ["Products", "Food products", "The lot"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "StandardOrCriterion",
+            "text": "the maximum residue limits established by the Codex Alimentarius Commission",
+            "required": true,
+            "description": "The referenced standard, limit, criterion, or requirement that must be complied with.",
+            "examples": ["the maximum residue limits established by the Codex Alimentarius Commission", "applicable microbiological criteria", "the relevant Codex standard"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "OBL-6d2b1a0c-7e4f-4c3a-9b1d-2e3f4a5c6d7e",
+        "type": "default",
+        "category": "Expressing Obligation",
+        "modality": "Obligation",
+        "communicative_function": "Order precautionary measures",
+        "representative_example": "Precautions shall be taken to prevent contamination from moisture.",
+        "structural_template": "*<PrecautionOrMeasure> *[shall/must/should] be taken to *<PurposeInfinitive>",
+        "components": {
+          "1": {
+            "label": "PrecautionOrMeasure",
+            "text": "Precautions",
+            "required": true,
+            "description": "Noun phrase naming the precaution(s) or measure(s) that must be taken.",
+            "examples": ["Precautions", "Measures", "Appropriate precautions"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PurposeInfinitive",
+            "text": "prevent contamination from moisture",
+            "required": true,
+            "description": "Infinitive verb phrase stating the purpose of the precautionary measures.",
+            "examples": ["prevent contamination from moisture", "avoid cross-contamination", "reduce the risk of microbial growth"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "OBL-9c4d2e1f-0a7b-4b6c-8d2e-1f3a4c5b6d7e",
+        "type": "default",
+        "category": "Expressing Obligation",
+        "modality": "Obligation",
+        "communicative_function": "Set conditional acceptance or rejection",
+        "representative_example": "No raw material shall be accepted if known to contain toxic substances.",
+        "structural_template": "*<Quantifier> *<Material> *[shall/must/should] be *<PastParticiple> *[if/when] *<Condition>.",
+        "components": {
+          "1": {
+            "label": "Quantifier",
+            "text": "No",
+            "required": true,
+            "description": "Quantifier establishing acceptance or rejection scope.",
+            "examples": ["No", "Any"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Material",
+            "text": "raw material",
+            "required": true,
+            "description": "Material, input, or item subject to acceptance or rejection.",
+            "examples": ["raw material", "ingredient", "lot"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "PastParticiple",
+            "text": "accepted",
+            "required": true,
+            "description": "Past participle expressing acceptance or rejection decision.",
+            "examples": ["accepted", "used", "processed"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "Condition",
+            "text": "known to contain toxic substances",
+            "required": true,
+            "description": "Condition that triggers acceptance or rejection.",
+            "examples": ["known to contain toxic substances", "found to be contaminated", "non-compliant with specifications"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "OBL-2e1a0b9c-3d4f-4a5b-8c6d-7e9f0a1b2c3d",
+        "type": "default",
+        "category": "Expressing Obligation",
+        "modality": "Obligation",
+        "communicative_function": "Assign responsibility to an agent",
+        "representative_example": "Competent authorities must implement a water-safety management plan in accordance with current regulations.",
+        "structural_template": "*<Agent> *[shall/must/should] *<BaseVerb> *<ObjectOrProcess> {[in accordance with/to ensure] <ReferenceOrGoal>}.",
+        "components": {
+          "1": {
+            "label": "Agent",
+            "text": "Competent authorities",
+            "required": true,
+            "description": "Responsible entity (authority, operator, establishment).",
+            "examples": ["Competent authorities", "The operator", "The competent authority"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "BaseVerb",
+            "text": "implement",
+            "required": true,
+            "description": "Base verb expressing the mandated action.",
+            "examples": ["implement", "maintain", "establish"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "ObjectOrProcess",
+            "text": "a water-safety management plan",
+            "required": true,
+            "description": "Object, plan, procedure, or process required by the rule.",
+            "examples": ["a water-safety management plan", "traceability records", "a cleaning schedule"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "ReferenceOrGoal",
+            "text": "current regulations",
+            "required": false,
+            "description": "Optional reference (standard/regulation) or intended goal.",
+            "examples": ["current regulations", "Codex guidelines", "to ensure food safety"],
+            "allow_custom": true
+          }
+        }
+      },
+  
+      {
+        "id": "PRM-0d1c2b3a-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+        "type": "default",
+        "category": "Expressing Permission",
+        "modality": "Permission",
+        "communicative_function": "Allow a substance or action",
+        "representative_example": "Natural flavoring substances may be used in products covered by this Standard.",
+        "structural_template": "*<SubstanceOrAction> may be *<PastParticiple> {[in/for] <ProductOrCategory>} {[in accordance with] <Standard>}.",
+        "components": {
+          "1": {
+            "label": "SubstanceOrAction",
+            "text": "Natural flavoring substances",
+            "required": true,
+            "description": "Substance or action that is explicitly permitted.",
+            "examples": ["Natural flavoring substances", "Food additives", "Processing aids"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PastParticiple",
+            "text": "used",
+            "required": true,
+            "description": "Past participle expressing the permitted action or state.",
+            "examples": ["used", "applied", "added"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "ProductOrCategory",
+            "text": "products covered by this Standard",
+            "required": false,
+            "description": "Product, food category, or scope to which the permission applies.",
+            "examples": ["products covered by this Standard", "processed foods", "the final product"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "Standard",
+            "text": "this Standard",
+            "required": false,
+            "description": "Referenced standard or regulation governing the permitted use.",
+            "examples": ["this Standard", "Codex Alimentarius", "applicable regulations"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRM-1f2e3d4c-5b6a-4c7d-8e9f-0a1b2c3d4e5f",
+        "type": "default",
+        "category": "Expressing Permission",
+        "modality": "Permission",
+        "communicative_function": "List permitted items",
+        "representative_example": "Permitted ingredients: starter cultures of harmless microorganisms; sodium chloride; potable water.",
+        "structural_template": "Permitted *<ItemCategory>: *<PermittedItemList>.",
+        "components": {
+          "1": {
+            "label": "ItemCategory",
+            "text": "ingredients",
+            "required": true,
+            "description": "Category or class of items that are explicitly permitted.",
+            "examples": ["ingredients", "additives", "processing aids"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PermittedItemList",
+            "text": "starter cultures of harmless microorganisms; sodium chloride; potable water",
+            "required": true,
+            "description": "Explicit list of permitted items, typically separated by semicolons or commas.",
+            "examples": ["starter cultures of harmless microorganisms; sodium chloride; potable water", "citric acid; ascorbic acid; lactic acid", "water; salt; sugar"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRM-2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+        "type": "default",
+        "category": "Expressing Permission",
+        "modality": "Permission",
+        "communicative_function": "Give permission with a condition",
+        "representative_example": "Allergenic ingredients may be added only if cross-contact is prevented.",
+        "structural_template": "*<SubstanceOrAction> may *<BaseVerb> *[only if/provided that] *<Condition>.",
+        "components": {
+          "1": {
+            "label": "SubstanceOrAction",
+            "text": "Allergenic ingredients",
+            "required": true,
+            "description": "Substance or action that is permitted under a specific condition.",
+            "examples": ["Allergenic ingredients", "Reused packaging", "Processing aids"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "BaseVerb",
+            "text": "be added",
+            "required": true,
+            "description": "Base verb describing the permitted action.",
+            "examples": ["be added", "be used", "be applied"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Condition",
+            "text": "cross-contact is prevented",
+            "required": true,
+            "description": "Condition that must be met for the permission to apply.",
+            "examples": ["cross-contact is prevented", "the product is clearly labeled", "controls are implemented and verified"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRM-3c4d5e6f-7a8b-4c9d-8e0f-1a2b3c4d5e6f",
+        "type": "default",
+        "category": "Expressing Permission",
+        "modality": "Permission",
+        "communicative_function": "State an exception clause",
+        "representative_example": "Except for use in salted fish at up to 200 mg/kg, sodium benzoate may be used.",
+        "structural_template": "*[Except for/Except when] *<Context>, *<SubstanceOrAction> may be *<PastParticiple> *<LimitOrDetails>.",
+        "components": {
+          "1": {
+            "label": "Context",
+            "text": "use in salted fish",
+            "required": true,
+            "description": "Specific context, product, use, or situation that defines the exception scope.",
+            "examples": ["use in salted fish", "application in fermented products", "storage at low temperature"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "SubstanceOrAction",
+            "text": "sodium benzoate",
+            "required": true,
+            "description": "Substance or action to which the permission applies under the stated exception.",
+            "examples": ["sodium benzoate", "potassium sorbate", "the additive"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "PastParticiple",
+            "text": "used",
+            "required": true,
+            "description": "Past participle expressing the permitted action or state.",
+            "examples": ["used", "applied", "added"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "LimitOrDetails",
+            "text": "at up to 200 mg/kg",
+            "required": false,
+            "description": "Optional limits, conditions, or additional details applicable within the exception.",
+            "examples": ["at up to 200 mg/kg", "within the specified limits", "under controlled conditions"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRM-4d5e6f7a-8b9c-4d0e-9f1a-2b3c4d5e6f7a",
+        "type": "default",
+        "category": "Expressing Permission",
+        "modality": "Permission",
+        "communicative_function": "Authorize an action through a responsible agent",
+        "representative_example": "The competent authority may approve recirculated water for food processing.",
+        "structural_template": "*<Authority> may *<BaseVerb> *<ProcessOrMaterial> {[in accordance with/to ensure] <ReferenceOrGoal>}.",
+        "components": {
+          "1": {
+            "label": "Authority",
+            "text": "The competent authority",
+            "required": true,
+            "description": "Competent authority or responsible body empowered to grant authorization.",
+            "examples": ["The competent authority", "Regulatory authorities", "The approval body"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "BaseVerb",
+            "text": "approve",
+            "required": true,
+            "description": "Base verb expressing the act of authorization or approval.",
+            "examples": ["approve", "authorize", "permit"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "ProcessOrMaterial",
+            "text": "recirculated water for food processing",
+            "required": true,
+            "description": "Process, practice, or material being authorized.",
+            "examples": ["recirculated water for food processing", "the use of recycled water", "alternative processing methods"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "ReferenceOrGoal",
+            "text": "applicable regulations",
+            "required": false,
+            "description": "Optional reference to standards, regulations, or the purpose of the authorization.",
+            "examples": ["applicable regulations", "Codex guidelines", "to ensure food safety"],
+            "allow_custom": true
+          }
+        }
+      },
+  
+      {
+        "id": "PRO-5e6f7a8b-9c0d-4e1f-8a2b-3c4d5e6f7a8b",
+        "type": "default",
+        "category": "Expressing Prohibition",
+        "modality": "Prohibition",
+        "communicative_function": "Ban a treatment or condition",
+        "representative_example": "The product shall not be treated with ionizing irradiation.",
+        "structural_template": "*<Subject> *[shall/must/should] not be *<PastParticiple> {[by/with] <AgentOrMethod>}.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "The product",
+            "required": true,
+            "description": "Entity or product to which the prohibition applies.",
+            "examples": ["The product", "Food products", "The lot"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PastParticiple",
+            "text": "treated",
+            "required": true,
+            "description": "Past participle expressing the prohibited treatment or condition.",
+            "examples": ["treated", "processed", "subjected"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "AgentOrMethod",
+            "text": "ionizing irradiation",
+            "required": false,
+            "description": "Optional agent, method, or technology that is explicitly prohibited.",
+            "examples": ["ionizing irradiation", "chemical treatment", "non-approved methods"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRO-6f7a8b9c-0d1e-4f2a-9b3c-4d5e6f7a8b9c",
+        "type": "default",
+        "category": "Expressing Prohibition",
+        "modality": "Prohibition",
+        "communicative_function": "Ban a substance or exceeding a limit",
+        "representative_example": "The product shall not contain histamine above 20 mg/kg.",
+        "structural_template": "*<Subject> *[shall/must] *[not contain/not exceed] *<SubstanceOrValueUnit> {[above/below] <Limit>}.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "The product",
+            "required": true,
+            "description": "Entity being regulated.",
+            "examples": ["The product", "Fish products", "The lot"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "SubstanceOrValueUnit",
+            "text": "histamine",
+            "required": true,
+            "description": "Substance being prohibited or parameter/value being constrained.",
+            "examples": ["histamine", "the histamine level", "pesticide residue levels", "20 mg/kg", "0.1 mg/kg", "5°C"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Limit",
+            "text": "20 mg/kg",
+            "required": false,
+            "description": "Optional threshold level or comparative limit (value + unit).",
+            "examples": ["20 mg/kg", "0.1 mg/kg", "the maximum permitted level"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRO-7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+        "type": "default",
+        "category": "Expressing Prohibition",
+        "modality": "Prohibition",
+        "communicative_function": "Ban storage, placement, or association",
+        "representative_example": "Containers must not be placed directly on the floor.",
+        "structural_template": "*<Item> *[shall/must/should] not be *[stored/placed/associated] *<Preposition> *<ObjectOrLocation>.",
+        "components": {
+          "1": {
+            "label": "Item",
+            "text": "Containers",
+            "required": true,
+            "description": "Item, material, or object subject to the prohibition.",
+            "examples": ["Containers", "Raw materials", "Packaging materials"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Preposition",
+            "text": "on",
+            "required": true,
+            "description": "Preposition expressing spatial or relational restriction.",
+            "examples": ["on", "with", "near", "in"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "ObjectOrLocation",
+            "text": "the floor",
+            "required": true,
+            "description": "Object, surface, location, or item with which association or placement is prohibited.",
+            "examples": ["the floor", "contaminated surfaces", "raw materials"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRO-8b9c0d1e-2f3a-4b5c-9d6e-7f8a9b0c1d2e",
+        "type": "default",
+        "category": "Expressing Prohibition",
+        "modality": "Prohibition",
+        "communicative_function": "Ban with a conditional exception",
+        "representative_example": "Use of wood should be avoided unless it can be thoroughly cleaned and disinfected.",
+        "structural_template": "*<ActionOrMaterial> *[shall/must/should] be avoided unless *<RiskEliminatingCondition>.",
+        "components": {
+          "1": {
+            "label": "ActionOrMaterial",
+            "text": "Use of wood",
+            "required": true,
+            "description": "Action, material, or practice that is discouraged or prohibited by default.",
+            "examples": ["Use of wood", "Use of untreated water", "Wooden utensils"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "RiskEliminatingCondition",
+            "text": "it can be thoroughly cleaned and disinfected",
+            "required": true,
+            "description": "Condition that eliminates or sufficiently mitigates the risk, allowing an exception.",
+            "examples": ["it can be thoroughly cleaned and disinfected", "cross-contamination is prevented", "controls are verified and documented"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "PRO-9c0d1e2f-3a4b-4c5d-8e6f-7a8b9c0d1e2f",
+        "type": "default",
+        "category": "Expressing Prohibition",
+        "modality": "Prohibition",
+        "communicative_function": "Exclude risky persons, practices, or materials",
+        "representative_example": "No raw material shall be accepted if known to contain parasites.",
+        "structural_template": "*<Quantifier> *<Noun> *[shall/must/should] not *<VerbForm> *[if/when] *<Condition>.",
+        "components": {
+          "1": {
+            "label": "Quantifier",
+            "text": "No",
+            "required": true,
+            "description": "Quantifier defining the scope of exclusion.",
+            "examples": ["No", "Any", "All"],
+            "allow_custom": false
+          },
+          "2": {
+            "label": "Noun",
+            "text": "raw material",
+            "required": true,
+            "description": "Person, practice, material, lot, or entity subject to exclusion.",
+            "examples": ["raw material", "food handler", "batch"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "VerbForm",
+            "text": "be accepted",
+            "required": true,
+            "description": "Verb phrase describing what is prohibited (active form or passive form).",
+            "examples": ["be accepted", "be used", "be allowed"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "Condition",
+            "text": "known to contain parasites",
+            "required": true,
+            "description": "Risk condition that triggers exclusion.",
+            "examples": ["known to contain parasites", "found to be contaminated", "showing signs of illness"],
+            "allow_custom": true
+          }
+        }
+      },
+  
+      {
+        "id": "LIM-a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+        "type": "default",
+        "category": "Limits and Targets",
+        "modality": "Limits and Targets",
+        "communicative_function": "Cite an official limit or condition",
+        "representative_example": "Limits for pesticides established by the Codex Alimentarius Commission shall apply.",
+        "structural_template": "*<Parameter> *[established/approved] by *<Authority> shall apply {to <ProductOrProcess>}.",
+        "components": {
+          "1": {
+            "label": "Parameter",
+            "text": "Limits for pesticides",
+            "required": true,
+            "description": "Official limit, condition, or criterion being cited.",
+            "examples": ["Limits for pesticides", "Maximum residue limits", "Microbiological criteria"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Authority",
+            "text": "the Codex Alimentarius Commission",
+            "required": true,
+            "description": "Authority or body that established or approved the limit or condition.",
+            "examples": ["the Codex Alimentarius Commission", "the competent authority", "the regulatory authority"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "ProductOrProcess",
+            "text": "food products",
+            "required": false,
+            "description": "Product, category, or process to which the limit or condition applies.",
+            "examples": ["food products", "this product", "the production process"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "LIM-b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+        "type": "default",
+        "category": "Limits and Targets",
+        "modality": "Limits and Targets",
+        "communicative_function": "Set quantitative acceptance criteria",
+        "representative_example": "A lot shall be considered acceptable when the number of defectives does not exceed the acceptance number of the sampling plan (AQL 6.5).",
+        "structural_template": "*<Subject> *[shall/must/should] be considered acceptable *[when/if] *<Criterion> does not exceed *<LimitOrNumber>.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "A lot",
+            "required": true,
+            "description": "Entity, lot, or unit whose acceptability is being assessed.",
+            "examples": ["A lot", "The batch", "The consignment"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Criterion",
+            "text": "the number of defectives",
+            "required": true,
+            "description": "Measured criterion used to assess acceptability.",
+            "examples": ["the number of defectives", "the defect rate", "the non-conformity count"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "LimitOrNumber",
+            "text": "the acceptance number of the sampling plan (AQL 6.5)",
+            "required": true,
+            "description": "Quantitative limit, acceptance number, or threshold defining acceptability.",
+            "examples": ["the acceptance number of the sampling plan (AQL 6.5)", "the specified acceptance limit", "the maximum allowable number"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "LIM-c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f",
+        "type": "default",
+        "category": "Limits and Targets",
+        "modality": "Limits and Targets",
+        "communicative_function": "Require absence of an undesirable condition",
+        "representative_example": "The product shall be free from abnormal external moisture, excluding condensation after cold storage.",
+        "structural_template": "*<Product> shall be free from *<UndesirableCondition> {[except/excluding] <AllowedCircumstance>}.",
+        "components": {
+          "1": {
+            "label": "Product",
+            "text": "The product",
+            "required": true,
+            "description": "Product, material, or item to which the condition applies.",
+            "examples": ["The product", "The food", "The lot"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "UndesirableCondition",
+            "text": "abnormal external moisture",
+            "required": true,
+            "description": "Undesirable condition, defect, or characteristic that must be absent.",
+            "examples": ["abnormal external moisture", "foreign matter", "visible contamination"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "AllowedCircumstance",
+            "text": "condensation after cold storage",
+            "required": false,
+            "description": "Specific circumstance under which the undesirable condition is allowed or tolerated.",
+            "examples": ["condensation after cold storage", "minor surface moisture during thawing", "temporary humidity during processing"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "LIM-d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f7a",
+        "type": "default",
+        "category": "Limits and Targets",
+        "modality": "Limits and Targets",
+        "communicative_function": "Define a process-performance target",
+        "representative_example": "The process shall achieve at least a 5-log reduction of Salmonella.",
+        "structural_template": "*<Subject> *[shall/must/should] achieve *[at least/no less than/not less than/not below] *<PerformanceMetric> of *<Target>.",
+        "components": {
+          "1": {
+            "label": "Subject",
+            "text": "The process",
+            "required": true,
+            "description": "Process, system, or operational step that is required to achieve the specified performance target.",
+            "examples": ["The process", "The treatment step", "The heat treatment"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "PerformanceMetric",
+            "text": "a 5-log reduction",
+            "required": true,
+            "description": "Quantitative performance level that must be achieved, usually expressed as a reduction, inactivation, or effectiveness measure.",
+            "examples": ["a 5-log reduction", "a 3-log reduction", "a 99.9% reduction"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Target",
+            "text": "Salmonella",
+            "required": true,
+            "description": "Hazard, organism, or parameter against which the performance metric is measured.",
+            "examples": ["Salmonella", "Listeria monocytogenes", "the target microorganism"],
+            "allow_custom": true
+          }
+        }
+      },
+      {
+        "id": "LIM-e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+        "type": "default",
+        "category": "Limits and Targets",
+        "modality": "Limits and Targets",
+        "communicative_function": "Require inspection, testing, or monitoring",
+        "representative_example": "Products shall be inspected by a competent person before distribution.",
+        "structural_template": "*<ProductOrProcess> shall be *[inspected/monitored/tested] {[by] <Agent>} {[at] <Frequency>} {[to ensure] <Purpose>}.",
+        "components": {
+          "1": {
+            "label": "ProductOrProcess",
+            "text": "Products",
+            "required": true,
+            "description": "Product, process, or activity subject to inspection, testing, or monitoring.",
+            "examples": ["Products", "The process", "The production line"],
+            "allow_custom": true
+          },
+          "2": {
+            "label": "Agent",
+            "text": "a competent person",
+            "required": false,
+            "description": "Person, authority, or body responsible for carrying out the inspection, testing, or monitoring.",
+            "examples": ["a competent person", "the competent authority", "trained personnel"],
+            "allow_custom": true
+          },
+          "3": {
+            "label": "Frequency",
+            "text": "before distribution",
+            "required": false,
+            "description": "Timing or frequency at which the inspection, testing, or monitoring is performed.",
+            "examples": ["before distribution", "at regular intervals", "prior to release"],
+            "allow_custom": true
+          },
+          "4": {
+            "label": "Purpose",
+            "text": "ensure compliance with requirements",
+            "required": false,
+            "description": "Intended purpose or objective of the inspection, testing, or monitoring activity.",
+            "examples": ["ensure compliance with requirements", "verify process control", "confirm product safety"],
+            "allow_custom": true
+          }
+        }
+      }
+    ]
+  }
+  

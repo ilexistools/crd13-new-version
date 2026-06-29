@@ -1,0 +1,18 @@
+# Store large project data with Git LFS so the repository can be cloned cleanly.
+*.sqlite3 filter=lfs diff=lfs merge=lfs -text
+*.db filter=lfs diff=lfs merge=lfs -text
+*.npy filter=lfs diff=lfs merge=lfs -text
+*.npz filter=lfs diff=lfs merge=lfs -text
+*.pickle filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text
+
+backend/app/assets/resources/**/*.json filter=lfs diff=lfs merge=lfs -text
+new-backend/app/assets/resources/*.json filter=lfs diff=lfs merge=lfs -text
+new-backend/app/raw/**/*.json filter=lfs diff=lfs merge=lfs -text
+new-backend/app/assets/indexes/* filter=lfs diff=lfs merge=lfs -text
+
+# Keep model weights out of normal Git history if they are ever staged manually.
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+*.pth filter=lfs diff=lfs merge=lfs -text

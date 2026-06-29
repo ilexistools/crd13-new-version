@@ -1,0 +1,7 @@
+interface:
+  display_name: "Crd13 Guideline Compliance Analysis"
+  short_description: "Evaluates sanitary, veterinary, phytosanitary, food safety, and export certificate attestations against CRD13 guidelines."
+  default_prompt: "Use $crd13-guideline-compliance-analysis  to execute this task following the skill instructions."
+
+policy:
+  allow_implicit_invocation: false

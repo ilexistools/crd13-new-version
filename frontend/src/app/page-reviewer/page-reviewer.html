@@ -1,0 +1,960 @@
+<div class="shell">
+  <!-- Hidden file input for import (must be outside any *ngIf) -->
+  <input #importFileInput type="file" accept=".json" (change)="handleImportFile($event)" style="display: none;" />
+  <!-- ==========================================
+       TOAST NOTIFICATION
+       ========================================== -->
+  <div class="toast" [class.toast-visible]="toastVisible" 
+       [class.toast-success]="toastType === 'success'"
+       [class.toast-error]="toastType === 'error'"
+       [class.toast-info]="toastType === 'info'">
+    <div class="toast-content">
+      <!-- Success Icon -->
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" *ngIf="toastType === 'success'">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+      
+      <!-- Error Icon -->
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" *ngIf="toastType === 'error'">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="15" y1="9" x2="9" y2="15"></line>
+        <line x1="9" y1="9" x2="15" y2="15"></line>
+      </svg>
+      
+      <!-- Info Icon -->
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" *ngIf="toastType === 'info'">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      
+      <span class="toast-message">{{ toastMessage }}</span>
+    </div>
+    
+    <button class="toast-close" (click)="hideToast()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ==========================================
+       SIDEBAR (LEFT) - Only visible in review step
+       ========================================== -->
+  <div class="sidebar" *ngIf="uiStep === 'review'">
+    <div class="sidebar-header">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path *ngIf="reviewLayoutMode === 'context_sidebar'" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        <path *ngIf="reviewLayoutMode === 'requirements_sidebar'" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline *ngIf="reviewLayoutMode === 'requirements_sidebar'" points="14 2 14 8 20 8"></polyline>
+      </svg>
+      <h2 class="sidebar-title">{{ reviewLayoutMode === 'context_sidebar' ? 'Context' : 'Requirements' }}</h2>
+    </div>
+
+    <div class="sidebar-body">
+      <ng-container *ngIf="reviewLayoutMode === 'context_sidebar'; else requirementsSidebar">
+      <div class="filters">
+        <div class="form-group">
+          <label for="type-select">Type</label>
+          <select id="type-select" class="select-input" [(ngModel)]="selectedTypeFilter" (change)="applyFilters()">
+            <option value="all">All</option>
+            <option value="default">Default</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="modality-select">Modality</label>
+          <select id="modality-select" class="select-input" [(ngModel)]="selectedModality" (change)="applyFilters()">
+            <option *ngFor="let m of modalities" [value]="m">{{ m }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="function-select">Communicative Function</label>
+          <select id="function-select" class="select-input" [(ngModel)]="selectedFunction" (change)="applyFilters()">
+            <option *ngFor="let f of functions" [value]="f">{{ f }}</option>
+          </select>
+        </div>
+
+        <div class="results-count">{{ filteredTemplates.length }} template(s)</div>
+
+        <!-- Import button hidden but kept for future use -->
+        <button class="btn-sidebar-import" (click)="triggerImportTemplates()" title="Import exported templates" style="display:none">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Import Templates
+        </button>
+      </div>
+
+      <div class="template-list">
+        <button type="button" class="template-card" *ngFor="let t of filteredTemplates"
+          (click)="selectTemplateFromSidebar(t)" [class.active]="t.id === selectedTemplateId">
+          <div class="template-card-top">
+            <div class="template-title">{{ t.modality }}</div>
+            <span class="template-badge-custom" *ngIf="isCustomTemplate(t)" title="Custom template">Custom</span>
+          </div>
+          <div class="template-meta">{{ t.communicative_function }}</div>
+        </button>
+
+        <div class="empty" *ngIf="filteredTemplates.length === 0">
+          No templates for this combination.
+        </div>
+      </div>
+      </ng-container>
+
+      <ng-template #requirementsSidebar>
+        <div class="sidebar-requirements-actions" *ngIf="requirements.length > 0">
+          <select class="download-format-select" [(ngModel)]="selectedDownloadFormat" aria-label="Download format">
+            <option value="json">JSON</option>
+            <option value="xlsx">XLSX</option>
+            <option value="csv">CSV</option>
+            <option value="md">MD</option>
+            <option value="text">TEXT</option>
+          </select>
+          <button class="btn-icon-small download-action-btn" (click)="downloadAllRequirements()" title="Download all">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download
+          </button>
+        </div>
+
+        <div class="sidebar-requirements-list">
+          <div class="requirement-card sidebar-requirement-card" *ngFor="let req of requirements"
+               [class.editing]="req.id === editingRequirementId">
+            <div
+              class="req-text-tooltip"
+              (mouseenter)="showRequirementTooltip($event, $any(req).originalSentence || req.sentence)"
+              (mouseleave)="hideRequirementTooltip()">
+              <div class="req-sentence">{{ $any(req).originalSentence || req.sentence }}</div>
+            </div>
+            <div class="req-preview"
+                 (mouseenter)="showRequirementTooltip($event, 'Preview: ' + req.sentence)"
+                 (mouseleave)="hideRequirementTooltip()"
+                 *ngIf="req.id === editingRequirementId && req.sentence && req.sentence !== $any(req).originalSentence">
+              <span class="req-preview-label">Preview:</span> {{ req.sentence }}
+            </div>
+            <div class="req-actions">
+              <button type="button" class="req-btn" (click)="copyRequirement(req)" title="Copy">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+              </button>
+              <button type="button" class="req-btn" (click)="editRequirement(req)" title="Edit">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </button>
+              <button type="button" class="req-btn" (click)="deleteRequirement(req.id)" title="Delete">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="requirement-empty" *ngIf="requirements.length === 0">
+            No requirements yet
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MAIN CONTENT AREA
+       ========================================== -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+        <circle cx="11" cy="11" r="2"></circle>
+      </svg>
+      <h2 class="topbar-title">Editor</h2>
+    </div>
+
+    <!-- WORKSPACE -->
+    <div class="workspace">
+      <!-- ==========================================
+           SEGMENTER STEP
+           ========================================== -->
+      <div class="stage" *ngIf="uiStep === 'segmenter'">
+        <widget-segmenter
+          [initialText]="''"
+          (segmentsReady)="onSegmentsReady($event)">
+        </widget-segmenter>
+      </div>
+
+      <!-- ==========================================
+           REVIEW STEP: STAGE + TRAY
+           ========================================== -->
+      <ng-container *ngIf="uiStep === 'review'">
+        <!-- STAGE -->
+        <div class="stage">
+          <!-- AI Suggestion Loading Overlay -->
+          <div class="suggestion-loading-overlay" *ngIf="suggestionLoading">
+            <div class="suggestion-loading-box">
+              <div class="suggestion-spinner">
+                <svg viewBox="0 0 50 50" class="spinner-svg">
+                  <circle cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+                </svg>
+              </div>
+              <div class="suggestion-loading-text">
+                <span class="suggestion-loading-title">Identifying template…</span>
+                <span class="suggestion-loading-sub">AI is analysing the requirement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-inner" *ngIf="!selectedTemplate && !suggestionLoading">
+            <div class="stage-hint">
+              {{ reviewLayoutMode === 'context_sidebar' ? 'Select a template from the sidebar' : 'Select a requirement from the sidebar' }}
+            </div>
+          </div>
+
+          <div class="editor-content" *ngIf="selectedTemplate">
+            <!-- Interactive Preview -->
+            <div class="preview-section">
+              <div class="preview-header">
+                <h3>Interactive Preview <span class="hint">Click to edit</span></h3>
+                
+                <!-- ==========================================
+                     TEMPLATE EDITING TOOLBAR
+                     ========================================== -->
+                <div class="template-toolbar">
+                  <!-- REWRITE BUTTON -->
+                  <button class="toolbar-btn toolbar-btn-rewrite" (click)="openRewriteModal()"
+                          [disabled]="!generatedSentence"
+                          title="Rewrite attestation using normative reference">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <span>Rewrite</span>
+                  </button>
+
+                  <!-- Suggest button hidden but kept for future use -->
+                  <button class="toolbar-btn toolbar-btn-suggest" (click)="openSuggestTemplateModal()" 
+                          [disabled]="!currentOriginalSentence"
+                          title="Suggest template format" style="display:none">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                    <span>Suggest</span>
+                  </button>
+
+                  <button class="toolbar-btn toolbar-btn-triples" (click)="extractTriples()"
+                          [disabled]="!isGeneratedSentenceValid || triplesLoading"
+                          title="Extract ontology triples from generated sentence">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="5" cy="12" r="2"></circle>
+                      <circle cx="19" cy="5" r="2"></circle>
+                      <circle cx="19" cy="19" r="2"></circle>
+                      <line x1="7" y1="11.5" x2="17" y2="6.5"></line>
+                      <line x1="7" y1="12.5" x2="17" y2="17.5"></line>
+                    </svg>
+                    <span>{{ triplesLoading ? 'Loading...' : 'Triples' }}</span>
+                  </button>
+
+                  <!-- Divider and editing buttons hidden but kept for future use -->
+                  <div class="toolbar-divider" style="display:none"></div>
+
+                  <button class="toolbar-btn toolbar-btn-add" (click)="openAddElementModal()" 
+                          [disabled]="!selectedTemplate" 
+                          title="Add element to template" style="display:none">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="16"></line>
+                      <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    <span>Add</span>
+                  </button>
+                  
+                  <button class="toolbar-btn toolbar-btn-delete" (click)="openDeleteElementModal()" 
+                          [disabled]="!selectedTemplate" 
+                          title="Delete element from template" style="display:none">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                    <span>Delete</span>
+                  </button>
+                  
+                  <button class="toolbar-btn toolbar-btn-reorder" (click)="openReorderModal()" 
+                          [disabled]="!selectedTemplate" 
+                          title="Reorder elements in template" style="display:none">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <line x1="3" y1="12" x2="21" y2="12"></line>
+                      <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <span>Reorder</span>
+                  </button>
+
+                  <!-- Divider hidden - kept for future use -->
+                  <div class="toolbar-divider" style="display:none"></div>
+
+                  <button class="toolbar-btn toolbar-btn-reset" (click)="resetTemplate()"
+                          title="Reset all fields to default">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                      <path d="M3 3v5h5"></path>
+                    </svg>
+                    <span>Reset</span>
+                  </button>
+
+                  <!-- Save button hidden - changes saved in real time -->
+                  <div class="toolbar-divider" style="display:none"></div>
+
+                  <button class="toolbar-btn toolbar-btn-save" (click)="saveAsRequirement()"
+                          *ngIf="!editingRequirementId"
+                          [disabled]="validationProblems.length > 0 || !generatedSentence"
+                          title="Add to requirements">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                      <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                      <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    <span>Add to Requirements</span>
+                  </button>
+
+                  <button class="toolbar-btn toolbar-btn-export" (click)="exportAllCustomTemplates()" 
+                          [disabled]="customTemplateIds.size === 0"
+                          title="Export all custom templates" style="display:none">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <span>Export All</span>
+                  </button>
+                </div>
+                
+              </div>
+              
+              <div class="preview-container">
+                <ng-container *ngFor="let token of tokens">
+                  <ng-container [ngTemplateOutlet]="tokenTemplate" [ngTemplateOutletContext]="{token: token}"></ng-container>
+                </ng-container>
+              </div>
+
+              <!-- Template Info (below editor) -->
+              <div class="template-info-bar" *ngIf="selectedTemplate">
+                <span class="template-info-label">Template:</span>
+                <span class="template-info-item">
+                  <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  </svg>
+                  <strong>Modality:</strong> {{ selectedTemplate.modality || '—' }}
+                </span>
+                <span class="template-info-separator">·</span>
+                <span class="template-info-item">
+                  <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <strong>Function:</strong> {{ selectedTemplate.communicative_function || '—' }}
+                </span>
+                <span class="template-info-id">ID: {{ selectedTemplate.id }}</span>
+              </div>
+            </div>
+
+            <!-- Original Sentence -->
+            <div class="original-section" *ngIf="currentOriginalSentence">
+              <div class="sentence-header">
+                <h3>Original Sentence</h3>
+              </div>
+              <div class="original-sentence">{{ currentOriginalSentence }}</div>
+            </div>
+
+            <!-- Generated Sentence -->
+            <div class="sentence-section" [class.valid]="validationProblems.length === 0" [class.invalid]="validationProblems.length > 0">
+              <div class="sentence-header">
+                <h3>
+                  <span *ngIf="validationProblems.length === 0">✓ Generated Sentence</span>
+                  <span *ngIf="validationProblems.length > 0">⚠ Generated Sentence</span>
+                  <span class="hint" *ngIf="validationProblems.length > 0">({{ validationProblems.join(', ') }})</span>
+                </h3>
+              </div>
+              <div class="generated-sentence">{{ generatedSentence }}</div>
+
+              <div class="validation" *ngIf="validationProblems.length > 0">
+                <div class="validation-title">Problems</div>
+                <ul>
+                  <li *ngFor="let p of validationProblems">{{ p }}</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Triples Section -->
+            <div class="triples-section" *ngIf="triples.length > 0 || triplesError">
+              <div class="sentence-header">
+                <h3>
+                  <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="5" cy="12" r="2"></circle>
+                    <circle cx="19" cy="5" r="2"></circle>
+                    <circle cx="19" cy="19" r="2"></circle>
+                    <line x1="7" y1="11.5" x2="17" y2="6.5"></line>
+                    <line x1="7" y1="12.5" x2="17" y2="17.5"></line>
+                  </svg>
+                  Ontology Triples
+                </h3>
+              </div>
+              <div class="triples-error" *ngIf="triplesError">{{ triplesError }}</div>
+              <div class="triples-list" *ngIf="triples.length > 0">
+                <div class="triple-row" *ngFor="let triple of triples">
+                  <span class="triple-subject">{{ triple.subject }}</span>
+                  <span class="triple-predicate">{{ triple.predicate }}</span>
+                  <span class="triple-object">{{ triple.object }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Debug Inspector -->
+            <details class="debug-panel" *ngIf="debugOpen">
+              <summary>Debug Inspector</summary>
+              <div class="debug-actions">
+                <button class="btn-icon-small" type="button" (click)="logDebugToConsole()">Console.log</button>
+                <button class="btn-icon-small" type="button" (click)="copyDebugJson()">Copy JSON</button>
+              </div>
+              <pre class="debug-pre">{{ getDebugJson() }}</pre>
+            </details>
+          </div>
+        </div>
+
+        <!-- REQUIREMENTS TRAY -->
+        <div class="tray" *ngIf="reviewLayoutMode === 'context_sidebar'">
+          <div class="tray-header">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <span class="tray-title">Requirements ({{ requirements.length }})</span>
+            <div class="tray-actions" *ngIf="requirements.length > 0">
+              <select class="download-format-select" [(ngModel)]="selectedDownloadFormat" aria-label="Download format">
+                <option value="json">JSON</option>
+                <option value="xlsx">XLSX</option>
+                <option value="csv">CSV</option>
+                <option value="md">MD</option>
+                <option value="text">TEXT</option>
+              </select>
+              <button class="btn-icon-small download-action-btn" (click)="downloadAllRequirements()" title="Download all">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </button>
+              <button class="btn-icon-small" (click)="exportTemplates()" title="Export all templates used in requirements">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                Export
+              </button>
+            </div>
+          </div>
+
+          <div class="tray-items">
+            <div class="requirement-card" *ngFor="let req of requirements" 
+                 [class.editing]="req.id === editingRequirementId">
+              <div
+                class="req-text-tooltip"
+                (mouseenter)="showRequirementTooltip($event, $any(req).originalSentence || req.sentence)"
+                (mouseleave)="hideRequirementTooltip()">
+                <div class="req-sentence">{{ $any(req).originalSentence || req.sentence }}</div>
+              </div>
+              <div class="req-preview"
+                   (mouseenter)="showRequirementTooltip($event, 'Preview: ' + req.sentence)"
+                   (mouseleave)="hideRequirementTooltip()"
+                   *ngIf="req.id === editingRequirementId && req.sentence && req.sentence !== $any(req).originalSentence">
+                <span class="req-preview-label">Preview:</span> {{ req.sentence }}
+              </div>
+              <div class="req-actions">
+                <button type="button" class="req-btn" (click)="copyRequirement(req)" title="Copy">
+                  <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+                <button type="button" class="req-btn" (click)="editRequirement(req)" title="Edit">
+                  <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                </button>
+                <button type="button" class="req-btn" (click)="deleteRequirement(req.id)" title="Delete">
+                  <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="requirement-empty" *ngIf="requirements.length === 0">
+              No requirements yet
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div
+  class="req-floating-tooltip"
+  *ngIf="requirementTooltipVisible"
+  [style.left.px]="requirementTooltipX"
+  [style.top.px]="requirementTooltipY"
+  [class.req-floating-tooltip-bottom]="requirementTooltipY > 120">
+  {{ requirementTooltipText }}
+</div>
+
+<!-- ==========================================
+     TOKEN TEMPLATE (SHARED)
+     ========================================== -->
+<ng-template #tokenTemplate let-token="token">
+  <span *ngIf="token.type === 'text'" class="token-text">{{ token.value }}</span>
+  
+  <span *ngIf="token.type === 'component'" 
+        class="token-component" 
+        [class.required]="token.required && !state.values[token.name].trim()"
+        [title]="getComponentTooltip(token)"
+        (click)="openComponentEditor({name: token.name, required: token.required})">
+    {{ getComponentDisplayValue(token.name) }}
+  </span>
+  
+  <span *ngIf="token.type === 'choice'" 
+        class="token-choice"
+        title="Click to choose"
+        (click)="openChoiceEditor({id: token.id, options: token.options})">
+    {{ state.choices[token.id] || token.options[0] }}
+  </span>
+  
+  <span *ngIf="token.type === 'optional'" 
+        class="token-optional" 
+        [class.on]="state.optionals[token.id]"
+        [title]="state.optionals[token.id] ? 'Click to disable' : 'Click to enable'"
+        (click)="toggleOptional(token.id)">
+    <span class="checkbox">{{ state.optionals[token.id] ? '✓' : '+' }}</span>
+    <ng-container *ngIf="state.optionals[token.id]">
+      <ng-container *ngFor="let child of token.children">
+        <ng-container [ngTemplateOutlet]="tokenTemplate" [ngTemplateOutletContext]="{token: child}"></ng-container>
+      </ng-container>
+    </ng-container>
+  </span>
+</ng-template>
+
+<!-- ==========================================
+     POPOVER (FLOATING EDITOR)
+     ========================================== -->
+<div class="overlay" *ngIf="popoverVisible" (click)="closePopover()"></div>
+<div class="popover" *ngIf="popoverVisible">
+  <div class="popover-header">
+    <span class="popover-title">{{ popoverData?.title }}</span>
+    <button class="popover-close" (click)="closePopover()">×</button>
+  </div>
+  <div class="popover-content">
+    <div *ngIf="popoverData?.type === 'component'">
+      <p class="pop-desc" *ngIf="popoverData.description">{{ popoverData.description }}</p>
+      <input #compInput class="pop-input" type="text" [value]="popoverData.currentValue" 
+             (keyup.enter)="savePopover(compInput.value)" />
+      <div class="pop-examples" *ngIf="popoverData.examples?.length">
+        <strong>Examples:</strong>
+        <button class="example-chip" *ngFor="let ex of popoverData.examples" 
+                (click)="savePopover(ex)">{{ ex }}</button>
+      </div>
+      <button class="btn-primary" (click)="savePopover(compInput.value)">Save</button>
+    </div>
+
+    <div *ngIf="popoverData?.type === 'choice'">
+      <div class="choice-options">
+        <button class="choice-chip" *ngFor="let opt of popoverData.options"
+                [class.active]="opt === popoverData.currentValue"
+                (click)="savePopover(opt)">{{ opt }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================
+     ADD ELEMENT MODAL (UNIFIED)
+     ========================================== -->
+<div class="overlay" *ngIf="addElementModalVisible" (click)="closeAddElementModal()"></div>
+<div class="modal-large" *ngIf="addElementModalVisible">
+  <div class="modal-header">
+    <span class="modal-title">Add Element</span>
+    <button class="modal-close" (click)="closeAddElementModal()">×</button>
+  </div>
+  <div class="modal-body">
+    <!-- Element Type Selector -->
+    <div class="form-row">
+      <label>Element Type <span class="required-mark">*</span></label>
+      <select class="form-control" [(ngModel)]="addElementType" (change)="onAddElementTypeChange()">
+        <option value="">-- Select type --</option>
+        <option value="component">Component</option>
+        <option value="choice">Choice</option>
+        <option value="text">Text</option>
+      </select>
+      <p class="form-hint">Choose the type of element you want to add</p>
+    </div>
+
+    <!-- Component Fields -->
+    <ng-container *ngIf="addElementType === 'component'">
+      <div class="form-row">
+        <label>Label <span class="required-mark">*</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newComponent.label" 
+               placeholder="e.g., actor, action, object" />
+      </div>
+
+      <div class="form-row">
+        <label>Text</label>
+        <input type="text" class="form-control" [(ngModel)]="newComponent.text" 
+               placeholder="Default text value" />
+      </div>
+
+      <div class="form-row">
+        <label>Description</label>
+        <textarea class="form-control" [(ngModel)]="newComponent.description" 
+                  rows="2" placeholder="Brief description of this component"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>Examples <span class="hint-inline">(comma-separated)</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newComponent.examplesText" 
+               placeholder="example1, example2, example3" />
+      </div>
+
+      <div class="form-row-inline">
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="newComponent.required" />
+          <span>Required</span>
+        </label>
+        
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="newComponent.allowCustom" />
+          <span>Allow Custom</span>
+        </label>
+      </div>
+    </ng-container>
+
+    <!-- Choice Fields -->
+    <ng-container *ngIf="addElementType === 'choice'">
+      <div class="form-row">
+        <label>Options <span class="required-mark">*</span> <span class="hint-inline">(separated by /)</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newChoice.optionsText" 
+               placeholder="e.g., shall/must or that/which may" />
+        <p class="form-hint">Enter options separated by forward slash (/)</p>
+      </div>
+
+      <div class="form-row">
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="newChoice.required" />
+          <span>Required</span>
+        </label>
+      </div>
+
+      <div class="preview-box" *ngIf="newChoice.optionsText">
+        <strong>Preview:</strong>
+        <span class="preview-text">{{ getChoicePreview() }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Text Fields -->
+    <ng-container *ngIf="addElementType === 'text'">
+      <div class="form-row">
+        <label>Text <span class="required-mark">*</span></label>
+        <input type="text" class="form-control" [(ngModel)]="newText.content" 
+               placeholder="e.g., comply with, in order to, etc." />
+        <p class="form-hint">Enter immutable text that will appear in the template</p>
+      </div>
+
+      <div class="preview-box" *ngIf="newText.content">
+        <strong>Preview:</strong>
+        <span class="preview-text-plain">{{ newText.content }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeAddElementModal()">Cancel</button>
+    <button class="btn-primary" (click)="saveAddElement()" [disabled]="!canSaveAddElement()">
+      Add {{ addElementType || 'Element' }}
+    </button>
+  </div>
+</div>
+
+<!-- ==========================================
+     DELETE ELEMENT MODAL (UNIFIED)
+     ========================================== -->
+<div class="overlay" *ngIf="deleteElementModalVisible" (click)="closeDeleteElementModal()"></div>
+<div class="modal-medium" *ngIf="deleteElementModalVisible">
+  <div class="modal-header">
+    <span class="modal-title">Delete Element</span>
+    <button class="modal-close" (click)="closeDeleteElementModal()">×</button>
+  </div>
+  <div class="modal-body">
+    <!-- Element Type Selector -->
+    <div class="form-row">
+      <label>Element Type <span class="required-mark">*</span></label>
+      <select class="form-control" [(ngModel)]="deleteElementType" (change)="onDeleteElementTypeChange()">
+        <option value="">-- Select type --</option>
+        <option value="component">Component</option>
+        <option value="choice">Choice</option>
+        <option value="text">Text</option>
+      </select>
+      <p class="form-hint">Choose the type of element you want to delete</p>
+    </div>
+
+    <!-- Component Selection -->
+    <ng-container *ngIf="deleteElementType === 'component'">
+      <div class="form-row" *ngIf="availableComponentsForDeletion.length > 0">
+        <label>Select component to delete <span class="required-mark">*</span></label>
+        <select class="form-control" [(ngModel)]="componentToDelete">
+          <option value="">-- Select a component --</option>
+          <option *ngFor="let comp of availableComponentsForDeletion" [value]="comp">{{ comp }}</option>
+        </select>
+      </div>
+      
+      <div class="empty-state" *ngIf="availableComponentsForDeletion.length === 0">
+        <p>No components available to delete.</p>
+      </div>
+    </ng-container>
+
+    <!-- Choice Selection -->
+    <ng-container *ngIf="deleteElementType === 'choice'">
+      <div class="form-row" *ngIf="availableChoicesForDeletion.length > 0">
+        <label>Select choice to delete <span class="required-mark">*</span></label>
+        <select class="form-control" [(ngModel)]="choiceToDelete">
+          <option value="">-- Select a choice --</option>
+          <option *ngFor="let choice of availableChoicesForDeletion" [value]="choice.displayText">
+            {{ choice.displayText }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="empty-state" *ngIf="availableChoicesForDeletion.length === 0">
+        <p>No choices available to delete.</p>
+      </div>
+    </ng-container>
+
+    <!-- Text Selection -->
+    <ng-container *ngIf="deleteElementType === 'text'">
+      <div class="form-row" *ngIf="availableTextsForDeletion.length > 0">
+        <label>Select text to delete <span class="required-mark">*</span></label>
+        <select class="form-control" [(ngModel)]="textToDelete">
+          <option value="">-- Select text --</option>
+          <option *ngFor="let txt of availableTextsForDeletion" [value]="txt">
+            {{ txt }}
+          </option>
+        </select>
+        <p class="form-hint">Only shows text fragments with 2+ words</p>
+      </div>
+      
+      <div class="empty-state" *ngIf="availableTextsForDeletion.length === 0">
+        <p>No immutable text fragments available to delete.</p>
+      </div>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeDeleteElementModal()">Cancel</button>
+    <button class="btn-danger" (click)="confirmDeleteElement()" 
+            [disabled]="!canDeleteElement()">
+      Delete
+    </button>
+  </div>
+</div>
+
+<!-- ==========================================
+     REORDER ELEMENTS MODAL
+     ========================================== -->
+<div class="overlay" *ngIf="reorderModalVisible" (click)="closeReorderModal()"></div>
+<div class="modal-large" *ngIf="reorderModalVisible">
+  <div class="modal-header">
+    <span class="modal-title">Reorder Elements</span>
+    <button class="modal-close" (click)="closeReorderModal()">×</button>
+  </div>
+  <div class="modal-body">
+    <div class="reorder-info">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      <span>Use the arrows to change the order of elements in your template</span>
+    </div>
+
+    <div class="reorder-list" *ngIf="reorderableTokens.length > 0">
+      <div class="reorder-item" *ngFor="let item of reorderableTokens; let i = index">
+        <div class="reorder-item-content">
+          <div class="reorder-item-icon">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="5" r="1"></circle>
+              <circle cx="9" cy="12" r="1"></circle>
+              <circle cx="9" cy="19" r="1"></circle>
+              <circle cx="15" cy="5" r="1"></circle>
+              <circle cx="15" cy="12" r="1"></circle>
+              <circle cx="15" cy="19" r="1"></circle>
+            </svg>
+          </div>
+          
+          <div class="reorder-item-badge" [class.badge-component]="item.type === 'component'"
+                                          [class.badge-choice]="item.type === 'choice'"
+                                          [class.badge-text]="item.type === 'text'"
+                                          [class.badge-optional]="item.type === 'optional'">
+            {{ getElementTypeBadge(item.type) }}
+          </div>
+          
+          <div class="reorder-item-label">
+            {{ getElementDisplayText(item) }}
+          </div>
+        </div>
+        
+        <div class="reorder-item-actions">
+          <button class="reorder-btn" (click)="moveElementUp(i)" 
+                  [disabled]="i === 0"
+                  title="Move up">
+            <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </button>
+          
+          <button class="reorder-btn" (click)="moveElementDown(i)" 
+                  [disabled]="i === reorderableTokens.length - 1"
+                  title="Move down">
+            <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="reorderableTokens.length === 0">
+      <p>No elements available to reorder.</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeReorderModal()">Cancel</button>
+    <button class="btn-primary" (click)="saveReorder()">
+      Save Order
+    </button>
+  </div>
+</div>
+
+<!-- ==========================================
+     SUGGEST TEMPLATE MODAL
+     ========================================== -->
+<div class="overlay" *ngIf="suggestTemplateModalVisible" (click)="closeSuggestTemplateModal()"></div>
+<div class="modal-medium" *ngIf="suggestTemplateModalVisible">
+  <div class="modal-header">
+    <span class="modal-title">Suggest Template Format</span>
+    <button class="modal-close" (click)="closeSuggestTemplateModal()">×</button>
+  </div>
+  <div class="modal-body">
+    <div class="suggest-info">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+      </svg>
+      <div>
+        <strong>Current sentence:</strong>
+        <div class="suggest-sentence">{{ currentOriginalSentence }}</div>
+      </div>
+    </div>
+
+    <div class="suggest-options">
+      <div class="suggest-option" [class.selected]="suggestMode === 'identify'" (click)="suggestMode = 'identify'">
+        <div class="suggest-option-radio">
+          <div class="radio-dot" *ngIf="suggestMode === 'identify'"></div>
+        </div>
+        <div class="suggest-option-content">
+          <div class="suggest-option-title">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Identify Existing Template
+          </div>
+          <div class="suggest-option-desc">
+            Find a matching template from the existing library
+          </div>
+        </div>
+      </div>
+
+      <div class="suggest-option" [class.selected]="suggestMode === 'create'" (click)="suggestMode = 'create'">
+        <div class="suggest-option-radio">
+          <div class="radio-dot" *ngIf="suggestMode === 'create'"></div>
+        </div>
+        <div class="suggest-option-content">
+          <div class="suggest-option-title">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 4v16m8-8H4"></path>
+            </svg>
+            Create New Template
+          </div>
+          <div class="suggest-option-desc">
+            Generate a brand new template format based on this sentence
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="suggest-loading" *ngIf="suggestingTemplate">
+      <div class="spinner"></div>
+      <span>{{ suggestMode === 'identify' ? 'Searching for matching template...' : 'Creating new template format...' }}</span>
+    </div>
+
+    <!-- Error State -->
+    <div class="suggest-error" *ngIf="suggestError">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="15" y1="9" x2="9" y2="15"></line>
+        <line x1="9" y1="9" x2="15" y2="15"></line>
+      </svg>
+      <span>{{ suggestError }}</span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-secondary" (click)="closeSuggestTemplateModal()" [disabled]="suggestingTemplate">
+      Cancel
+    </button>
+    <button class="btn-primary" (click)="executeSuggestTemplate()" 
+            [disabled]="!suggestMode || suggestingTemplate">
+      <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" *ngIf="!suggestingTemplate">
+        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+      </svg>
+      {{ suggestMode === 'identify' ? 'Find Template' : 'Create Template' }}
+    </button>
+  </div>
+</div>
+
+<!-- ==========================================
+     REWRITE ATTESTATION MODAL
+     ========================================== -->
+<app-widget-rewrite
+  [visible]="rewriteModalVisible"
+  [sentence]="rewriteSentence"
+  [commodities]="rewriteCommodities"
+  [modalityOptions]="rewriteModalityOptions"
+  [communicativeFunctionOptions]="rewriteFunctionOptions"
+  [communicativeFunctionOptionsByModality]="rewriteFunctionOptionsByModality"
+  (closed)="closeRewriteModal()"
+  (commodityChanged)="onRewriteCommodityChanged($event)"
+  (applied)="onRewriteApplied($event)">
+</app-widget-rewrite>
