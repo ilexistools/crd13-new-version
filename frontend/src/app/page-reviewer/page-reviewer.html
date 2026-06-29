@@ -373,6 +373,19 @@
               </div>
             </div>
 
+            <div class="compatibility-alert" *ngIf="templateCompatibilityStatus === 'partial'">
+              <div class="compatibility-alert-head">
+                <span class="compatibility-badge">Partially compatible</span>
+                <span>The selected template contains information not found in the attestation.</span>
+              </div>
+              <ul>
+                <li *ngFor="let warning of templateCompatibilityWarnings">{{ warning }}</li>
+              </ul>
+              <div class="compatibility-actions">
+                <span>Fill the highlighted component in the preview, choose another template, or keep the reduced generated sentence.</span>
+              </div>
+            </div>
+
             <!-- Original Sentence -->
             <div class="original-section" *ngIf="currentOriginalSentence">
               <div class="sentence-header">

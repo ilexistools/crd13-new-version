@@ -121,6 +121,9 @@ export class PageReviewer implements OnInit {
 
   generatedSentence = '';
   validationProblems: string[] = [];
+  templateCompatibilityStatus: 'full' | 'partial' = 'full';
+  templateCompatibilityWarnings: string[] = [];
+  omittedTemplateComponents: string[] = [];
 
   // Ontology Triples
   triples: Array<{ subject: string; predicate: string; object: string }> = [];
@@ -460,16 +463,25 @@ export class PageReviewer implements OnInit {
     if (!this.selectedTemplate) {
       this.generatedSentence = '';
       this.validationProblems = [];
+      this.templateCompatibilityStatus = 'full';
+      this.templateCompatibilityWarnings = [];
+      this.omittedTemplateComponents = [];
       this.triples = [];
       this.triplesError = null;
       return;
     }
 
-    const newSentence = this.parser.renderSentence(
+    const renderedSentence = this.parser.renderSentence(
       this.tokens,
       this.state,
       this.editedComponents
     );
+    const compatibility = this.resolveTemplateCompatibility(renderedSentence);
+    const newSentence = compatibility.sentence;
+
+    this.templateCompatibilityStatus = compatibility.missingComponents.length ? 'partial' : 'full';
+    this.omittedTemplateComponents = compatibility.missingComponents;
+    this.templateCompatibilityWarnings = compatibility.warnings;
 
     if (newSentence !== this.generatedSentence) {
       this.triples = [];
@@ -544,11 +556,63 @@ export class PageReviewer implements OnInit {
   }
 
   private buildSentenceFromTokens(): string {
-    return this.parser.renderSentence(
+    return this.resolveTemplateCompatibility(this.parser.renderSentence(
       this.tokens,
       this.state,
       this.editedComponents
-    );
+    )).sentence;
+  }
+
+  private resolveTemplateCompatibility(renderedSentence: string): {
+    sentence: string;
+    missingComponents: string[];
+    warnings: string[];
+  } {
+    const raw = String(renderedSentence || '').trim();
+    const missingComponents = Array.from(raw.matchAll(/<([^<>]+)>/g))
+      .map(match => String(match[1] || '').trim())
+      .filter(Boolean)
+      .filter((name, index, list) => list.indexOf(name) === index);
+
+    if (!missingComponents.length) {
+      return { sentence: raw, missingComponents: [], warnings: [] };
+    }
+
+    let sentence = raw;
+    for (const component of missingComponents) {
+      const escaped = this.escapeRegExp(component);
+      sentence = sentence
+        .replace(new RegExp(`\\s*in\\s+accordance\\s+with\\s+<${escaped}>`, 'gi'), '')
+        .replace(new RegExp(`\\s*(according|pursuant|subject)\\s+to\\s+<${escaped}>`, 'gi'), '')
+        .replace(new RegExp(`\\s*(under|by)\\s+<${escaped}>`, 'gi'), '')
+        .replace(new RegExp(`\\s*<${escaped}>`, 'g'), '');
+    }
+
+    sentence = this.normalizeGeneratedSentence(sentence);
+
+    return {
+      sentence,
+      missingComponents,
+      warnings: missingComponents.map(component =>
+        `${component} is required by the selected template but is not present in the attestation. The unsupported template phrase was omitted from the generated sentence.`
+      ),
+    };
+  }
+
+  private normalizeGeneratedSentence(value: string): string {
+    const cleaned = String(value || '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([,.;:])/g, '$1')
+      .replace(/\s+([.])$/g, '$1')
+      .replace(/\s*,\s*([.;])/g, '$1')
+      .replace(/\s+(and|or)\s*([.;])/gi, '$2')
+      .trim();
+
+    return cleaned.replace(/\s+\.$/, '.');
+  }
+
+  private escapeRegExp(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   /* =========================
