@@ -38,6 +38,9 @@ export class WidgetSegmenterComponent {
   error: string | null = null;
   info: string | null = null;
   commodityError: string | null = null;
+  private lastCommoditySource = '';
+  private commodityDetectionTimer: ReturnType<typeof setTimeout> | null = null;
+  private commodityDetectionRunId = 0;
 
   refiningIdx = new Set<number>();
 
@@ -48,6 +51,7 @@ export class WidgetSegmenterComponent {
     if (init) {
       this.rawText = init;
       this.step = 'text';
+      this.scheduleCommodityDetection(init);
     }
   }
 
@@ -61,11 +65,13 @@ export class WidgetSegmenterComponent {
   }
 
   goToUpload() {
+    this.clearCommodityDetectionTimer();
     this.error = null;
     this.commodityError = null;
     this.loading = false;
     this.commodityLoading = false;
     this.commodityInput = '';
+    this.lastCommoditySource = '';
     this.step = 'upload';
   }
 
@@ -87,14 +93,16 @@ export class WidgetSegmenterComponent {
 
     this.error = null;
     this.info = null;
-    this.step = 'commodities';
 
-    if (!this.commodities.length && !this.commodityLoading) {
+    if (this.shouldIdentifyCommodities(text) && !this.commodityLoading) {
       await this.detectCommodityForCurrentContext();
     }
+
+    this.step = 'commodities';
   }
 
   clearAll() {
+    this.clearCommodityDetectionTimer();
     this.rawText = '';
     this.segments = [];
     this.error = null;
@@ -104,6 +112,7 @@ export class WidgetSegmenterComponent {
     this.commodityError = null;
     this.commodities = [];
     this.commodityInput = '';
+    this.lastCommoditySource = '';
     this.refiningIdx.clear();
     this.step = 'upload';
   }
@@ -121,7 +130,9 @@ export class WidgetSegmenterComponent {
       this.commodityError = null;
       this.commodities = [];
       this.commodityInput = '';
+      this.lastCommoditySource = '';
       this.step = 'text';
+      this.scheduleCommodityDetection(text);
     } catch {
       // Clipboard API blocked by browser — navigate to text step so the user
       // can paste manually with Ctrl+V directly into the textarea.
@@ -132,8 +143,25 @@ export class WidgetSegmenterComponent {
       this.commodityError = null;
       this.commodities = [];
       this.commodityInput = '';
+      this.lastCommoditySource = '';
       this.step = 'text';
     }
+  }
+
+  onRawTextChange(value: string): void {
+    this.rawText = value;
+    this.error = null;
+    this.info = null;
+    this.commodityError = null;
+    this.segments = [];
+
+    const normalizedText = String(value || '').trim();
+    if (normalizedText !== this.lastCommoditySource) {
+      this.commodities = [];
+      this.commodityInput = '';
+    }
+
+    this.scheduleCommodityDetection(normalizedText);
   }
 
   async onFileSelected(ev: Event) {
@@ -162,8 +190,10 @@ export class WidgetSegmenterComponent {
       this.segments = [];
       this.commodities = [];
       this.commodityInput = '';
+      this.lastCommoditySource = '';
       this.commodityError = null;
       this.step = 'text';
+      this.scheduleCommodityDetection(this.rawText);
     } catch (e: any) {
       this.error = e?.message || 'Failed to read file.';
     } finally {
@@ -349,31 +379,81 @@ export class WidgetSegmenterComponent {
   }
 
   async reidentifyCommodity(): Promise<void> {
-    await this.detectCommodityForCurrentContext();
+    await this.detectCommodityForCurrentContext(true);
   }
 
-  private async detectCommodityForCurrentContext(): Promise<string[]> {
-    const sourceText = String(this.rawText || this.segments.join('\n') || '').trim();
+  private async detectCommodityForCurrentContext(force = false, sourceOverride?: string): Promise<string[]> {
+    const sourceText = String(sourceOverride ?? this.currentCommoditySourceText()).trim();
     if (!sourceText) {
       this.commodities = [];
       this.commodityError = 'No text available to identify commodity.';
       return [];
     }
 
+    if (!force && !this.shouldIdentifyCommodities(sourceText)) {
+      return this.getNormalizedCommodityList(this.commodities);
+    }
+
     this.commodityLoading = true;
     this.commodityError = null;
+    const runId = ++this.commodityDetectionRunId;
 
     try {
       const commodities = await this.identifyCommodities(sourceText);
+      if (runId !== this.commodityDetectionRunId || sourceText !== this.currentCommoditySourceText()) {
+        return this.getNormalizedCommodityList(this.commodities);
+      }
+
       this.commodities = commodities;
+      this.lastCommoditySource = sourceText;
       return commodities;
     } catch (e: any) {
+      if (runId !== this.commodityDetectionRunId || sourceText !== this.currentCommoditySourceText()) {
+        return this.getNormalizedCommodityList(this.commodities);
+      }
+
       this.commodities = [];
       this.commodityError = e?.error?.message || e?.message || 'Failed to identify commodity.';
       return [];
     } finally {
-      this.commodityLoading = false;
+      if (runId === this.commodityDetectionRunId) {
+        this.commodityLoading = false;
+      }
     }
+  }
+
+  private shouldIdentifyCommodities(sourceText: string): boolean {
+    const normalizedText = String(sourceText || '').trim();
+    return (
+      !!normalizedText &&
+      (!this.getNormalizedCommodityList(this.commodities).length || normalizedText !== this.lastCommoditySource)
+    );
+  }
+
+  private scheduleCommodityDetection(sourceText: string): void {
+    this.clearCommodityDetectionTimer();
+
+    if (!sourceText) {
+      this.commodityDetectionRunId++;
+      this.commodityLoading = false;
+      return;
+    }
+
+    this.commodityDetectionTimer = setTimeout(() => {
+      if (this.step === 'text' && this.shouldIdentifyCommodities(sourceText)) {
+        void this.detectCommodityForCurrentContext(false, sourceText);
+      }
+    }, 900);
+  }
+
+  private clearCommodityDetectionTimer(): void {
+    if (!this.commodityDetectionTimer) return;
+    clearTimeout(this.commodityDetectionTimer);
+    this.commodityDetectionTimer = null;
+  }
+
+  private currentCommoditySourceText(): string {
+    return String(this.rawText || this.segments.join('\n') || '').trim();
   }
 
   private async identifyCommodities(text: string): Promise<string[]> {
@@ -398,6 +478,7 @@ export class WidgetSegmenterComponent {
     this.commodityError = null;
     this.commodities = [];
     this.commodityInput = '';
+    this.lastCommoditySource = '';
     this.refiningIdx.clear();
 
     // estado "do zero"
