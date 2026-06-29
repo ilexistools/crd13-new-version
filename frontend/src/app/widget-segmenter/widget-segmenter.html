@@ -224,7 +224,18 @@
 
       <div class="ws-compliance-grid" *ngIf="complianceResult">
         <div class="ws-compliance-panel" *ngIf="compliancePrinciples().length > 0">
-          <div class="ws-compliance-panel-title">Principles</div>
+          <div class="ws-compliance-panel-head">
+            <div class="ws-compliance-panel-title">Principles</div>
+            <label class="ws-correction-toggle">
+              <input
+                type="checkbox"
+                [checked]="allComplianceCorrectionsSelected()"
+                (change)="toggleAllComplianceCorrections($any($event.target).checked)"
+                [disabled]="complianceCorrectionLoading || loading"
+              />
+              <span>Select all</span>
+            </label>
+          </div>
           <div class="ws-principle-list">
             <div class="ws-principle-item" *ngFor="let item of compliancePrinciples(); let i = index">
               <div class="ws-principle-head">

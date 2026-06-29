@@ -338,6 +338,13 @@
   gap: 8px;
 }
 
+.ws-compliance-panel-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .ws-principle-item{
   border: 1px solid #e5e7eb;
   border-radius: 8px;

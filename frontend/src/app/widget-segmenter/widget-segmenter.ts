@@ -771,6 +771,25 @@ export class WidgetSegmenterComponent {
     this.complianceCorrectionResult = null;
   }
 
+  allComplianceCorrectionsSelected(): boolean {
+    const principles = this.compliancePrinciples();
+    return (
+      principles.length > 0 &&
+      principles.every((item, index) => !!this.allowedComplianceCorrections[this.compliancePrincipleKey(item, index)])
+    );
+  }
+
+  toggleAllComplianceCorrections(checked: boolean): void {
+    const next: Record<string, boolean> = {};
+    for (const [index, item] of this.compliancePrinciples().entries()) {
+      next[this.compliancePrincipleKey(item, index)] = checked;
+    }
+
+    this.allowedComplianceCorrections = next;
+    this.complianceCorrectionError = null;
+    this.complianceCorrectionResult = null;
+  }
+
   selectedComplianceCorrectionPrinciples(): string[] {
     return Object.entries(this.allowedComplianceCorrections)
       .filter(([, allowed]) => allowed)
