@@ -294,6 +294,9 @@
           <span class="spinner spinner-button" *ngIf="loading"></span>
           {{ loading ? 'Segmenting...' : 'Segment' }}
         </button>
+        <button type="button" class="btn btn-outline" (click)="skipSegmentation()" [disabled]="loading">
+          Skip
+        </button>
       </div>
     </div>
 

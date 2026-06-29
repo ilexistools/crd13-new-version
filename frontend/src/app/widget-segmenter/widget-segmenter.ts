@@ -354,6 +354,18 @@ export class WidgetSegmenterComponent {
     });
   }
 
+  skipSegmentation(): void {
+    const text = (this.rawText || '').trim();
+    if (!text) {
+      this.error = 'Paste or upload some text first.';
+      return;
+    }
+
+    this.error = null;
+    this.segments = [text];
+    this.step = 'segments';
+  }
+
   async analyzeComplianceAndContinue(): Promise<void> {
     const text = (this.rawText || '').trim();
     if (!text) {
