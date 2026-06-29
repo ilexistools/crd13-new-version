@@ -195,29 +195,7 @@
         <div class="ws-error ws-commodity-error" *ngIf="complianceError">{{ complianceError }}</div>
       </div>
 
-      <div class="ws-seg-row">
-        <div class="seg-label">Segmentation:</div>
-  
-        <label class="radio">
-          <input type="radio" name="segMode" [checked]="mode==='ai'" (change)="setMode('ai')" />
-          <span>Auto (AI)</span>
-        </label>
-  
-        <label class="radio">
-          <input type="radio" name="segMode" [checked]="mode==='semicolon'" (change)="setMode('semicolon')" />
-          <span>Split (;)</span>
-        </label>
-  
-        <label class="radio">
-          <input type="radio" name="segMode" [checked]="mode==='newline'" (change)="setMode('newline')" />
-          <span>Split (\n)</span>
-        </label>
-  
-        <label class="radio">
-          <input type="radio" name="segMode" [checked]="mode==='dot'" (change)="setMode('dot')" />
-          <span>Split (.)</span>
-        </label>
-  
+      <div class="ws-footer ws-footer-end">
         <button type="button" class="btn btn-primary" (click)="analyzeComplianceAndContinue()" [disabled]="loading || commodityLoading || complianceLoading">
           <span class="spinner spinner-button" *ngIf="complianceLoading"></span>
           {{ complianceLoading ? 'Analyzing...' : 'Continue' }}
@@ -304,10 +282,49 @@
     </div>
   
     <!-- STEP 5 -->
+    <div *ngIf="step === 'segmentation'" class="ws-step">
+      <div class="ws-header">
+        <div class="ws-title">Segmentation</div>
+        <button type="button" class="link" (click)="step = 'compliance'" [disabled]="loading">Back</button>
+      </div>
+
+      <div class="ws-text-preview">{{ rawText }}</div>
+
+      <div class="ws-seg-row">
+        <div class="seg-label">Segmentation:</div>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='ai'" (change)="setMode('ai')" />
+          <span>Auto (AI)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='semicolon'" (change)="setMode('semicolon')" />
+          <span>Split (;)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='newline'" (change)="setMode('newline')" />
+          <span>Split (\n)</span>
+        </label>
+  
+        <label class="radio">
+          <input type="radio" name="segMode" [checked]="mode==='dot'" (change)="setMode('dot')" />
+          <span>Split (.)</span>
+        </label>
+  
+        <button type="button" class="btn btn-primary" (click)="segment()" [disabled]="loading">
+          <span class="spinner spinner-button" *ngIf="loading"></span>
+          {{ loading ? 'Segmenting...' : 'Segment' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
     <div *ngIf="step === 'segments'" class="ws-step">
       <div class="ws-header">
         <div class="ws-title">Edit segmentation</div>
-        <button type="button" class="link" (click)="step = 'compliance'" [disabled]="loading">Back</button>
+        <button type="button" class="link" (click)="step = 'segmentation'" [disabled]="loading">Back</button>
       </div>
   
       <div class="ws-seg-list">

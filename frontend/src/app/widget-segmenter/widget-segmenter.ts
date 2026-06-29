@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { ComplianceAnalysisResult, Crd13ApiService } from '../crd13-api.service';
 
 type SegMode = 'ai' | 'semicolon' | 'newline' | 'dot';
-type Step = 'upload' | 'text' | 'commodities' | 'compliance' | 'segments';
+type Step = 'upload' | 'text' | 'commodities' | 'compliance' | 'segmentation' | 'segments';
 
 export interface SegmenterOutput {
   segments: string[];
@@ -71,7 +71,6 @@ export class WidgetSegmenterComponent {
     this.commodityError = null;
     this.complianceError = null;
     this.segments = [];
-    this.complianceResult = null;
   }
 
   goToUpload() {
@@ -358,7 +357,8 @@ export class WidgetSegmenterComponent {
   }
 
   continueAfterCompliance(): void {
-    this.segment();
+    this.error = null;
+    this.step = 'segmentation';
   }
 
   backToCommodities(): void {
