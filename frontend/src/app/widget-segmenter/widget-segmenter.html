@@ -211,6 +211,12 @@
       </div>
 
       <div class="ws-compliance-summary" *ngIf="complianceResult">
+        <div class="ws-compliance-attestation">
+          <span class="ws-compliance-label">Attestation analyzed</span>
+          <div class="ws-compliance-fragment">
+            {{ complianceResult.attestation || rawText }}
+          </div>
+        </div>
         <div class="ws-compliance-overall">
           <span class="ws-compliance-label">Overall assessment</span>
           <span class="ws-compliance-badge" [ngClass]="complianceClass(complianceResult.overall_assessment?.compliance)">

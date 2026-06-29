@@ -283,6 +283,12 @@
   gap: 10px;
 }
 
+.ws-compliance-attestation{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .ws-compliance-label,
 .ws-compliance-panel-title{
   color: #111827;
