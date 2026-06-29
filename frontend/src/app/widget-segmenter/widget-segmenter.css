@@ -166,7 +166,45 @@
 .ws-commodity-input-row{
   display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
+}
+
+.ws-commodity-combobox{
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.ws-commodity-options{
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  max-height: 190px;
+  overflow: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.12);
+  padding: 4px;
+}
+
+.ws-commodity-option{
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #111827;
+  cursor: pointer;
+  display: block;
+  font-size: 13px;
+  padding: 7px 8px;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.ws-commodity-option:hover{
+  background: #eef2ff;
 }
 
 .ws-commodity-add{

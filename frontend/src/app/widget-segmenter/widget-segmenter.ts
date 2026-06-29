@@ -32,12 +32,17 @@ export class WidgetSegmenterComponent {
   segments: string[] = [];
   commodities: string[] = [];
   commodityInput = '';
+  commodityOptions: string[] = [];
+  filteredCommodityOptions: string[] = [];
+  commodityListError: string | null = null;
 
   loading = false;
   commodityLoading = false;
   error: string | null = null;
   info: string | null = null;
   commodityError: string | null = null;
+  private autoDetectedCommodities: string[] = [];
+  private manualCommodities: string[] = [];
   private lastCommoditySource = '';
   private commodityDetectionTimer: ReturnType<typeof setTimeout> | null = null;
   private commodityDetectionRunId = 0;
@@ -47,6 +52,8 @@ export class WidgetSegmenterComponent {
   constructor(private crd13Api: Crd13ApiService) {}
 
   ngOnInit() {
+    void this.loadCommodityOptions();
+
     const init = (this.initialText || '').trim();
     if (init) {
       this.rawText = init;
@@ -60,8 +67,6 @@ export class WidgetSegmenterComponent {
     this.error = null;
     this.commodityError = null;
     this.segments = [];
-    this.commodities = [];
-    this.commodityInput = '';
   }
 
   goToUpload() {
@@ -71,6 +76,7 @@ export class WidgetSegmenterComponent {
     this.loading = false;
     this.commodityLoading = false;
     this.commodityInput = '';
+    this.filteredCommodityOptions = [];
     this.lastCommoditySource = '';
     this.step = 'upload';
   }
@@ -81,6 +87,7 @@ export class WidgetSegmenterComponent {
     this.loading = false;
     this.commodityLoading = false;
     this.commodityInput = '';
+    this.filteredCommodityOptions = [];
     this.step = 'text';
   }
 
@@ -110,8 +117,10 @@ export class WidgetSegmenterComponent {
     this.loading = false;
     this.commodityLoading = false;
     this.commodityError = null;
-    this.commodities = [];
+    this.setAutoDetectedCommodities([]);
+    this.setManualCommodities([]);
     this.commodityInput = '';
+    this.filteredCommodityOptions = [];
     this.lastCommoditySource = '';
     this.refiningIdx.clear();
     this.step = 'upload';
@@ -128,8 +137,10 @@ export class WidgetSegmenterComponent {
       this.error = null;
       this.info = null;
       this.commodityError = null;
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
+      this.setManualCommodities([]);
       this.commodityInput = '';
+      this.filteredCommodityOptions = [];
       this.lastCommoditySource = '';
       this.step = 'text';
       this.scheduleCommodityDetection(text);
@@ -141,8 +152,10 @@ export class WidgetSegmenterComponent {
       this.error = null;
       this.info = 'Clipboard access was blocked by the browser. Please paste your text below (Ctrl+V).';
       this.commodityError = null;
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
+      this.setManualCommodities([]);
       this.commodityInput = '';
+      this.filteredCommodityOptions = [];
       this.lastCommoditySource = '';
       this.step = 'text';
     }
@@ -157,8 +170,9 @@ export class WidgetSegmenterComponent {
 
     const normalizedText = String(value || '').trim();
     if (normalizedText !== this.lastCommoditySource) {
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
       this.commodityInput = '';
+      this.updateFilteredCommodityOptions('');
     }
 
     this.scheduleCommodityDetection(normalizedText);
@@ -188,8 +202,10 @@ export class WidgetSegmenterComponent {
       }
 
       this.segments = [];
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
+      this.setManualCommodities([]);
       this.commodityInput = '';
+      this.filteredCommodityOptions = [];
       this.lastCommoditySource = '';
       this.commodityError = null;
       this.step = 'text';
@@ -352,30 +368,53 @@ export class WidgetSegmenterComponent {
   onCommodityInput(value: string): void {
     this.commodityInput = String(value || '');
     this.commodityError = null;
+    this.updateFilteredCommodityOptions(this.commodityInput);
   }
 
   onCommodityInputKeydown(event: KeyboardEvent): void {
-    if (event.key !== 'Enter' && event.key !== ',') return;
-    event.preventDefault();
-    this.addCommodityFromInput();
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addCommodityFromInput();
+      return;
+    }
+
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
+
+  canAddSelectedCommodity(): boolean {
+    return !!this.getCommodityOptionFromInput(this.commodityInput);
   }
 
   addCommodityFromInput(): void {
-    const next = this.normalizeCommodity(this.commodityInput);
+    const next = this.getCommodityOptionFromInput(this.commodityInput);
     if (!next) return;
 
-    const exists = this.commodities.some(item => item.toLowerCase() === next.toLowerCase());
-    if (!exists) {
-      this.commodities = [...this.commodities, next];
-    }
+    this.addManualCommodity(next);
 
     this.commodityInput = '';
+    this.filteredCommodityOptions = [];
+    this.commodityError = null;
+  }
+
+  selectCommodityOption(option: string): void {
+    const next = this.normalizeCommodity(option);
+    if (!next) return;
+
+    this.addManualCommodity(next);
+    this.commodityInput = '';
+    this.filteredCommodityOptions = [];
     this.commodityError = null;
   }
 
   removeCommodity(index: number): void {
     if (index < 0 || index >= this.commodities.length) return;
-    this.commodities = this.commodities.filter((_, i) => i !== index);
+    const removed = this.commodities[index];
+    const key = removed.toLowerCase();
+    this.manualCommodities = this.manualCommodities.filter(item => item.toLowerCase() !== key);
+    this.autoDetectedCommodities = this.autoDetectedCommodities.filter(item => item.toLowerCase() !== key);
+    this.syncCommodities();
   }
 
   async reidentifyCommodity(): Promise<void> {
@@ -385,7 +424,7 @@ export class WidgetSegmenterComponent {
   private async detectCommodityForCurrentContext(force = false, sourceOverride?: string): Promise<string[]> {
     const sourceText = String(sourceOverride ?? this.currentCommoditySourceText()).trim();
     if (!sourceText) {
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
       this.commodityError = 'No text available to identify commodity.';
       return [];
     }
@@ -404,15 +443,15 @@ export class WidgetSegmenterComponent {
         return this.getNormalizedCommodityList(this.commodities);
       }
 
-      this.commodities = commodities;
+      this.setAutoDetectedCommodities(commodities);
       this.lastCommoditySource = sourceText;
-      return commodities;
+      return this.getNormalizedCommodityList(this.commodities);
     } catch (e: any) {
       if (runId !== this.commodityDetectionRunId || sourceText !== this.currentCommoditySourceText()) {
         return this.getNormalizedCommodityList(this.commodities);
       }
 
-      this.commodities = [];
+      this.setAutoDetectedCommodities([]);
       this.commodityError = e?.error?.message || e?.message || 'Failed to identify commodity.';
       return [];
     } finally {
@@ -476,8 +515,10 @@ export class WidgetSegmenterComponent {
     this.loading = false;
     this.commodityLoading = false;
     this.commodityError = null;
-    this.commodities = [];
+    this.setAutoDetectedCommodities([]);
+    this.setManualCommodities([]);
     this.commodityInput = '';
+    this.filteredCommodityOptions = [];
     this.lastCommoditySource = '';
     this.refiningIdx.clear();
 
@@ -491,6 +532,67 @@ export class WidgetSegmenterComponent {
 
   private normalizeCommodity(value: string | null | undefined): string {
     return String(value ?? '').trim();
+  }
+
+  private async loadCommodityOptions(): Promise<void> {
+    try {
+      const response = await fetch('assets/commodities.json');
+      if (!response.ok) {
+        throw new Error('Commodity list could not be loaded.');
+      }
+
+      const data = await response.json();
+      this.commodityOptions = this.getNormalizedCommodityList(Array.isArray(data) ? data : []);
+      this.updateFilteredCommodityOptions(this.commodityInput);
+    } catch (e: any) {
+      this.commodityListError = e?.message || 'Commodity list could not be loaded.';
+    }
+  }
+
+  private updateFilteredCommodityOptions(query: string): void {
+    const normalizedQuery = this.normalizeCommodity(query).toLowerCase();
+    const selected = new Set(this.commodities.map(item => item.toLowerCase()));
+    const options = this.commodityOptions.filter(item => !selected.has(item.toLowerCase()));
+
+    this.filteredCommodityOptions = (normalizedQuery
+      ? options.filter(item => item.toLowerCase().includes(normalizedQuery))
+      : options
+    ).slice(0, 12);
+  }
+
+  private getCommodityOptionFromInput(value: string): string {
+    const normalized = this.normalizeCommodity(value);
+    if (!normalized) return '';
+
+    const exact = this.commodityOptions.find(item => item.toLowerCase() === normalized.toLowerCase());
+    if (exact) return exact;
+
+    return this.filteredCommodityOptions[0] || '';
+  }
+
+  private addManualCommodity(value: string): void {
+    const commodity = this.normalizeCommodity(value);
+    if (!commodity) return;
+
+    this.setManualCommodities([...this.manualCommodities, commodity]);
+  }
+
+  private setAutoDetectedCommodities(values: string[]): void {
+    this.autoDetectedCommodities = this.getNormalizedCommodityList(values);
+    this.syncCommodities();
+  }
+
+  private setManualCommodities(values: string[]): void {
+    this.manualCommodities = this.getNormalizedCommodityList(values);
+    this.syncCommodities();
+  }
+
+  private syncCommodities(): void {
+    this.commodities = this.getNormalizedCommodityList([
+      ...this.autoDetectedCommodities,
+      ...this.manualCommodities,
+    ]);
+    this.updateFilteredCommodityOptions(this.commodityInput);
   }
 
   private getNormalizedCommodityList(values: string[] | null | undefined): string[] {

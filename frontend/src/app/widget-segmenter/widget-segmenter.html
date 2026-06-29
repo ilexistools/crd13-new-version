@@ -49,9 +49,9 @@
         (ngModelChange)="onRawTextChange($event)"
       ></textarea>
 
-      <div class="ws-inline-commodity" *ngIf="commodityLoading || commodities.length > 0 || commodityError">
+      <div class="ws-inline-commodity">
         <div class="ws-inline-commodity-head">
-          <span class="ws-commodity-title">Identified commodities</span>
+          <span class="ws-commodity-title">Commodities</span>
           <button
             type="button"
             class="link"
@@ -61,9 +61,48 @@
           </button>
         </div>
 
+        <div class="ws-commodity-input-row">
+          <div class="ws-commodity-combobox">
+            <input
+              class="ws-commodity-input"
+              type="text"
+              [ngModel]="commodityInput"
+              (ngModelChange)="onCommodityInput($event)"
+              (keydown)="onCommodityInputKeydown($event)"
+              placeholder="Search commodity"
+              autocomplete="off"
+              [disabled]="commodityLoading || loading || commodityOptions.length === 0"
+            />
+            <div class="ws-commodity-options" *ngIf="commodityInput.trim() && filteredCommodityOptions.length > 0 && !commodityLoading && !loading">
+              <button
+                type="button"
+                class="ws-commodity-option"
+                *ngFor="let option of filteredCommodityOptions"
+                (click)="selectCommodityOption(option)">
+                {{ option }}
+              </button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-outline ws-commodity-add"
+            (click)="addCommodityFromInput()"
+            [disabled]="commodityLoading || loading || !canAddSelectedCommodity()">
+            Add
+          </button>
+        </div>
+
         <div class="ws-commodity-chips" *ngIf="commodities.length > 0">
-          <span class="ws-chip" *ngFor="let item of commodities">
+          <span class="ws-chip" *ngFor="let item of commodities; let i = index">
             <span class="ws-chip-text">{{ item }}</span>
+            <button
+              type="button"
+              class="ws-chip-remove"
+              title="Remove commodity"
+              (click)="removeCommodity(i)"
+              [disabled]="commodityLoading || loading">
+              ×
+            </button>
           </span>
         </div>
 
@@ -71,6 +110,7 @@
           Identifying commodities...
         </div>
         <div class="ws-error ws-commodity-error" *ngIf="commodityError && !commodityLoading">{{ commodityError }}</div>
+        <div class="ws-error ws-commodity-error" *ngIf="commodityListError">{{ commodityListError }}</div>
       </div>
 
       <div class="ws-footer ws-footer-end">
@@ -103,20 +143,32 @@
         </div>
 
         <div class="ws-commodity-input-row">
-          <input
-            class="ws-commodity-input"
-            type="text"
-            [ngModel]="commodityInput"
-            (ngModelChange)="onCommodityInput($event)"
-            (keydown)="onCommodityInputKeydown($event)"
-            placeholder="Type a commodity and press Enter"
-            [disabled]="commodityLoading || loading"
-          />
+          <div class="ws-commodity-combobox">
+            <input
+              class="ws-commodity-input"
+              type="text"
+              [ngModel]="commodityInput"
+              (ngModelChange)="onCommodityInput($event)"
+              (keydown)="onCommodityInputKeydown($event)"
+              placeholder="Search commodity"
+              autocomplete="off"
+              [disabled]="commodityLoading || loading || commodityOptions.length === 0"
+            />
+            <div class="ws-commodity-options" *ngIf="commodityInput.trim() && filteredCommodityOptions.length > 0 && !commodityLoading && !loading">
+              <button
+                type="button"
+                class="ws-commodity-option"
+                *ngFor="let option of filteredCommodityOptions"
+                (click)="selectCommodityOption(option)">
+                {{ option }}
+              </button>
+            </div>
+          </div>
           <button
             type="button"
             class="btn btn-outline ws-commodity-add"
             (click)="addCommodityFromInput()"
-            [disabled]="commodityLoading || loading || !commodityInput.trim()">
+            [disabled]="commodityLoading || loading || !canAddSelectedCommodity()">
             Add
           </button>
         </div>
@@ -139,6 +191,7 @@
           Identifying commodities...
         </div>
         <div class="ws-error ws-commodity-error" *ngIf="commodityError">{{ commodityError }}</div>
+        <div class="ws-error ws-commodity-error" *ngIf="commodityListError">{{ commodityListError }}</div>
       </div>
 
       <div class="ws-seg-row">
