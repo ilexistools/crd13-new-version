@@ -119,23 +119,6 @@
   gap: 8px;
 }
 
-.ws-inline-commodity{
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  background: #f9fafb;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ws-inline-commodity-head{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
 .ws-commodity-head{
   display: flex;
   align-items: center;
