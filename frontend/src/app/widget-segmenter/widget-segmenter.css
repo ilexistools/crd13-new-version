@@ -368,6 +368,20 @@
   margin-right: auto;
 }
 
+.ws-correction-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+  font-size: 12px;
+}
+
+.ws-correction-toggle input{
+  width: 14px;
+  height: 14px;
+  accent-color: #6366f1;
+}
+
 .ws-compliance-text,
 .ws-compliance-fragment,
 .ws-missing-list{

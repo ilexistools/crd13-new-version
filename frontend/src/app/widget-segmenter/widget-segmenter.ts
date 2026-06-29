@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { firstValueFrom } from 'rxjs';
-import { ComplianceAnalysisResult, Crd13ApiService } from '../crd13-api.service';
+import { ComplianceAnalysisResult, ComplianceCorrectionResult, Crd13ApiService } from '../crd13-api.service';
 
 type SegMode = 'ai' | 'semicolon' | 'newline' | 'dot';
 type Step = 'upload' | 'text' | 'commodities' | 'compliance' | 'segmentation' | 'segments';
@@ -44,6 +44,10 @@ export class WidgetSegmenterComponent {
   commodityError: string | null = null;
   complianceError: string | null = null;
   complianceResult: ComplianceAnalysisResult | null = null;
+  complianceCorrectionLoading = false;
+  complianceCorrectionError: string | null = null;
+  complianceCorrectionResult: ComplianceCorrectionResult | null = null;
+  allowedComplianceCorrections: Record<string, boolean> = {};
   private autoDetectedCommodities: string[] = [];
   private manualCommodities: string[] = [];
   private lastCommoditySource = '';
@@ -70,6 +74,7 @@ export class WidgetSegmenterComponent {
     this.error = null;
     this.commodityError = null;
     this.complianceError = null;
+    this.complianceCorrectionError = null;
     this.segments = [];
   }
 
@@ -82,6 +87,10 @@ export class WidgetSegmenterComponent {
     this.complianceLoading = false;
     this.complianceError = null;
     this.complianceResult = null;
+    this.complianceCorrectionLoading = false;
+    this.complianceCorrectionError = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
     this.commodityInput = '';
     this.filteredCommodityOptions = [];
     this.lastCommoditySource = '';
@@ -95,6 +104,8 @@ export class WidgetSegmenterComponent {
     this.commodityLoading = false;
     this.complianceLoading = false;
     this.complianceError = null;
+    this.complianceCorrectionLoading = false;
+    this.complianceCorrectionError = null;
     this.commodityInput = '';
     this.filteredCommodityOptions = [];
     this.step = 'text';
@@ -129,6 +140,10 @@ export class WidgetSegmenterComponent {
     this.commodityError = null;
     this.complianceError = null;
     this.complianceResult = null;
+    this.complianceCorrectionLoading = false;
+    this.complianceCorrectionError = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
     this.setAutoDetectedCommodities([]);
     this.setManualCommodities([]);
     this.commodityInput = '';
@@ -151,6 +166,9 @@ export class WidgetSegmenterComponent {
       this.commodityError = null;
       this.complianceError = null;
       this.complianceResult = null;
+      this.complianceCorrectionError = null;
+      this.complianceCorrectionResult = null;
+      this.allowedComplianceCorrections = {};
       this.setAutoDetectedCommodities([]);
       this.setManualCommodities([]);
       this.commodityInput = '';
@@ -168,6 +186,9 @@ export class WidgetSegmenterComponent {
       this.commodityError = null;
       this.complianceError = null;
       this.complianceResult = null;
+      this.complianceCorrectionError = null;
+      this.complianceCorrectionResult = null;
+      this.allowedComplianceCorrections = {};
       this.setAutoDetectedCommodities([]);
       this.setManualCommodities([]);
       this.commodityInput = '';
@@ -183,8 +204,11 @@ export class WidgetSegmenterComponent {
     this.info = null;
     this.commodityError = null;
     this.complianceError = null;
+    this.complianceCorrectionError = null;
     this.segments = [];
     this.complianceResult = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
 
     const normalizedText = String(value || '').trim();
     if (normalizedText !== this.lastCommoditySource) {
@@ -222,6 +246,9 @@ export class WidgetSegmenterComponent {
       this.segments = [];
       this.complianceResult = null;
       this.complianceError = null;
+      this.complianceCorrectionError = null;
+      this.complianceCorrectionResult = null;
+      this.allowedComplianceCorrections = {};
       this.setAutoDetectedCommodities([]);
       this.setManualCommodities([]);
       this.commodityInput = '';
@@ -343,10 +370,13 @@ export class WidgetSegmenterComponent {
 
     this.error = null;
     this.complianceError = null;
+    this.complianceCorrectionError = null;
     this.complianceLoading = true;
 
     try {
       this.complianceResult = await firstValueFrom(this.crd13Api.analyzeCompliance(text));
+      this.allowedComplianceCorrections = {};
+      this.complianceCorrectionResult = null;
       this.step = 'compliance';
     } catch (e: any) {
       this.complianceResult = null;
@@ -356,8 +386,36 @@ export class WidgetSegmenterComponent {
     }
   }
 
-  continueAfterCompliance(): void {
+  async continueAfterCompliance(): Promise<void> {
+    if (!this.complianceResult) {
+      this.step = 'segmentation';
+      return;
+    }
+
     this.error = null;
+    this.complianceCorrectionError = null;
+
+    const allowedPrinciples = this.selectedComplianceCorrectionPrinciples();
+    if (allowedPrinciples.length) {
+      this.complianceCorrectionLoading = true;
+      try {
+        const result = await firstValueFrom(
+          this.crd13Api.correctCompliance(this.rawText, this.complianceResult, allowedPrinciples)
+        );
+        this.complianceCorrectionResult = result;
+        const corrected = String(result.corrected_attestation || '').trim();
+        if (corrected && corrected !== this.rawText.trim()) {
+          this.rawText = corrected;
+          this.segments = [];
+        }
+      } catch (e: any) {
+        this.complianceCorrectionError = e?.error?.detail || e?.error?.message || e?.message || 'Compliance correction failed.';
+        return;
+      } finally {
+        this.complianceCorrectionLoading = false;
+      }
+    }
+
     this.step = 'segmentation';
   }
 
@@ -365,6 +423,7 @@ export class WidgetSegmenterComponent {
     this.step = 'commodities';
     this.error = null;
     this.complianceError = null;
+    this.complianceCorrectionError = null;
   }
 
   updateSegment(i: number, value: string) {
@@ -453,6 +512,8 @@ export class WidgetSegmenterComponent {
 
     this.addManualCommodity(next);
     this.complianceResult = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
 
     this.commodityInput = '';
     this.filteredCommodityOptions = [];
@@ -465,6 +526,8 @@ export class WidgetSegmenterComponent {
 
     this.addManualCommodity(next);
     this.complianceResult = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
     this.commodityInput = '';
     this.filteredCommodityOptions = [];
     this.commodityError = null;
@@ -478,6 +541,8 @@ export class WidgetSegmenterComponent {
     this.autoDetectedCommodities = this.autoDetectedCommodities.filter(item => item.toLowerCase() !== key);
     this.syncCommodities();
     this.complianceResult = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
   }
 
   async reidentifyCommodity(): Promise<void> {
@@ -581,6 +646,10 @@ export class WidgetSegmenterComponent {
     this.commodityError = null;
     this.complianceError = null;
     this.complianceResult = null;
+    this.complianceCorrectionLoading = false;
+    this.complianceCorrectionError = null;
+    this.complianceCorrectionResult = null;
+    this.allowedComplianceCorrections = {};
     this.setAutoDetectedCommodities([]);
     this.setManualCommodities([]);
     this.commodityInput = '';
@@ -682,6 +751,30 @@ export class WidgetSegmenterComponent {
     if (normalized.includes('partial')) return 'is-partial';
     if (normalized.includes('compliant')) return 'is-compliant';
     return '';
+  }
+
+  compliancePrincipleKey(item: NonNullable<ComplianceAnalysisResult['principle_assessments']>[number], index: number): string {
+    return String(item?.principle || `principle-${index}`);
+  }
+
+  onComplianceCorrectionToggle(
+    item: NonNullable<ComplianceAnalysisResult['principle_assessments']>[number],
+    index: number,
+    checked: boolean,
+  ): void {
+    const key = this.compliancePrincipleKey(item, index);
+    this.allowedComplianceCorrections = {
+      ...this.allowedComplianceCorrections,
+      [key]: checked,
+    };
+    this.complianceCorrectionError = null;
+    this.complianceCorrectionResult = null;
+  }
+
+  selectedComplianceCorrectionPrinciples(): string[] {
+    return Object.entries(this.allowedComplianceCorrections)
+      .filter(([, allowed]) => allowed)
+      .map(([principle]) => principle);
   }
 
   private getNormalizedCommodityList(values: string[] | null | undefined): string[] {

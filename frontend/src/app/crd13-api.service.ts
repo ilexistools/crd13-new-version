@@ -60,6 +60,13 @@ export type ComplianceAnalysisResult = {
   final_assessment?: string;
 };
 
+export type ComplianceCorrectionResult = {
+  decision?: string;
+  corrected_attestation?: string;
+  applied_principles?: string[];
+  correction_notes?: string[];
+};
+
 type RewriteBackendResult = {
   decision?: string;
   rewritten?: string;
@@ -121,6 +128,20 @@ export class Crd13ApiService {
   analyzeCompliance(attestation: string): Observable<ComplianceAnalysisResult> {
     return this.postTool<ComplianceAnalysisResult>('/analyze_compliance', { attestation }).pipe(
       map(result => (this.unwrapResults(result) || result || {}) as ComplianceAnalysisResult)
+    );
+  }
+
+  correctCompliance(
+    attestation: string,
+    complianceAnalysis: ComplianceAnalysisResult,
+    allowedPrinciples: string[]
+  ): Observable<ComplianceCorrectionResult> {
+    return this.postTool<ComplianceCorrectionResult>('/correct_compliance', {
+      attestation,
+      compliance_analysis: complianceAnalysis,
+      allowed_principles: allowedPrinciples,
+    }).pipe(
+      map(result => (this.unwrapResults(result) || result || {}) as ComplianceCorrectionResult)
     );
   }
 

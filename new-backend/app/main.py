@@ -14,6 +14,7 @@ from app.tools.attestation_analyser import AttestationAnalyserTool
 from app.tools.attestation_rewriter import AttestationRewriteTool
 from app.tools.attestation_template_adaptation import AttestationTemplateAdapterTool
 from app.tools.compliance_analysis import ComplianceAnalysisTool
+from app.tools.compliance_correction import ComplianceCorrectionTool
 
 
 unitizer = UnitizationTool()
@@ -24,6 +25,7 @@ attestation_analyser = AttestationAnalyserTool()
 attestation_rewriter = AttestationRewriteTool()
 attestation_template_adapter = AttestationTemplateAdapterTool()
 compliance_analyser = ComplianceAnalysisTool()
+compliance_corrector = ComplianceCorrectionTool()
 
 
 class InputRequest(BaseModel):
@@ -132,6 +134,15 @@ async def adapt_attestation_template(payload: InputRequest) -> OutputResponse:
 @app.post("/analyze_compliance", response_model=OutputResponse)
 async def analyze_compliance(payload: InputRequest) -> OutputResponse:
     result = await compliance_analyser.run_async(payload.input.get("attestation", ""))
+    return OutputResponse(output=result)
+
+@app.post("/correct_compliance", response_model=OutputResponse)
+async def correct_compliance(payload: InputRequest) -> OutputResponse:
+    result = await compliance_corrector.run_async(
+        payload.input.get("attestation", ""),
+        payload.input.get("compliance_analysis", {}),
+        payload.input.get("allowed_principles", []),
+    )
     return OutputResponse(output=result)
 
 

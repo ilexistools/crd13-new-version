@@ -226,7 +226,7 @@
         <div class="ws-compliance-panel" *ngIf="compliancePrinciples().length > 0">
           <div class="ws-compliance-panel-title">Principles</div>
           <div class="ws-principle-list">
-            <div class="ws-principle-item" *ngFor="let item of compliancePrinciples()">
+            <div class="ws-principle-item" *ngFor="let item of compliancePrinciples(); let i = index">
               <div class="ws-principle-head">
                 <span class="ws-principle-code">{{ item.principle }}</span>
                 <span class="ws-principle-name">{{ item.principle_name }}</span>
@@ -234,6 +234,15 @@
                   {{ item.compliance }}
                 </span>
               </div>
+              <label class="ws-correction-toggle">
+                <input
+                  type="checkbox"
+                  [checked]="allowedComplianceCorrections[compliancePrincipleKey(item, i)]"
+                  (change)="onComplianceCorrectionToggle(item, i, $any($event.target).checked)"
+                  [disabled]="complianceCorrectionLoading || loading"
+                />
+                <span>Allow changes to address this finding</span>
+              </label>
               <div class="ws-compliance-fragment" *ngIf="item.relevant_text_fragment">
                 {{ item.relevant_text_fragment }}
               </div>
@@ -273,10 +282,25 @@
       </div>
 
       <div class="ws-error" *ngIf="complianceError">{{ complianceError }}</div>
+      <div class="ws-error" *ngIf="complianceCorrectionError">{{ complianceCorrectionError }}</div>
+
+      <div class="ws-compliance-panel" *ngIf="complianceCorrectionResult">
+        <div class="ws-compliance-panel-title">Correction applied</div>
+        <div class="ws-compliance-text">
+          {{ complianceCorrectionResult.decision || 'completed' }}
+        </div>
+        <div class="ws-compliance-fragment" *ngIf="complianceCorrectionResult.corrected_attestation">
+          {{ complianceCorrectionResult.corrected_attestation }}
+        </div>
+        <ul class="ws-missing-list" *ngIf="(complianceCorrectionResult.correction_notes || []).length > 0">
+          <li *ngFor="let note of complianceCorrectionResult.correction_notes">{{ note }}</li>
+        </ul>
+      </div>
 
       <div class="ws-footer ws-footer-end">
-        <button type="button" class="btn btn-primary" (click)="continueAfterCompliance()" [disabled]="loading">
-          Continue
+        <button type="button" class="btn btn-primary" (click)="continueAfterCompliance()" [disabled]="loading || complianceCorrectionLoading">
+          <span class="spinner spinner-button" *ngIf="complianceCorrectionLoading"></span>
+          {{ complianceCorrectionLoading ? 'Applying corrections...' : 'Continue' }}
         </button>
       </div>
     </div>
